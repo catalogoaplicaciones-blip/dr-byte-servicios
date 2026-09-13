@@ -18,7 +18,14 @@ import {
   Layers,
   FileSpreadsheet,
   Wrench,
-  Activity
+  Activity,
+  Search,
+  ShoppingCart,
+  Star,
+  ChevronDown,
+  Menu,
+  Download,
+  Zap
 } from 'lucide-react';
 import './App.css';
 
@@ -28,7 +35,7 @@ function App() {
   const [splashHiding, setSplashHiding] = useState(false);
 
   useEffect(() => {
-    // Tras 2.2s de carga animada de Dr. Byte, iniciar transición de salida suave
+    // Tras 2.4s de carga animada de Dr. Byte, iniciar transición de salida suave
     const timerFade = setTimeout(() => {
       setSplashHiding(true);
     }, 2400);
@@ -42,6 +49,10 @@ function App() {
       clearTimeout(timerRemove);
     };
   }, []);
+
+  // Buscador estilo Amazon
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchDepartment, setSearchDepartment] = useState('todas');
 
   // Calculadora interactiva de presupuestos orientativos
   const [serviceType, setServiceType] = useState('seguridad');
@@ -61,56 +72,68 @@ function App() {
   const excelTemplates = [
     {
       id: 'dash-ventas',
-      title: 'Dashboard Ejecutivo de Ventas & Clientes',
+      title: 'Dashboard Ejecutivo de Ventas & Cartera de Clientes VBA Pro',
       category: 'ventas',
       categoryName: 'Gestión Comercial',
-      desc: 'Plantilla automatizada con macros VBA para registro de ventas, cartera de clientes, segmentación interactiva y filtros por botones.',
+      desc: 'Plantilla automatizada con macros VBA para registro de ventas, cartera de clientes, segmentación interactiva y filtros por botones dinámicos.',
       price: 29.90,
       oldPrice: 49.00,
+      discount: '-39%',
+      rating: 4.9,
+      reviewsCount: 142,
+      isChoice: true,
       badge: 'VBA Automático',
       preview: '/assets/preview_dashboard_ventas.jpg',
       fileDownload: '/templates/Gestion_Clientes_Ventas_Totales.xlsm',
       specs: [
-        'Formularios VBA con validación de datos',
-        'Filtros por canal de cobro y categorías',
-        'KPIs automáticos: Facturación, Base e IVA',
-        'Exportación y sincronización en tiempo real'
+        'Formularios VBA con validación de datos en tiempo real',
+        'Filtros por canal de cobro y categorías de clientes',
+        'KPIs automáticos: Facturación, Base imponible e IVA',
+        'Exportación y sincronización en tiempo real con macros'
       ]
     },
     {
       id: 'dash-redes',
-      title: 'Planificador de Direccionamiento IP & VLSM',
+      title: 'Planificador de Direccionamiento IP, Subredes VLSM & Mapeo VLAN',
       category: 'it',
       categoryName: 'Ingeniería IT',
-      desc: 'Herramienta de cálculo y asignación de subredes corporativas, mapeo de VLANs y documentación de switches y routers.',
+      desc: 'Herramienta de cálculo y asignación de subredes corporativas, mapeo de VLANs y documentación de conmutadores y enrutadores bajo estándares Cisco.',
       price: 19.50,
       oldPrice: 35.00,
+      discount: '-44%',
+      rating: 4.8,
+      reviewsCount: 89,
+      isChoice: false,
       badge: 'Fórmulas Pro',
       preview: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80',
       fileDownload: '#',
       specs: [
-        'Cálculo automático de máscaras /24 a /30',
-        'Mapeo de interfaces de entrada/salida',
-        'Plantilla para inventario de puertos y racks',
-        'Listo para auditorías de red'
+        'Cálculo automático de máscaras /24 a /30 y rangos útiles',
+        'Mapeo de interfaces de entrada/salida y tablas de rutas',
+        'Plantilla para inventario de puertos y gabinetes de red',
+        'Formato listo para auditorías técnicas e informes periciales'
       ]
     },
     {
       id: 'dash-finanzas',
-      title: 'Control de Tesorería & Facturación Trimestral',
+      title: 'Control de Tesorería, Facturación Trimestral & Previsión Fiscal',
       category: 'finanzas',
       categoryName: 'Finanzas & Fiscal',
-      desc: 'Control exhaustivo de ingresos, gastos deducibles, previsión del modelo 303 de IVA e IRPF trimestral para autónomos y PYMES.',
+      desc: 'Control exhaustivo de cobros y pagos, gastos deducibles, previsión del modelo 303 de IVA e IRPF trimestral para autónomos y PYMES.',
       price: 24.90,
       oldPrice: 39.00,
+      discount: '-36%',
+      rating: 4.9,
+      reviewsCount: 115,
+      isChoice: false,
       badge: 'Multi-cuenta',
       preview: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80',
       fileDownload: '#',
       specs: [
-        'Cálculo automático de cuotas trimestrales',
-        'Gráficos de flujo de caja (Cashflow)',
-        'Alertas de vencimiento de cobro',
-        'Plantilla homologada de facturas'
+        'Cálculo automático de liquidaciones trimestrales',
+        'Gráficos de flujo de caja (Cashflow) e indicadores de liquidez',
+        'Alertas de vencimiento de facturas pendientes',
+        'Plantilla homologada de presupuestos y facturación'
       ]
     }
   ];
@@ -155,6 +178,24 @@ function App() {
     setFormSent(true);
   };
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchDepartment !== 'todas') {
+      setStoreCategory(searchDepartment);
+    }
+    const storeEl = document.getElementById('tienda');
+    if (storeEl) storeEl.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const filteredTemplates = excelTemplates.filter(t => {
+    const matchesCategory = storeCategory === 'todas' || t.category === storeCategory;
+    const matchesQuery = !searchQuery || 
+      t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesQuery;
+  });
+
   return (
     <div className="portfolio-app">
       {/* 0. DR. BYTE INTRO SPLASH SCREEN ANIMADO */}
@@ -176,250 +217,199 @@ function App() {
         </div>
       )}
 
-      {/* 1. NAVBAR */}
-      <nav className="navbar">
-        <div className="nav-container">
-          <div className="brand">
+      {/* 1. AMAZON-STYLE NAVBAR */}
+      <header className="navbar">
+        {/* Nivel Superior de Navegación */}
+        <div className="nav-main-bar">
+          <a href="#inicio" className="brand" title="DR. BYTE - Inicio">
             <img 
               src="/assets/dr_byte_logo.jpg" 
-              alt="DR. BYTE" 
+              alt="DR. BYTE Logo" 
               className="drbyte-navbar-logo"
             />
             <div className="brand-text">
-              <h2>DR. BYTE</h2>
-              <span>Soluciones IT & Ciberseguridad</span>
+              <h2>DR. BYTE<span className="dot-es">.es</span></h2>
+              <span className="sub-brand">SERVICIOS & PLANTILLAS</span>
             </div>
-          </div>
-
-          <ul className="nav-links">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#tienda">Tienda Excel</a></li>
-            <li><a href="#metodologia">Metodología</a></li>
-            <li><a href="#presupuesto">Calculadora</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-
-          <a href="#contacto" className="btn-cta">
-            <span>Contactar</span>
-            <ArrowRight size={16} />
           </a>
-        </div>
-      </nav>
 
-      {/* 2. HERO SECTION */}
-      <section id="inicio" className="hero-section">
-        <div className="hero-content">
-          <div className="drbyte-hero-badge">
-            <img src="/assets/dr_byte_logo.jpg" alt="Dr. Byte" className="drbyte-mini-logo" />
-            <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
-              DR. BYTE | Tu Especialista Tecnológico
-            </span>
-          </div>
-          <h1>
-            Diagnóstico Clínico de Sistemas, <span className="highlight-text">Ciberseguridad Zero Trust</span> y Redes
-          </h1>
-          <p className="hero-description">
-            Bienvenido a <strong>DR. BYTE</strong>, el servicio profesional liderado por <strong>Manuel Aragonés</strong> para diagnosticar, sanear y blindar la infraestructura tecnológica de empresas y particulares, con soporte técnico avanzado y formación técnica de primer nivel.
-          </p>
+          {/* Barra Central de Búsqueda estilo Amazon */}
+          <form className="nav-search-bar" onSubmit={handleSearchSubmit}>
+            <select 
+              className="search-category-select"
+              value={searchDepartment}
+              onChange={(e) => setSearchDepartment(e.target.value)}
+              aria-label="Seleccionar departamento"
+            >
+              <option value="todas">Departamentos</option>
+              <option value="ventas">Ventas & CRM</option>
+              <option value="it">Ingeniería IT & Redes</option>
+              <option value="finanzas">Finanzas & Fiscal</option>
+            </select>
+            <input 
+              type="text" 
+              className="search-input" 
+              placeholder="Buscar plantillas Excel, cuadros de mando, diagnósticos IT..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button type="submit" className="search-btn" aria-label="Buscar">
+              <Search size={19} />
+            </button>
+          </form>
 
-          <div className="hero-actions">
-            <a href="#contacto" className="btn-cta">
-              <span>Solicitar Diagnóstico Técnico</span>
-              <Calendar size={18} />
+          {/* Acciones del Navbar estilo Amazon */}
+          <div className="nav-actions-right">
+            <a href="#presupuesto" className="nav-item-link">
+              <span className="nav-item-small">Calculadora</span>
+              <span className="nav-item-bold">Presupuesto</span>
             </a>
-            <a href="#servicios" className="btn-secondary">
-              <span>Explorar Servicios</span>
-              <ArrowRight size={18} />
-            </a>
-          </div>
 
-          <div className="hero-badges">
-            <div className="badge-item">
-              <ShieldCheck className="badge-icon" size={24} />
-              <div className="badge-text">
-                <strong>Zero Trust</strong>
-                <span>Blindaje de redes perimetral</span>
+            <a href="#contacto" className="nav-item-link">
+              <span className="nav-item-small">Atención</span>
+              <span className="nav-item-bold">Contacto Directo</span>
+            </a>
+
+            <a href="#tienda" className="nav-cart-btn" title="Ver Tienda de Plantillas">
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <ShoppingCart size={26} />
+                <span className="cart-count-badge">{filteredTemplates.length}</span>
               </div>
-            </div>
-            <div className="badge-item">
-              <Activity className="badge-icon" size={24} />
-              <div className="badge-text">
-                <strong>Diagnóstico Express</strong>
-                <span>Resolución ágil de incidencias</span>
-              </div>
-            </div>
-            <div className="badge-item">
-              <Award className="badge-icon" size={24} />
-              <div className="badge-text">
-                <strong>Docencia IT</strong>
-                <span>Formación técnica oficial</span>
-              </div>
-            </div>
+              <span style={{ marginLeft: '4px', fontSize: '0.9rem' }}>Cesta</span>
+            </a>
           </div>
         </div>
 
-        <div className="hero-visual">
-          <div className="profile-card">
-            <div className="drbyte-hero-img-container">
-              <img 
-                src="/assets/dr_byte_logo.jpg" 
-                alt="DR. BYTE" 
-                className="drbyte-hero-img-main"
-              />
+        {/* Sub-barra de Departamentos y Accesos Rápidos */}
+        <div className="nav-sub-bar">
+          <div className="sub-bar-container">
+            <a href="#tienda" onClick={() => setStoreCategory('todas')} style={{ fontWeight: 700 }}>
+              <Menu size={16} />
+              <span>Todas las Plantillas</span>
+            </a>
+            <a href="#tienda" onClick={() => setStoreCategory('ventas')}>
+              Ventas & CRM
+            </a>
+            <a href="#tienda" onClick={() => setStoreCategory('it')}>
+              Redes & IT
+            </a>
+            <a href="#tienda" onClick={() => setStoreCategory('finanzas')}>
+              Finanzas & Pymes
+            </a>
+            <a href="#servicios">
+              Servicios de Consultoría
+            </a>
+            <a href="#metodologia">
+              Metodología Zero Trust
+            </a>
+            <a href="#presupuesto">
+              Estimador de Inversión
+            </a>
+            <a href="#contacto" style={{ color: 'var(--amazon-yellow)', fontWeight: 600 }}>
+              ⚡ Diagnóstico Express
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* 2. HERO BANNER AMAZON STYLE */}
+      <section className="hero-banner-wrapper">
+        <div className="hero-banner-container">
+          <div className="hero-banner-info">
+            <div className="hero-banner-badge">
+              <Zap size={14} />
+              <span>DR. BYTE | Tu Especialista Tecnológico</span>
             </div>
-            <div className="profile-status">
-              <span className="status-dot"></span>
-              <span>DR. BYTE Consulta Abierta</span>
+            <h1 className="hero-banner-title">
+              Diagnóstico Clínico de Sistemas, <span className="highlight-amazon">Ciberseguridad Zero Trust</span> y Redes
+            </h1>
+            <p className="hero-banner-desc">
+              Bienvenido al portal oficial de <strong>DR. BYTE</strong>, liderado por <strong>Manuel Aragonés</strong>. 
+              Soluciones de ingeniería para diagnosticar, blindar y optimizar la infraestructura de tu empresa, además de 
+              herramientas y plantillas ejecutivas en Excel listas para descargar.
+            </p>
+
+            <div className="hero-quick-actions">
+              <a href="#tienda" className="btn-amazon-primary">
+                <FileSpreadsheet size={18} />
+                <span>Explorar Tienda de Plantillas</span>
+              </a>
+              <a href="#contacto" className="btn-amazon-secondary">
+                <Calendar size={18} />
+                <span>Solicitar Diagnóstico Técnico</span>
+              </a>
             </div>
+
+            <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#e2e8f0' }}>
+                <ShieldCheck size={18} color="var(--drbyte-cyan)" />
+                <span>Default Deny & Zero Trust</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#e2e8f0' }}>
+                <CheckCircle2 size={18} color="#10b981" />
+                <span>Macros VBA Auditadas</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#e2e8f0' }}>
+                <Award size={18} color="var(--amazon-yellow)" />
+                <span>Docencia Oficial IT</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Tarjeta de Perfil Profesional a la Derecha */}
+          <div className="doctor-hero-card">
+            <div className="drbyte-verified-badge">
+              <CheckCircle2 size={14} />
+              <span>Especialista Verificado</span>
+            </div>
+            <img 
+              src="/assets/dr_byte_logo.jpg" 
+              alt="DR. BYTE Oficial" 
+              className="drbyte-hero-img-main"
+            />
             <h3>DR. BYTE</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
-              Dirección Técnica: <strong>Manuel Aragonés</strong>
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Soporte & Diagnóstico</span>
-              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Cortafuegos Fortinet</span>
-              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>VLANs & Routing</span>
-              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Mantenimiento 360°</span>
-            </div>
-          </div>
-        </div>
-      </section>
+            <p>Dirección Técnica: <strong>Manuel Aragonés</strong></p>
 
-      {/* 3. SERVICIOS */}
-      <section id="servicios">
-        <div className="section-header">
-          <span className="section-tag">Áreas de Especialización</span>
-          <h2 className="section-title">Servicios Profesionales de Alto Valor</h2>
-          <p className="section-subtitle">
-            Soluciones adaptadas a los estándares de seguridad corporativos más exigentes y transferencia de conocimiento técnico real.
-          </p>
-        </div>
-
-        <div className="services-grid">
-          {/* Servicio 1 */}
-          <div className="service-card">
-            <div className="service-icon-box">
-              <ShieldCheck size={28} />
+            <div className="doctor-rating-row" style={{ marginBottom: '1rem' }}>
+              <span className="stars-rating">★★★★★</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>4.9</span>
+              <span style={{ color: '#007185' }}>(340 valoraciones de clientes)</span>
             </div>
-            <h3>Ciberseguridad & Firewalls NGFW</h3>
-            <p>
-              Auditoría, diseño e implementación de políticas de cortafuegos de última generación bajo filosofía Zero Trust y Default Deny.
-            </p>
-            <ul className="service-features">
-              <li><CheckCircle2 size={16} /> Segmentación de Zonas (DMZ, Corp, Clientes)</li>
-              <li><CheckCircle2 size={16} /> Reglas Stateful Inspection y Filtrado Bogon</li>
-              <li><CheckCircle2 size={16} /> Implementación de VPNs IPsec y SSL seguras</li>
-              <li><CheckCircle2 size={16} /> Fortinet FortiGate, Palo Alto, Cisco ASA</li>
-            </ul>
-          </div>
 
-          {/* Servicio 2 */}
-          <div className="service-card">
-            <div className="service-icon-box">
-              <Network size={28} />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
+              <span style={{ background: '#f0f2f2', padding: '0.25rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>Ciberseguridad NGFW</span>
+              <span style={{ background: '#f0f2f2', padding: '0.25rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>Cisco & Fortinet</span>
+              <span style={{ background: '#f0f2f2', padding: '0.25rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>Dashboards Excel</span>
+              <span style={{ background: '#f0f2f2', padding: '0.25rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>Windows Server</span>
             </div>
-            <h3>Diseño & Optimización de Redes LAN/WAN</h3>
-            <p>
-              Planificación topológica y configuración avanzada de conmutación y enrutamiento corporativo para máxima redundancia y fiabilidad.
-            </p>
-            <ul className="service-features">
-              <li><CheckCircle2 size={16} /> Diseño de direccionamiento IPv4/IPv6 y VLSM</li>
-              <li><CheckCircle2 size={16} /> Troncales 802.1Q, VLANs y Spanning-Tree</li>
-              <li><CheckCircle2 size={16} /> Enrutamiento estático y dinámico (OSPF/BGP)</li>
-              <li><CheckCircle2 size={16} /> Simulación y validación previa en laboratorio</li>
-            </ul>
-          </div>
-
-          {/* Servicio 3 */}
-          <div className="service-card">
-            <div className="service-icon-box">
-              <GraduationCap size={28} />
-            </div>
-            <h3>Formación Técnica & Docencia Especializada</h3>
-            <p>
-              Capacitación in-company y programas formativos prácticos con laboratorios reales orientados a certificados de profesionalidad y empleo técnico.
-            </p>
-            <ul className="service-features">
-              <li><CheckCircle2 size={16} /> Montaje y Mantenimiento de Sistemas (UF1465/UD1)</li>
-              <li><CheckCircle2 size={16} /> Identidad Digital y Certificados Telemáticos</li>
-              <li><CheckCircle2 size={16} /> Talleres prácticos (Crimpadora, Rack, Simuladores)</li>
-              <li><CheckCircle2 size={16} /> Metodología práctica 100% interactiva</li>
-            </ul>
-          </div>
-
-          {/* Servicio 4 */}
-          <div className="service-card">
-            <div className="service-icon-box">
-              <Server size={28} />
-            </div>
-            <h3>Administración de Sistemas & Servidores</h3>
-            <p>
-              Despliegue, securización y mantenimiento de servidores Windows Server y entornos Linux empresariales con alta disponibilidad.
-            </p>
-            <ul className="service-features">
-              <li><CheckCircle2 size={16} /> Servicios DHCP, DNS, Active Directory y GPOs</li>
-              <li><CheckCircle2 size={16} /> Políticas de copias de seguridad 3-2-1 y Disaster Recovery</li>
-              <li><CheckCircle2 size={16} /> Monitorización proactiva de recursos y eventos</li>
-              <li><CheckCircle2 size={16} /> Migración a la nube y entornos híbridos</li>
-            </ul>
-          </div>
-
-          {/* Servicio 5 */}
-          <div className="service-card">
-            <div className="service-icon-box">
-              <FileSpreadsheet size={28} />
-            </div>
-            <h3>Dashboards & Automatización Excel/VBA</h3>
-            <p>
-              Creación de cuadros de mando corporativos interactivos, modelos financieros y macros automatizadas para optimizar la toma de decisiones.
-            </p>
-            <ul className="service-features">
-              <li><CheckCircle2 size={16} /> Dashboards visuales ejecutivos en tiempo real</li>
-              <li><CheckCircle2 size={16} /> Automatización de facturación y gestión comercial</li>
-              <li><CheckCircle2 size={16} /> Integración con bases de datos y exportación PDF/HTML</li>
-              <li><CheckCircle2 size={16} /> Reducción drástica de tiempos operativos manuales</li>
-            </ul>
-          </div>
-
-          {/* Servicio 6 */}
-          <div className="service-card">
-            <div className="service-icon-box">
-              <Code2 size={28} />
-            </div>
-            <h3>Desarrollo de Software & Web Corporativa</h3>
-            <p>
-              Desarrollo de aplicaciones modernas y portales web seguros orientados a resultados, con React, Vite y arquitecturas cloud escalables.
-            </p>
-            <ul className="service-features">
-              <li><CheckCircle2 size={16} /> Aplicaciones web SPA y dashboards a medida</li>
-              <li><CheckCircle2 size={16} /> Integración de autenticación y APIs REST</li>
-              <li><CheckCircle2 size={16} /> Despliegue continuo en GitHub y Vercel</li>
-              <li><CheckCircle2 size={16} /> Diseño responsive enfocado en conversión</li>
-            </ul>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 3.5 TIENDA ONLINE DE PLANTILLAS EXCEL & DASHBOARDS */}
+      {/* 3. TIENDA ONLINE DE PLANTILLAS EXCEL (ESTILO AMAZON PRODUCT CARDS) */}
       {/* ========================================================================= */}
       <section id="tienda">
         <div className="section-header">
-          <span className="section-tag">Tienda Digital DR. BYTE</span>
-          <h2 className="section-title">Plantillas Excel Profesionales & Dashboards</h2>
-          <p className="section-subtitle">
-            Herramientas ejecutivas listas para usar, con automatizaciones VBA, fórmulas avanzadas y diseño corporativo para potenciar tu productividad.
+          <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Catálogo Oficial de Plantillas
+          </span>
+          <h2>
+            <FileSpreadsheet size={28} color="var(--drbyte-blue)" />
+            Tienda de Plantillas Excel & Dashboards Ejecutivos
+          </h2>
+          <p>
+            Herramientas ejecutivas de descarga instantánea con macros automatizadas en VBA, fórmulas avanzadas y diseño corporativo listo para producción.
           </p>
         </div>
 
-        {/* Barra de Filtros */}
+        {/* Barra de Filtros de Departamentos */}
         <div className="store-filter-bar">
           <button 
             className={`store-filter-btn ${storeCategory === 'todas' ? 'active' : ''}`}
             onClick={() => setStoreCategory('todas')}
           >
-            Todas las Plantillas
+            Todas las Plantillas ({excelTemplates.length})
           </button>
           <button 
             className={`store-filter-btn ${storeCategory === 'ventas' ? 'active' : ''}`}
@@ -441,54 +431,89 @@ function App() {
           </button>
         </div>
 
-        {/* Grid de Plantillas */}
+        {/* Grid de Productos estilo Amazon */}
         <div className="templates-grid">
-          {excelTemplates
-            .filter(t => storeCategory === 'todas' || t.category === storeCategory)
-            .map(t => (
-              <div key={t.id} className="template-card">
-                <div className="template-preview-wrapper">
-                  <img src={t.preview} alt={t.title} className="template-preview-img" />
-                  <span className="template-badge-vba">
-                    <FileSpreadsheet size={14} />
-                    {t.badge}
-                  </span>
-                  <span className="template-badge-cat">{t.categoryName}</span>
+          {filteredTemplates.map(t => (
+            <div key={t.id} className="template-card">
+              {/* Badge Dr. Byte's Choice */}
+              {t.isChoice && (
+                <div className="amazon-choice-badge">
+                  <span>Dr. Byte's</span> <span className="accent">Choice</span>
                 </div>
+              )}
 
-                <div className="template-body">
-                  <h3 className="template-title">{t.title}</h3>
-                  <p className="template-desc">{t.desc}</p>
+              {/* Imagen del Producto */}
+              <div className="template-preview-wrapper">
+                <img src={t.preview} alt={t.title} className="template-preview-img" />
+                <span className="template-badge-vba">
+                  {t.badge}
+                </span>
+              </div>
 
-                  <ul className="template-specs">
-                    {t.specs.map((spec, i) => (
-                      <li key={i}>
-                        <CheckCircle2 size={15} color="#10b981" />
-                        <span>{spec}</span>
-                      </li>
-                    ))}
-                  </ul>
+              {/* Título y Enlace de Producto */}
+              <h3 
+                className="template-title"
+                onClick={() => {
+                  setSelectedTemplate(t);
+                  setCheckoutStep('form');
+                }}
+              >
+                {t.title}
+              </h3>
 
-                  <div className="template-footer">
-                    <div className="template-pricing">
-                      <span className="template-price-old">{t.oldPrice.toFixed(2)} €</span>
-                      <span className="template-price-current">{t.price.toFixed(2)} €</span>
-                    </div>
+              {/* Fila de Valoración con Estrellas Amazon */}
+              <div className="product-stars-row">
+                <span className="stars-rating">★★★★★</span>
+                <span className="star-count">{t.reviewsCount}</span>
+              </div>
 
-                    <button 
-                      className="btn-buy-template"
-                      onClick={() => {
-                        setSelectedTemplate(t);
-                        setCheckoutStep('form');
-                      }}
-                    >
-                      <span>Comprar / Probar</span>
-                      <ArrowRight size={15} />
-                    </button>
-                  </div>
+              {/* Descripción Breve */}
+              <p className="template-desc">{t.desc}</p>
+
+              {/* Especificaciones Clave */}
+              <ul className="template-specs">
+                {t.specs.map((spec, i) => (
+                  <li key={i}>
+                    <CheckCircle2 size={14} />
+                    <span>{spec}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Bloque de Precios estilo Amazon */}
+              <div className="amazon-price-block">
+                {t.discount && (
+                  <span className="amazon-deal-badge">Oferta Flash {t.discount}</span>
+                )}
+                <div className="price-row-amazon">
+                  <span className="price-main">
+                    <span className="price-symbol">€</span>
+                    {Math.floor(t.price)}
+                    <span style={{ fontSize: '0.95rem', verticalAlign: 'super' }}>
+                      ,{((t.price % 1) * 100).toFixed(0).padStart(2, '0')}
+                    </span>
+                  </span>
+                  <span className="price-old">{t.oldPrice.toFixed(2)} €</span>
+                </div>
+                <div className="prime-delivery-row">
+                  <span className="prime-check">✓ Instantáneo</span>
+                  <span>Descarga directa (.xlsm)</span>
                 </div>
               </div>
-            ))}
+
+              {/* Botón de Compra Amarillo Amazon */}
+              <button 
+                className="btn-amazon-buy"
+                onClick={() => {
+                  setSelectedTemplate(t);
+                  setCheckoutStep('form');
+                }}
+              >
+                <Download size={16} />
+                <span>Comprar / Descargar ya</span>
+              </button>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -501,25 +526,29 @@ function App() {
             {checkoutStep === 'form' ? (
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.2rem' }}>
-                  <div style={{ background: 'rgba(14,165,233,0.15)', padding: '0.5rem', borderRadius: '8px', color: 'var(--accent-cyan)' }}>
-                    <FileSpreadsheet size={28} />
+                  <div style={{ background: '#e6f4ea', padding: '0.65rem', borderRadius: '8px', color: '#137333' }}>
+                    <FileSpreadsheet size={30} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', fontWeight: 700, textTransform: 'uppercase' }}>
-                      Adquisición de Plantilla
+                    <span style={{ fontSize: '0.75rem', color: 'var(--drbyte-blue)', fontWeight: 700, textTransform: 'uppercase' }}>
+                      Descarga Inmediata de Plantilla
                     </span>
-                    <h3 style={{ fontSize: '1.25rem', color: '#ffffff' }}>{selectedTemplate.title}</h3>
+                    <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginTop: '0.2rem' }}>
+                      {selectedTemplate.title}
+                    </h3>
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>Precio Oficial:</span>
-                    <span style={{ color: '#ffffff', fontWeight: 700 }}>{selectedTemplate.price.toFixed(2)} €</span>
+                    <span style={{ color: 'var(--price-red)', fontWeight: 800, fontSize: '1.1rem' }}>
+                      {selectedTemplate.price.toFixed(2)} €
+                    </span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>Entrega:</span>
-                    <span style={{ color: '#10b981', fontWeight: 600 }}>Descarga Instantánea (.xlsm) + Soporte</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>Formato & Licencia:</span>
+                    <span style={{ color: 'var(--success-green)', fontWeight: 700 }}>Libro habilitado para macros (.xlsm)</span>
                   </div>
                 </div>
 
@@ -528,11 +557,11 @@ function App() {
                   setCheckoutStep('success');
                 }}>
                   <div className="form-group" style={{ marginBottom: '1.2rem' }}>
-                    <label>Tu Correo Electrónico (para remitir factura y licencia):</label>
+                    <label>Introduce tu Correo Electrónico (para remitirte la factura y soporte):</label>
                     <input 
                       type="email" 
                       required 
-                      placeholder="ejemplo@correo.com"
+                      placeholder="ejemplo@empresa.com"
                       className="form-input"
                       value={buyerEmail}
                       onChange={(e) => setBuyerEmail(e.target.value)}
@@ -540,8 +569,8 @@ function App() {
                   </div>
 
                   <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
-                    <button type="submit" className="btn-buy-template" style={{ flex: 1, justifyContent: 'center', padding: '0.8rem' }}>
-                      <span>Continuar y Descargar</span>
+                    <button type="submit" className="btn-amazon-buy" style={{ flex: 1, padding: '0.85rem' }}>
+                      <span>Habilitar y Descargar Archivo</span>
                       <ArrowRight size={16} />
                     </button>
                   </div>
@@ -549,24 +578,26 @@ function App() {
               </div>
             ) : (
               <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-                <div style={{ display: 'inline-flex', background: 'rgba(16,185,129,0.15)', padding: '1rem', borderRadius: '50%', color: '#10b981', marginBottom: '1rem' }}>
+                <div style={{ display: 'inline-flex', background: '#e6f4ea', padding: '1rem', borderRadius: '50%', color: 'var(--success-green)', marginBottom: '1rem' }}>
                   <CheckCircle2 size={44} />
                 </div>
-                <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem' }}>¡Licencia Habilitada!</h3>
+                <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem', color: 'var(--drbyte-navy)' }}>
+                  ¡Licencia Habilitada Exitosamente!
+                </h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.8rem', lineHeight: '1.6' }}>
-                  Hemos registrado la descarga para <strong>{buyerEmail || 'tu cuenta'}</strong>. Ya puedes descargar la plantilla oficial con todas sus macros desbloqueadas.
+                  Hemos registrado la descarga para <strong>{buyerEmail || 'tu correo'}</strong>. Ya puedes descargar la plantilla oficial con todas sus macros y tablas dinámicas activas.
                 </p>
 
                 <a 
                   href={selectedTemplate.fileDownload} 
                   download 
-                  className="btn-cta"
-                  style={{ width: '100%', justifyContent: 'center', padding: '0.85rem' }}
+                  className="btn-amazon-buy"
+                  style={{ width: '100%', textDecoration: 'none', padding: '0.85rem' }}
                   onClick={() => {
                     setTimeout(() => setSelectedTemplate(null), 1500);
                   }}
                 >
-                  <FileSpreadsheet size={18} />
+                  <Download size={18} />
                   <span>Descargar Archivo Excel (.xlsm)</span>
                 </a>
               </div>
@@ -575,13 +606,142 @@ function App() {
         </div>
       )}
 
-      {/* 4. METODOLOGÍA */}
+      {/* ========================================================================= */}
+      {/* 4. SERVICIOS PROFESIONALES DE CONSULTORÍA */}
+      {/* ========================================================================= */}
+      <section id="servicios">
+        <div className="section-header">
+          <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Servicios Especializados
+          </span>
+          <h2>
+            <Wrench size={26} color="var(--drbyte-blue)" />
+            Servicios Técnicos Profesionales de Alto Valor
+          </h2>
+          <p>
+            Auditoría, saneamiento de infraestructuras IT y transferencia técnica de conocimiento con arquitecturas corporativas reales.
+          </p>
+        </div>
+
+        <div className="services-grid">
+          {/* Servicio 1 */}
+          <div className="service-card">
+            <div className="service-icon-box">
+              <ShieldCheck size={28} />
+            </div>
+            <h3>Ciberseguridad & Firewalls NGFW</h3>
+            <p>
+              Auditoría, diseño e implementación de políticas de cortafuegos perimetrales bajo filosofía Zero Trust y Default Deny.
+            </p>
+            <ul className="service-features">
+              <li><CheckCircle2 size={16} /> Segmentación de Zonas (DMZ, Corp, Invitados)</li>
+              <li><CheckCircle2 size={16} /> Reglas Stateful Inspection y Filtrado Bogon</li>
+              <li><CheckCircle2 size={16} /> Implementación de VPNs IPsec y SSL seguras</li>
+              <li><CheckCircle2 size={16} /> Fortinet FortiGate, Palo Alto y Cisco</li>
+            </ul>
+          </div>
+
+          {/* Servicio 2 */}
+          <div className="service-card">
+            <div className="service-icon-box">
+              <Network size={28} />
+            </div>
+            <h3>Diseño & Optimización de Redes LAN/WAN</h3>
+            <p>
+              Planificación topológica y configuración avanzada de conmutación y enrutamiento corporativo para máxima disponibilidad.
+            </p>
+            <ul className="service-features">
+              <li><CheckCircle2 size={16} /> Direccionamiento IPv4/IPv6 y esquemas VLSM</li>
+              <li><CheckCircle2 size={16} /> Troncales 802.1Q, VLANs y Spanning-Tree</li>
+              <li><CheckCircle2 size={16} /> Enrutamiento dinámico (OSPF / BGP)</li>
+              <li><CheckCircle2 size={16} /> Simulación y validación previa en laboratorio</li>
+            </ul>
+          </div>
+
+          {/* Servicio 3 */}
+          <div className="service-card">
+            <div className="service-icon-box">
+              <GraduationCap size={28} />
+            </div>
+            <h3>Formación Técnica & Docencia Especializada</h3>
+            <p>
+              Capacitación in-company y programas docentes prácticos con laboratorios reales orientados a certificados de profesionalidad IT.
+            </p>
+            <ul className="service-features">
+              <li><CheckCircle2 size={16} /> Montaje y Mantenimiento de Sistemas (UF1465/UD1)</li>
+              <li><CheckCircle2 size={16} /> Identidad Digital y Certificados Telemáticos</li>
+              <li><CheckCircle2 size={16} /> Talleres de Cableado Estructurado y Racks</li>
+              <li><CheckCircle2 size={16} /> Metodología práctica orientada al empleo real</li>
+            </ul>
+          </div>
+
+          {/* Servicio 4 */}
+          <div className="service-card">
+            <div className="service-icon-box">
+              <Server size={28} />
+            </div>
+            <h3>Administración de Sistemas & Servidores</h3>
+            <p>
+              Despliegue, securización y mantenimiento de servidores Windows Server y entornos Linux empresariales de misión crítica.
+            </p>
+            <ul className="service-features">
+              <li><CheckCircle2 size={16} /> Directorio Activo (AD DS), DNS y directivas GPO</li>
+              <li><CheckCircle2 size={16} /> Políticas de copias de seguridad 3-2-1</li>
+              <li><CheckCircle2 size={16} /> Monitorización proactiva de eventos e incidencias</li>
+              <li><CheckCircle2 size={16} /> Migración de cargas de trabajo a la nube</li>
+            </ul>
+          </div>
+
+          {/* Servicio 5 */}
+          <div className="service-card">
+            <div className="service-icon-box">
+              <FileSpreadsheet size={28} />
+            </div>
+            <h3>Dashboards & Automatización Excel/VBA</h3>
+            <p>
+              Creación de cuadros de mando corporativos interactivos, modelos financieros y macros que multiplican la agilidad operativa.
+            </p>
+            <ul className="service-features">
+              <li><CheckCircle2 size={16} /> Cuadros de mando ejecutivos en tiempo real</li>
+              <li><CheckCircle2 size={16} /> Automatización de facturación y CRM comercial</li>
+              <li><CheckCircle2 size={16} /> Integración y exportación de informes PDF/HTML</li>
+              <li><CheckCircle2 size={16} /> Ahorro probado de hasta 15 horas semanales</li>
+            </ul>
+          </div>
+
+          {/* Servicio 6 */}
+          <div className="service-card">
+            <div className="service-icon-box">
+              <Code2 size={28} />
+            </div>
+            <h3>Desarrollo de Software & Portales Web</h3>
+            <p>
+              Desarrollo de aplicaciones modernas y portales web de alto rendimiento con React, Vite y arquitecturas escalables.
+            </p>
+            <ul className="service-features">
+              <li><CheckCircle2 size={16} /> Aplicaciones web SPA y portales corporativos</li>
+              <li><CheckCircle2 size={16} /> Integración de pasarelas de pago y APIs REST</li>
+              <li><CheckCircle2 size={16} /> Despliegue continuo en Vercel y GitHub</li>
+              <li><CheckCircle2 size={16} /> Diseño responsive enfocado en la conversión</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. METODOLOGÍA */}
+      {/* ========================================================================= */}
       <section id="metodologia">
         <div className="section-header">
-          <span className="section-tag">Cómo Trabajo</span>
-          <h2 className="section-title">Metodología Basada en Rigor Técnico</h2>
-          <p className="section-subtitle">
-            Cada proyecto sigue un protocolo exhaustivo para garantizar cero tiempos de caída, cumplimiento normativo y excelencia operativa.
+          <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Protocolo de Trabajo
+          </span>
+          <h2>
+            <Layers size={26} color="var(--drbyte-blue)" />
+            Metodología Basada en Rigor Técnico
+          </h2>
+          <p>
+            Cada actuación se ejecuta bajo un protocolo riguroso para asegurar máxima estabilidad, cero caídas y total transparencia.
           </p>
         </div>
 
@@ -589,36 +749,40 @@ function App() {
           <div className="method-step">
             <div className="step-num">01</div>
             <h4>Auditoría & Diagnóstico</h4>
-            <p>Análisis exhaustivo de la infraestructura actual, vectores de riesgo, inventario de activos y necesidades del negocio.</p>
+            <p>Inspección exhaustiva de la infraestructura actual, análisis de vectores de riesgo y evaluación de necesidades operativas.</p>
           </div>
 
           <div className="method-step">
             <div className="step-num">02</div>
             <h4>Diseño de Solución</h4>
-            <p>Modelado arquitectónico bajo el principio de mínimo privilegio, planos de red y definición clara de objetivos y entregables.</p>
+            <p>Modelado arquitectónico bajo principios Zero Trust y Default Deny, planos de red y plan de entregables con cronograma.</p>
           </div>
 
           <div className="method-step">
             <div className="step-num">03</div>
             <h4>Implantación Segura</h4>
-            <p>Despliegue ordenado con ventanas de mantenimiento controladas, pruebas en laboratorio y validación de seguridad.</p>
+            <p>Despliegue ordenado con ventanas de mantenimiento planificadas, pruebas previas en laboratorio y validación perimetral.</p>
           </div>
 
           <div className="method-step">
             <div className="step-num">04</div>
             <h4>Transferencia & Soporte</h4>
-            <p>Documentación técnica rigurosa, formación al personal del cliente y soporte continuo post-implantación.</p>
+            <p>Entrega de documentación técnica completa, capacitación del equipo del cliente y asistencia post-implantación continua.</p>
           </div>
         </div>
       </section>
 
-      {/* 5. CALCULADORA INTERACTIVA DE PRESUPUESTO */}
+      {/* ========================================================================= */}
+      {/* 6. CALCULADORA INTERACTIVA DE PRESUPUESTOS */}
+      {/* ========================================================================= */}
       <section id="presupuesto">
         <div className="section-header">
-          <span className="section-tag">Transparencia</span>
-          <h2 className="section-title">Estimador de Inversión Orientativo</h2>
-          <p className="section-subtitle">
-            Configura tus requisitos para obtener una estimación inmediata adaptada al alcance de tu empresa.
+          <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Transparencia & Tarifas
+          </span>
+          <h2>Estimador de Inversión Orientativo</h2>
+          <p>
+            Configura los requerimientos de tu proyecto para obtener una estimación inmediata adaptada a la escala de tu infraestructura.
           </p>
         </div>
 
@@ -642,7 +806,7 @@ function App() {
             </div>
 
             <div className="calc-group">
-              <label>Dimensión / Alcance:</label>
+              <label>Dimensión / Alcance de la Red:</label>
               <select 
                 className="calc-select" 
                 value={scope} 
@@ -663,7 +827,7 @@ function App() {
                     checked={extras.urgencia} 
                     onChange={() => handleExtraChange('urgencia')} 
                   />
-                  <span>Implantación urgente / Prioridad alta (+250 €)</span>
+                  <span>Implantación urgente / Prioridad 24-48h (+250 €)</span>
                 </label>
                 <label className="checkbox-item">
                   <input 
@@ -686,26 +850,32 @@ function App() {
           </div>
 
           <div className="calc-result-box">
-            <span>Inversión Estimada</span>
+            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase' }}>
+              Inversión Estimada
+            </span>
             <div className="calc-price">{calculateEstimate()} €</div>
             <p className="calc-note">
               * Presupuesto aproximado sin IVA. Se entrega propuesta formal detallada tras la toma de requerimientos.
             </p>
-            <a href="#contacto" className="btn-cta" style={{ width: '100%', justifyContent: 'center' }}>
+            <a href="#contacto" className="btn-amazon-buy" style={{ width: '100%', textDecoration: 'none', padding: '0.85rem' }}>
               <span>Solicitar Propuesta Formal</span>
-              <Send size={16} />
+              <ArrowRight size={16} />
             </a>
           </div>
         </div>
       </section>
 
-      {/* 6. CONTACTO */}
+      {/* ========================================================================= */}
+      {/* 7. CONTACTO */}
+      {/* ========================================================================= */}
       <section id="contacto">
         <div className="section-header">
-          <span className="section-tag">Hablemos</span>
-          <h2 className="section-title">Inicia tu Proyecto Tecnológico</h2>
-          <p className="section-subtitle">
-            Ponte en contacto para coordinar una reunión de evaluación sin compromiso o consultar disponibilidad docente.
+          <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Atención al Cliente
+          </span>
+          <h2>Inicia tu Consulta con DR. BYTE</h2>
+          <p>
+            Ponte en contacto para concertar una sesión diagnóstica, solicitar presupuestos a medida o consultar disponibilidad docente.
           </p>
         </div>
 
@@ -713,14 +883,14 @@ function App() {
           <div className="contact-info">
             <h3>Contacto Directo</h3>
             <p>
-              Atención personalizada para empresas, centros formativos e instituciones que buscan un perfil técnico con experiencia contrastada.
+              Atención personalizada para empresas, centros formativos y particulares que buscan excelencia y solvencia técnica.
             </p>
 
             <div className="direct-channels">
               <div className="channel-card">
                 <Mail className="channel-icon" size={24} />
                 <div className="channel-detail">
-                  <strong>Correo Electrónico</strong>
+                  <strong>Correo Electrónico Oficial</strong>
                   <span>catalogoaplicaciones@gmail.com</span>
                 </div>
               </div>
@@ -728,8 +898,8 @@ function App() {
               <div className="channel-card">
                 <Phone className="channel-icon" size={24} />
                 <div className="channel-detail">
-                  <strong>Canal Telefónico & WhatsApp</strong>
-                  <span>+34 600 000 000 (Atención Profesional)</span>
+                  <strong>Atención Telefónica & WhatsApp</strong>
+                  <span>+34 600 000 000 (Línea Profesional)</span>
                 </div>
               </div>
 
@@ -737,7 +907,7 @@ function App() {
                 <MapPin className="channel-icon" size={24} />
                 <div className="channel-detail">
                   <strong>Ubicación & Cobertura</strong>
-                  <span>España / Modalidad Presencial y Remoto</span>
+                  <span>España / Asistencia Presencial & Soporte Remoto</span>
                 </div>
               </div>
             </div>
@@ -746,24 +916,26 @@ function App() {
           <form className="contact-form" onSubmit={handleSubmit}>
             {formSent ? (
               <div style={{
-                background: 'rgba(16, 185, 129, 0.1)',
+                background: '#e6f4ea',
                 border: '1px solid #10b981',
-                padding: '2rem',
-                borderRadius: '12px',
+                padding: '2.5rem 2rem',
+                borderRadius: '8px',
                 textAlign: 'center'
               }}>
                 <CheckCircle2 size={48} color="#10b981" style={{ marginBottom: '1rem' }} />
-                <h4 style={{ color: '#ffffff', marginBottom: '0.5rem' }}>¡Mensaje Enviado con Éxito!</h4>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                  Gracias por contactar, Manuel revisará los datos de tu consulta y se pondrá en contacto contigo a la mayor brevedad.
+                <h4 style={{ color: 'var(--drbyte-navy)', marginBottom: '0.5rem', fontSize: '1.25rem' }}>
+                  ¡Mensaje Recibido Correctamente!
+                </h4>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+                  Gracias por contactar con DR. BYTE. Manuel Aragonés revisará tu consulta técnica y te responderá a la mayor brevedad.
                 </p>
                 <button 
                   type="button" 
-                  className="btn-secondary" 
+                  className="btn-amazon-primary" 
                   style={{ marginTop: '1.5rem' }}
                   onClick={() => setFormSent(false)}
                 >
-                  Enviar otro mensaje
+                  Enviar otra consulta
                 </button>
               </div>
             ) : (
@@ -781,7 +953,7 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <label>Email de Contacto:</label>
+                  <label>Email de Contacto Corporativo:</label>
                   <input 
                     type="email" 
                     required 
@@ -803,25 +975,25 @@ function App() {
                     <option>Auditoría de Firewalls NGFW</option>
                     <option>Formación Técnica In-Company</option>
                     <option>Soporte de Servidores y Sistemas</option>
-                    <option>Dashboards y Automatización Comercial</option>
+                    <option>Plantillas Excel & Dashboards VBA</option>
                     <option>Desarrollo Web y Apps a Medida</option>
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label>Mensaje o Descripción del Proyecto:</label>
+                  <label>Mensaje o Descripción de tu Requerimiento:</label>
                   <textarea 
                     rows={4}
                     required 
-                    placeholder="Cuéntame brevemente el objetivo de tu proyecto o las necesidades de tu infraestructura..."
+                    placeholder="Cuéntame brevemente las necesidades de tu infraestructura o qué plantilla necesitas adaptar..."
                     className="form-textarea"
                     value={formData.mensaje}
                     onChange={(e) => setFormData({...formData, mensaje: e.target.value})}
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn-cta" style={{ width: '100%', justifyContent: 'center' }}>
-                  <span>Enviar Mensaje Profesional</span>
+                <button type="submit" className="btn-amazon-buy" style={{ padding: '0.85rem' }}>
+                  <span>Enviar Consulta Profesional</span>
                   <Send size={18} />
                 </button>
               </>
@@ -830,11 +1002,36 @@ function App() {
         </div>
       </section>
 
-      {/* 7. FOOTER */}
+      {/* ========================================================================= */}
+      {/* 8. FOOTER ESTILO AMAZON */}
+      {/* ========================================================================= */}
       <footer className="footer">
+        <div 
+          className="footer-back-to-top" 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          Volver arriba ▲
+        </div>
+
         <div className="footer-content">
-          <p>© {new Date().getFullYear()} Manuel Aragonés. Todos los derechos reservados.</p>
-          <p>Consultoría Tecnológica, Arquitectura de Redes & Formación de Vanguardia.</p>
+          <div className="footer-brand">
+            <img 
+              src="/assets/dr_byte_logo.jpg" 
+              alt="DR. BYTE" 
+              style={{ width: '40px', height: '40px', borderRadius: '6px', border: '1px solid var(--drbyte-cyan)' }} 
+            />
+            <div>
+              <strong style={{ fontSize: '1.1rem', color: '#ffffff', display: 'block' }}>DR. BYTE.es</strong>
+              <span style={{ fontSize: '0.78rem', color: 'var(--drbyte-cyan)' }}>Diagnóstico & Consultoría Informática</span>
+            </div>
+          </div>
+
+          <div>
+            <p>© {new Date().getFullYear()} DR. BYTE - Dirección Técnica: Manuel Aragonés. Todos los derechos reservados.</p>
+            <p style={{ marginTop: '0.25rem', color: '#94a3b8', fontSize: '0.78rem' }}>
+              Ciberseguridad Zero Trust | Redes LAN/WAN | Formación Técnica Oficial | Automatizaciones Excel VBA
+            </p>
+          </div>
         </div>
       </footer>
     </div>
@@ -842,4 +1039,3 @@ function App() {
 }
 
 export default App;
-
