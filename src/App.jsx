@@ -68,7 +68,8 @@ function App() {
         'Formularios VBA con validación de datos en tiempo real',
         'Filtros por canal de cobro y categorías de clientes',
         'KPIs automáticos: Facturación, Base imponible e IVA',
-        'Exportación y sincronización en tiempo real con macros'
+        'Exportación y sincronización en tiempo real con macros',
+        'Logotipo blindado de DR. BYTE con soporte directo (+34 607 35 39 10 / hola.drbyte@gmail.com)'
       ]
     },
     {
@@ -486,7 +487,7 @@ function App() {
               <div className="bottom-strip-contacts">
                 <div className="strip-item">
                   <Mail size={18} />
-                  <span>Email: <a href="mailto:jmaragones@gmail.com" style={{ textDecoration: 'underline', color: 'inherit' }}><strong>jmaragones@gmail.com</strong></a></span>
+                  <span>Email: <a href="mailto:hola.drbyte@gmail.com" style={{ textDecoration: 'underline', color: 'inherit' }}><strong>hola.drbyte@gmail.com</strong></a></span>
                 </div>
                 <div className="strip-item">
                   <Phone size={18} />
@@ -667,7 +668,7 @@ function App() {
                 {contactSubject}
               </h3>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                Indícanos tus datos y Manuel Aragonés te atenderá personalmente.
+                Atención directa: <strong>+34 607 35 39 10</strong> · <strong>hola.drbyte@gmail.com</strong>
               </p>
             </div>
 
