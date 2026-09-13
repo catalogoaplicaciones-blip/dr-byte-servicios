@@ -1,39 +1,39 @@
-/* index.css - DR. BYTE Tech SaaS Theme */
+/* index.css - DR. BYTE Luminous Modern Tech Theme */
 :root {
-  /* Paleta Base Tech Dark */
-  --bg-main: #090d16;
-  --bg-surface: #0f172a;
-  --bg-card: rgba(15, 23, 42, 0.75);
-  --bg-card-hover: rgba(30, 41, 59, 0.85);
-  --bg-card-solid: #131d31;
-  --bg-glass: rgba(15, 23, 42, 0.65);
+  /* Paleta Base Luminosa y Limpia */
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-card-solid: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.9);
   
-  /* Acentos Tecnológicos Luminosos */
-  --drbyte-cyan: #06b6d4;
-  --drbyte-cyan-glow: rgba(6, 182, 212, 0.25);
-  --drbyte-blue: #3b82f6;
-  --drbyte-indigo: #6366f1;
-  --drbyte-indigo-glow: rgba(99, 102, 241, 0.25);
-  --drbyte-emerald: #10b981;
-  --drbyte-amber: #f59e0b;
-  --drbyte-purple: #a855f7;
+  /* Acentos Tecnológicos Vibrantes */
+  --drbyte-cyan: #0284c7;
+  --drbyte-cyan-glow: rgba(2, 132, 199, 0.15);
+  --drbyte-blue: #2563eb;
+  --drbyte-indigo: #4f46e5;
+  --drbyte-indigo-glow: rgba(79, 70, 229, 0.12);
+  --drbyte-emerald: #059669;
+  --drbyte-amber: #d97706;
+  --drbyte-purple: #7c3aed;
 
-  /* Textos de Alta Legibilidad */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  /* Textos Nítidos con Máximo Contraste */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
   --text-muted: #64748b;
-  --text-highlight: #38bdf8;
+  --text-highlight: #0284c7;
   
-  /* Bordes Sutiles y Gradientes */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(148, 163, 184, 0.14);
-  --border-hover: rgba(6, 182, 212, 0.4);
-  --border-glow: 0 0 20px rgba(6, 182, 212, 0.15);
+  /* Bordes Limpios y Definidos */
+  --border-subtle: #f1f5f9;
+  --border-card: #e2e8f0;
+  --border-hover: #0284c7;
+  --border-glow: 0 0 20px rgba(2, 132, 199, 0.12);
 
-  /* Sombras y Elevaciones */
-  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
-  --shadow-hover: 0 12px 32px -4px rgba(0, 0, 0, 0.7), 0 0 24px -2px rgba(6, 182, 212, 0.2);
-  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+  /* Sombras Suaves Nivel SaaS */
+  --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 14px 34px -4px rgba(15, 23, 42, 0.08), 0 0 18px rgba(2, 132, 199, 0.1);
+  --shadow-modal: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
 
   /* Tipografías */
   --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -60,12 +60,12 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-main);
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   font-family: var(--font-body);
-  background: radial-gradient(circle at 50% 0%, #172554 0%, #090d16 55%, #05070c 100%);
+  background: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #f8fafc 50%, #f1f5f9 100%);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
@@ -104,22 +104,22 @@ input, textarea, select {
   font-family: var(--font-body);
 }
 
-/* Scrollbar Moderno */
+/* Scrollbar Moderno y Limpio */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94a3b8;
 }
 
 ::selection {
   background: var(--drbyte-cyan);
-  color: #090d16;
+  color: #ffffff;
 }

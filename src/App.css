@@ -1,16 +1,17 @@
-/* App.css - DR. BYTE Tech SaaS Design */
+/* App.css - DR. BYTE Luminous Modern Tech SaaS Design */
 
 /* ==========================================================================
-   1. HEADER FLOTANTE TECNOLÓGICO CON BLUR
+   1. HEADER FLOTANTE TECNOLÓGICO LUMINOSO
    ========================================================================== */
 .drbyte-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(9, 13, 22, 0.85);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-card);
+  box-shadow: 0 1px 10px rgba(15, 23, 42, 0.04);
   transition: var(--transition-normal);
 }
 
@@ -44,13 +45,13 @@
   object-fit: cover;
   border-radius: 10px;
   border: 1.5px solid var(--drbyte-cyan);
-  box-shadow: 0 0 15px var(--drbyte-cyan-glow);
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.2);
 }
 
 .brand-titles h1 {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #0f172a;
   display: flex;
   align-items: center;
   gap: 0.2rem;
@@ -59,14 +60,13 @@
 
 .brand-titles .dot-tech {
   color: var(--drbyte-cyan);
-  text-shadow: 0 0 8px var(--drbyte-cyan);
 }
 
 .brand-titles .brand-sub {
   font-size: 0.68rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(15, 23, 42, 0.75);
+  background: #f1f5f9;
   padding: 0.35rem;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-card);
@@ -85,9 +85,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.55rem 1.1rem;
+  padding: 0.55rem 1.15rem;
   border-radius: var(--radius-full);
-  color: var(--text-secondary);
+  color: #475569;
   font-size: 0.88rem;
   font-weight: 600;
   transition: var(--transition-fast);
@@ -95,20 +95,19 @@
 }
 
 .tab-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .tab-btn.active {
   color: #ffffff;
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(99, 102, 241, 0.25));
-  border: 1px solid var(--drbyte-cyan);
-  box-shadow: 0 0 16px rgba(6, 182, 212, 0.2);
+  background: #0f172a;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.2);
 }
 
 .tab-counter-badge {
   background: var(--drbyte-cyan);
-  color: #090d16;
+  color: #ffffff;
   font-size: 0.68rem;
   font-weight: 800;
   padding: 0.1rem 0.45rem;
@@ -125,27 +124,27 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.55rem 1.15rem;
+  padding: 0.55rem 1.25rem;
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, var(--drbyte-cyan), var(--drbyte-blue));
-  color: #090d16;
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.88rem;
-  box-shadow: 0 0 18px rgba(6, 182, 212, 0.35);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28);
   transition: var(--transition-fast);
 }
 
 .btn-contact-quick:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 24px rgba(6, 182, 212, 0.5);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+  filter: brightness(1.06);
 }
 
 /* ==========================================================================
-   2. HERO & SECCIÓN INICIO
+   2. HERO & SECCIÓN INICIO (LUMINOSO)
    ========================================================================== */
 .hero-tech-section {
-  padding: 4.5rem 1.5rem 3.5rem;
+  padding: 5rem 1.5rem 3.5rem;
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
@@ -156,27 +155,27 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 1rem;
+  padding: 0.45rem 1.15rem;
   border-radius: var(--radius-full);
-  background: rgba(6, 182, 212, 0.1);
-  border: 1px solid rgba(6, 182, 212, 0.3);
-  color: var(--drbyte-cyan);
-  font-size: 0.82rem;
-  font-weight: 600;
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+  font-size: 0.84rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  box-shadow: 0 0 16px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.1);
 }
 
 .hero-title-main {
-  font-size: 3.25rem;
+  font-size: 3.35rem;
   line-height: 1.15;
   margin-bottom: 1.5rem;
-  color: #ffffff;
+  color: #0f172a;
   font-weight: 800;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 30%, var(--drbyte-cyan) 75%, var(--drbyte-indigo) 100%);
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -205,17 +204,17 @@
   padding: 0.85rem 1.85rem;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--drbyte-cyan), var(--drbyte-blue));
-  color: #05070c;
+  color: #ffffff;
   font-weight: 700;
   font-size: 1rem;
-  box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.35);
   transition: var(--transition-fast);
 }
 
 .btn-primary-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(6, 182, 212, 0.6);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 24px rgba(2, 132, 199, 0.5);
+  filter: brightness(1.05);
 }
 
 .btn-secondary-glass {
@@ -224,33 +223,34 @@
   gap: 0.6rem;
   padding: 0.85rem 1.85rem;
   border-radius: var(--radius-md);
-  background: rgba(30, 41, 59, 0.6);
+  background: #ffffff;
   border: 1px solid var(--border-card);
-  color: #ffffff;
+  color: #0f172a;
   font-weight: 600;
   font-size: 1rem;
-  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
   transition: var(--transition-fast);
 }
 
 .btn-secondary-glass:hover {
-  background: rgba(51, 65, 85, 0.8);
+  background: #f8fafc;
   border-color: var(--drbyte-cyan);
+  color: var(--drbyte-cyan);
   transform: translateY(-2px);
 }
 
-/* MÉTRICAS TECH */
+/* MÉTRICAS TECH LUMINOSAS */
 .hero-metrics-bar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   max-width: 950px;
   margin: 0 auto 4rem;
-  padding: 1.5rem;
-  background: var(--bg-card);
+  padding: 1.75rem;
+  background: #ffffff;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-card);
-  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
 }
 
 .metric-item {
@@ -261,15 +261,16 @@
 }
 
 .metric-val {
-  font-size: 1.65rem;
+  font-size: 1.85rem;
   font-weight: 800;
   color: var(--drbyte-cyan);
   font-family: var(--font-heading);
 }
 
 .metric-desc {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 /* CUADRÍCULA DE PILARES TÉCNICOS */
@@ -287,16 +288,16 @@
 .section-tag {
   color: var(--drbyte-cyan);
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
   display: block;
 }
 
 .section-title {
-  font-size: 2.25rem;
-  color: #ffffff;
+  font-size: 2.35rem;
+  color: #0f172a;
   margin-bottom: 0.85rem;
 }
 
@@ -315,32 +316,29 @@
 }
 
 .tech-card {
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 1.85rem;
-  backdrop-filter: blur(14px);
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
   transition: var(--transition-normal);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  position: relative;
-  overflow: hidden;
 }
 
 .tech-card:hover {
   transform: translateY(-5px);
-  border-color: var(--border-hover);
+  border-color: #bae6fd;
   box-shadow: var(--shadow-hover);
-  background: var(--bg-card-hover);
 }
 
 .card-icon-box {
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: rgba(6, 182, 212, 0.1);
-  border: 1px solid rgba(6, 182, 212, 0.25);
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -349,7 +347,7 @@
 
 .tech-card h3 {
   font-size: 1.25rem;
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .tech-card p {
@@ -361,37 +359,37 @@
 
 /* BANNER DESTACADO DE PLANTILLA ESTRELLA */
 .spotlight-banner {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
-  border: 1px solid rgba(6, 182, 212, 0.35);
+  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 60%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
   border-radius: var(--radius-xl);
-  padding: 2.5rem;
+  padding: 2.75rem;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 2.5rem;
   align-items: center;
-  box-shadow: 0 0 35px rgba(6, 182, 212, 0.12);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.08);
   margin-top: 2rem;
 }
 
 .spotlight-text h4 {
   color: var(--drbyte-cyan);
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
 }
 
 .spotlight-text h3 {
-  font-size: 1.85rem;
-  color: #ffffff;
+  font-size: 1.95rem;
+  color: #0f172a;
   margin-bottom: 1rem;
 }
 
 .spotlight-text p {
   color: var(--text-secondary);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 1.5rem;
 }
 
@@ -399,16 +397,18 @@
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .badge-tag {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  padding: 0.25rem 0.75rem;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0.3rem 0.85rem;
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
-  border: 1px solid var(--border-subtle);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
 }
 
 .spotlight-preview {
@@ -416,7 +416,7 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-card);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
 }
 
 .spotlight-preview img {
@@ -431,7 +431,7 @@
 }
 
 /* ==========================================================================
-   3. TIENDA DE PLANTILLAS EXCEL
+   3. TIENDA DE PLANTILLAS EXCEL (LUMINOSA)
    ========================================================================== */
 .store-controls-bar {
   display: flex;
@@ -450,37 +450,39 @@
 }
 
 .filter-pill-btn {
-  padding: 0.5rem 1.15rem;
+  padding: 0.55rem 1.25rem;
   border-radius: var(--radius-full);
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-card);
   color: var(--text-secondary);
   font-size: 0.88rem;
   font-weight: 600;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
   transition: var(--transition-fast);
 }
 
 .filter-pill-btn:hover {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
+  color: #0f172a;
+  border-color: #cbd5e1;
 }
 
 .filter-pill-btn.active {
-  background: rgba(6, 182, 212, 0.15);
-  border-color: var(--drbyte-cyan);
-  color: var(--drbyte-cyan);
-  box-shadow: 0 0 12px var(--drbyte-cyan-glow);
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.2);
 }
 
 .store-search-box {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-card);
   padding: 0.55rem 1rem;
   border-radius: var(--radius-full);
   min-width: 280px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
 
 .store-search-box:focus-within {
@@ -492,7 +494,7 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #ffffff;
+  color: #0f172a;
   font-size: 0.9rem;
   width: 100%;
 }
@@ -508,11 +510,11 @@
 }
 
 .template-card {
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   transition: var(--transition-normal);
@@ -520,7 +522,7 @@
 
 .template-card:hover {
   transform: translateY(-6px);
-  border-color: var(--border-hover);
+  border-color: #bae6fd;
   box-shadow: var(--shadow-hover);
 }
 
@@ -528,7 +530,7 @@
   position: relative;
   height: 200px;
   overflow: hidden;
-  background: #0d1322;
+  background: #e2e8f0;
 }
 
 .template-thumb img {
@@ -546,14 +548,13 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--drbyte-cyan);
-  color: var(--drbyte-cyan);
+  background: #0f172a;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
   padding: 0.25rem 0.65rem;
   border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .template-body {
@@ -567,7 +568,7 @@
 .template-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
   line-height: 1.35;
 }
 
@@ -590,7 +591,7 @@
   align-items: flex-start;
   gap: 0.5rem;
   font-size: 0.82rem;
-  color: #cbd5e1;
+  color: #334155;
 }
 
 .spec-check-item svg {
@@ -610,7 +611,7 @@
 .price-current {
   font-size: 1.65rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #0f172a;
   font-family: var(--font-heading);
 }
 
@@ -621,13 +622,12 @@
 }
 
 .price-discount-tag {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--drbyte-emerald);
+  background: #dcfce7;
+  color: #15803d;
   font-size: 0.75rem;
   font-weight: 800;
   padding: 0.2rem 0.5rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .template-actions {
@@ -643,8 +643,8 @@
   gap: 0.45rem;
   padding: 0.65rem 0.85rem;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  background: #f1f5f9;
+  color: #0f172a;
   font-size: 0.85rem;
   font-weight: 600;
   border: 1px solid var(--border-card);
@@ -652,8 +652,8 @@
 }
 
 .btn-card-download:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--drbyte-cyan);
+  background: #e2e8f0;
+  border-color: #cbd5e1;
 }
 
 .btn-card-buy {
@@ -664,19 +664,19 @@
   padding: 0.65rem 0.85rem;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--drbyte-cyan), var(--drbyte-blue));
-  color: #05070c;
+  color: #ffffff;
   font-size: 0.85rem;
   font-weight: 700;
   transition: var(--transition-fast);
 }
 
 .btn-card-buy:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 4px 15px var(--drbyte-cyan-glow);
+  filter: brightness(1.08);
+  box-shadow: 0 4px 14px var(--drbyte-cyan-glow);
 }
 
 /* ==========================================================================
-   4. PESTAÑA NOTICIAS (ARTÍCULOS & ACTUALIDAD TÉCNICA)
+   4. PESTAÑA NOTICIAS (ARTÍCULOS LUMINOSOS)
    ========================================================================== */
 .news-grid {
   display: grid;
@@ -685,20 +685,20 @@
 }
 
 .news-card {
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  box-shadow: var(--shadow-card);
   transition: var(--transition-normal);
-  backdrop-filter: blur(14px);
 }
 
 .news-card:hover {
   transform: translateY(-5px);
-  border-color: var(--border-hover);
+  border-color: #bae6fd;
   box-shadow: var(--shadow-hover);
 }
 
@@ -710,12 +710,11 @@
 }
 
 .news-cat-pill {
-  color: var(--drbyte-cyan);
-  background: rgba(6, 182, 212, 0.12);
+  color: #0369a1;
+  background: #e0f2fe;
   padding: 0.25rem 0.65rem;
   border-radius: var(--radius-full);
   font-weight: 700;
-  border: 1px solid rgba(6, 182, 212, 0.25);
 }
 
 .news-date {
@@ -724,7 +723,7 @@
 
 .news-title {
   font-size: 1.35rem;
-  color: #ffffff;
+  color: #0f172a;
   line-height: 1.35;
 }
 
@@ -740,7 +739,7 @@
   align-items: center;
   gap: 0.5rem;
   color: var(--drbyte-cyan);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.88rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--border-subtle);
@@ -750,11 +749,11 @@
 
 .news-footer-link:hover {
   gap: 0.75rem;
-  color: #ffffff;
+  color: var(--drbyte-blue);
 }
 
 /* ==========================================================================
-   5. PESTAÑA QUIÉN ES DR. BYTE
+   5. PESTAÑA QUIÉN ES DR. BYTE (LUMINOSA)
    ========================================================================== */
 .about-profile-wrapper {
   display: grid;
@@ -764,16 +763,15 @@
 }
 
 .profile-card-sticky {
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-xl);
-  padding: 2rem;
+  padding: 2.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   box-shadow: var(--shadow-card);
-  backdrop-filter: blur(14px);
   position: sticky;
   top: 90px;
 }
@@ -784,7 +782,7 @@
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--drbyte-cyan);
-  box-shadow: 0 0 25px var(--drbyte-cyan-glow);
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
   margin-bottom: 1.5rem;
 }
 
@@ -796,13 +794,13 @@
 
 .profile-name {
   font-size: 1.6rem;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 0.25rem;
 }
 
 .profile-title {
   color: var(--drbyte-cyan);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.92rem;
   margin-bottom: 1.25rem;
 }
@@ -820,18 +818,19 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: #f8fafc;
   padding: 0.65rem 0.85rem;
   border-radius: var(--radius-md);
   font-size: 0.85rem;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
+  color: #334155;
+  border: 1px solid var(--border-card);
   transition: var(--transition-fast);
 }
 
 .contact-row-item:hover {
   border-color: var(--drbyte-cyan);
-  color: #ffffff;
+  background: #f0f9ff;
+  color: var(--drbyte-cyan);
 }
 
 .about-bio-content {
@@ -841,16 +840,16 @@
 }
 
 .bio-block {
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-xl);
-  padding: 2.25rem;
-  backdrop-filter: blur(14px);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-card);
 }
 
 .bio-block h3 {
   font-size: 1.45rem;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -876,14 +875,14 @@
 }
 
 .cred-card-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
+  background: #f8fafc;
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
   padding: 1.25rem;
 }
 
 .cred-card-item h4 {
-  color: var(--drbyte-cyan);
+  color: #0369a1;
   font-size: 1rem;
   margin-bottom: 0.35rem;
 }
@@ -899,8 +898,8 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -909,8 +908,8 @@
 }
 
 .modal-content-box {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-hover);
+  background: #ffffff;
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-xl);
   padding: 2.5rem;
   max-width: 550px;
@@ -928,7 +927,7 @@
 }
 
 .btn-modal-close:hover {
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .form-group-field {
@@ -939,7 +938,7 @@
   display: block;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #334155;
   margin-bottom: 0.45rem;
 }
 
@@ -947,11 +946,11 @@
 .form-group-field textarea,
 .form-group-field select {
   width: 100%;
-  background: #090d16;
+  background: #f8fafc;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
   padding: 0.75rem 1rem;
-  color: #ffffff;
+  color: #0f172a;
   font-size: 0.95rem;
   outline: none;
   transition: var(--transition-fast);
@@ -961,16 +960,16 @@
 .form-group-field textarea:focus,
 .form-group-field select:focus {
   border-color: var(--drbyte-cyan);
-  box-shadow: 0 0 12px var(--drbyte-cyan-glow);
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.15);
 }
 
-/* FOOTER */
+/* FOOTER LUMINOSO Y PROFESIONAL */
 .tech-footer {
   margin-top: auto;
-  background: #05070c;
-  border-top: 1px solid var(--border-card);
-  padding: 3rem 1.5rem 2rem;
-  color: var(--text-muted);
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 3rem 1.5rem 2.5rem;
 }
 
 .footer-container {
@@ -990,9 +989,10 @@
 }
 
 .footer-brand img {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 8px;
+  border: 1px solid var(--drbyte-cyan);
 }
 
 .footer-links {
@@ -1001,8 +1001,13 @@
   font-size: 0.88rem;
 }
 
-.footer-links a:hover {
-  color: var(--drbyte-cyan);
+.footer-links button {
+  color: #cbd5e1;
+  transition: var(--transition-fast);
+}
+
+.footer-links button:hover {
+  color: #38bdf8;
 }
 
 /* RESPONSIVE */
