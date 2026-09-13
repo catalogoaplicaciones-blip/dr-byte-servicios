@@ -1,7 +1,7 @@
-/* App.css - Amazon E-Commerce Architecture with Dr. Byte Brand Colors */
+/* App.css - Diseño Limpio, Sólido y Sencillo (Sin Transparencias) */
 
 /* ==========================================================================
-   1. AMAZON-STYLE TOP NAVBAR & SEARCH BAR
+   1. NAVBAR SÓLIDO TIPO AMAZON CON LOGO DR. BYTE
    ========================================================================== */
 .navbar {
   position: sticky;
@@ -9,36 +9,32 @@
   z-index: 100;
   background: var(--drbyte-navy);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-bottom: 2px solid var(--drbyte-blue);
 }
 
 .nav-main-bar {
-  max-width: 1380px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0.6rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
-  transition: outline 0.15s ease;
+  background: transparent;
   flex-shrink: 0;
-}
-
-.brand:hover {
-  outline: 1px solid #ffffff;
 }
 
 .drbyte-navbar-logo {
   width: 44px;
   height: 44px;
-  border-radius: 8px;
+  border-radius: 6px;
   object-fit: cover;
   border: 2px solid var(--drbyte-cyan);
 }
@@ -47,10 +43,10 @@
   font-size: 1.25rem;
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: -0.02em;
   display: flex;
   align-items: baseline;
   gap: 0.15rem;
+  line-height: 1.1;
 }
 
 .brand-text h2 span.dot-es {
@@ -60,13 +56,13 @@
 
 .brand-text span.sub-brand {
   font-size: 0.72rem;
-  color: var(--drbyte-cyan);
-  font-weight: 600;
+  color: #93c5fd;
+  font-weight: 700;
   display: block;
-  line-height: 1;
+  letter-spacing: 0.04em;
 }
 
-/* Amazon-Style Search Bar */
+/* Buscador Sólido */
 .nav-search-bar {
   flex: 1;
   display: flex;
@@ -74,20 +70,19 @@
   border-radius: var(--radius-sm);
   background: #ffffff;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  transition: box-shadow 0.2s ease;
+  border: 2px solid transparent;
 }
 
 .nav-search-bar:focus-within {
-  box-shadow: 0 0 0 3px var(--amazon-orange);
+  border-color: var(--amazon-orange);
 }
 
 .search-category-select {
-  background: #f3f3f3;
+  background: #e5e7eb;
   border: none;
-  border-right: 1px solid #d5d9d9;
-  padding: 0.65rem 0.8rem;
-  font-size: 0.82rem;
+  border-right: 1px solid #d1d5db;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.85rem;
   color: var(--text-primary);
   font-weight: 600;
   outline: none;
@@ -98,28 +93,28 @@
   flex: 1;
   border: none;
   padding: 0.65rem 1rem;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   outline: none;
   color: var(--text-primary);
+  background: #ffffff;
 }
 
 .search-btn {
   background: var(--amazon-orange);
-  color: #111;
+  color: #111827;
   border: none;
-  padding: 0.65rem 1.1rem;
+  padding: 0.65rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease;
 }
 
 .search-btn:hover {
-  background: var(--amazon-orange-hover);
+  background: #e68a00;
 }
 
-/* Nav Action Items */
+/* Acciones a la derecha */
 .nav-actions-right {
   display: flex;
   align-items: center;
@@ -131,9 +126,8 @@
   display: flex;
   flex-direction: column;
   color: #ffffff;
-  padding: 0.35rem 0.55rem;
+  padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
-  transition: outline 0.15s ease;
 }
 
 .nav-item-link:hover {
@@ -142,14 +136,14 @@
 
 .nav-item-small {
   font-size: 0.72rem;
-  color: #cccccc;
+  color: #cbd5e1;
   line-height: 1.1;
 }
 
 .nav-item-bold {
   font-size: 0.88rem;
   font-weight: 700;
-  line-height: 1.2;
+  color: #ffffff;
 }
 
 .nav-cart-btn {
@@ -160,7 +154,6 @@
   font-weight: 700;
   padding: 0.35rem 0.65rem;
   border-radius: var(--radius-sm);
-  position: relative;
 }
 
 .nav-cart-btn:hover {
@@ -169,36 +162,35 @@
 
 .cart-count-badge {
   position: absolute;
-  top: -2px;
-  left: 17px;
+  top: -4px;
+  left: 16px;
   color: var(--amazon-orange);
   font-weight: 800;
   font-size: 0.95rem;
 }
 
-/* Sub-navbar (Amazon Department links) */
+/* Sub-barra de categorías sólida */
 .nav-sub-bar {
   background: var(--drbyte-header-sub);
-  padding: 0.4rem 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1.25rem;
+  border-top: 1px solid #2d3748;
 }
 
 .sub-bar-container {
-  max-width: 1380px;
+  max-width: 1320px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  list-style: none;
   overflow-x: auto;
 }
 
 .sub-bar-container a {
-  color: #ffffff;
+  color: #f1f5f9;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
-  padding: 0.25rem 0.45rem;
+  padding: 0.2rem 0.4rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -206,47 +198,48 @@
 }
 
 .sub-bar-container a:hover {
-  outline: 1px solid #ffffff;
+  background: #2d3748;
+  color: #ffffff;
 }
 
 /* ==========================================================================
-   2. HERO BANNER AMAZON STYLE
+   2. HERO BANNER SÓLIDO (FONDO MARINO LIMPIO, SIN DEGRADADOS DIFUSOS)
    ========================================================================== */
 .hero-banner-wrapper {
-  background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 60%, #eaeded 100%);
-  padding: 2.5rem 1.25rem 1rem;
-  position: relative;
+  background: var(--drbyte-navy);
+  padding: 3rem 1.25rem;
+  border-bottom: 3px solid var(--drbyte-blue);
+  color: #ffffff;
 }
 
 .hero-banner-container {
-  max-width: 1380px;
+  max-width: 1320px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.3fr 0.9fr;
-  gap: 2rem;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 2.5rem;
   align-items: center;
-  color: #ffffff;
 }
 
 .hero-banner-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(0, 210, 255, 0.15);
+  gap: 0.45rem;
+  background: var(--drbyte-header-sub);
   border: 1px solid var(--drbyte-cyan);
-  color: var(--drbyte-cyan);
+  color: #38bdf8;
   padding: 0.35rem 0.85rem;
-  border-radius: var(--radius-full);
-  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   text-transform: uppercase;
 }
 
 .hero-banner-title {
-  font-size: 2.8rem;
-  line-height: 1.15;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
   font-weight: 800;
   color: #ffffff;
 }
@@ -257,31 +250,30 @@
 
 .hero-banner-desc {
   font-size: 1.05rem;
-  color: #cbd5e1;
-  margin-bottom: 1.8rem;
+  color: #e2e8f0;
+  margin-bottom: 2rem;
   line-height: 1.6;
 }
 
 .hero-quick-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
 .btn-amazon-primary {
   background: var(--amazon-yellow);
-  color: #0f1111;
-  border: 1px solid #a88734;
-  padding: 0.7rem 1.5rem;
-  border-radius: var(--radius-full);
+  color: #111827;
+  border: 1px solid var(--amazon-yellow-border);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
-  transition: background 0.15s ease;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 
 .btn-amazon-primary:hover {
@@ -289,46 +281,43 @@
 }
 
 .btn-amazon-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.7rem 1.4rem;
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  font-size: 0.92rem;
+  background: #ffffff;
+  color: var(--drbyte-navy);
+  border: 1px solid #d1d5db;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.95rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .btn-amazon-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #ffffff;
+  background: #f3f4f6;
 }
 
-/* Doctor Box Visual Right */
+/* Tarjeta Sólida Profesional Derecha */
 .doctor-hero-card {
   background: #ffffff;
   color: var(--text-primary);
   border-radius: var(--radius-md);
-  padding: 1.8rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-subtle);
+  padding: 2rem;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative;
 }
 
 .drbyte-hero-img-main {
-  width: 150px;
-  height: 150px;
-  border-radius: 16px;
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
   object-fit: cover;
-  border: 3px solid var(--drbyte-cyan);
-  box-shadow: 0 4px 14px rgba(0, 132, 255, 0.25);
+  border: 2px solid var(--drbyte-blue);
   margin-bottom: 1rem;
 }
 
@@ -336,11 +325,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #e6f4ea;
+  background: var(--success-bg);
   color: var(--success-green);
-  padding: 0.25rem 0.65rem;
-  border-radius: 4px;
-  font-size: 0.78rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
 }
@@ -349,34 +338,35 @@
   font-size: 1.35rem;
   color: var(--drbyte-navy);
   margin-bottom: 0.25rem;
+  font-weight: 800;
 }
 
 .doctor-hero-card p {
   font-size: 0.88rem;
   color: var(--text-secondary);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .doctor-rating-row {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
+  margin-bottom: 1.25rem;
 }
 
 .stars-rating {
   color: var(--amazon-star);
-  font-size: 1rem;
-  letter-spacing: 2px;
+  font-size: 1.1rem;
 }
 
 /* ==========================================================================
-   3. SECTIONS LAYOUT (AMAZON CARDS & MATRICES)
+   3. SECCIONES GENERALES (FONDOS SÓLIDOS Y CLAROS)
    ========================================================================== */
 section {
   padding: 3.5rem 1.25rem;
-  max-width: 1380px;
+  max-width: 1320px;
   margin: 0 auto;
   width: 100%;
 }
@@ -392,71 +382,71 @@ section {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  margin-top: 0.25rem;
 }
 
 .section-header p {
   color: var(--text-secondary);
   font-size: 0.95rem;
+  margin-top: 0.4rem;
 }
 
 /* ==========================================================================
-   4. AMAZON-STYLE PRODUCT CARDS (TIENDA EXCEL)
+   4. TIENDA DE PLANTILLAS EXCEL (TARJETAS SÓLIDAS BLANCAS)
    ========================================================================== */
 .store-filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.8rem;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
   background: #ffffff;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
 }
 
 .store-filter-btn {
-  background: #f0f2f2;
-  border: 1px solid #d5d9d9;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
   color: var(--text-primary);
-  padding: 0.45rem 1rem;
+  padding: 0.5rem 1.1rem;
   border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
 .store-filter-btn:hover {
-  background: #e3e6e6;
+  background: #e5e7eb;
 }
 
 .store-filter-btn.active {
   background: var(--drbyte-navy);
   color: #ffffff;
   border-color: var(--drbyte-navy);
-  font-weight: 700;
 }
 
 .templates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 1.75rem;
 }
 
-/* Single Product Card */
+/* Tarjeta individual de producto */
 .template-card {
   background: #ffffff;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+  padding: 1.5rem;
   position: relative;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: var(--shadow-card);
 }
 
 .template-card:hover {
+  border-color: #93c5fd;
   box-shadow: var(--shadow-hover);
-  border-color: var(--drbyte-blue);
 }
 
 .amazon-choice-badge {
@@ -467,7 +457,7 @@ section {
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.25rem 0.65rem 0.25rem 0.5rem;
+  padding: 0.3rem 0.75rem;
   border-bottom-right-radius: 6px;
   display: flex;
   align-items: center;
@@ -487,66 +477,59 @@ section {
   border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid #e5e7eb;
 }
 
 .template-preview-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.template-card:hover .template-preview-img {
-  transform: scale(1.03);
 }
 
 .template-badge-vba {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: var(--drbyte-blue);
+  background: var(--drbyte-navy);
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.2rem 0.55rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 4px;
 }
 
 .template-title {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.35;
-  color: #007185; /* Amazon classic blue link color */
-  margin-bottom: 0.4rem;
+  color: #0055aa;
+  margin-bottom: 0.5rem;
   cursor: pointer;
 }
 
 .template-title:hover {
-  color: #c7511f;
+  color: #b12704;
   text-decoration: underline;
 }
 
 .product-stars-row {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 0.65rem;
-  font-size: 0.82rem;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .product-stars-row span.star-count {
-  color: #007185;
-  font-weight: 500;
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .template-desc {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.45;
-  margin-bottom: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
   flex-grow: 1;
 }
 
@@ -554,18 +537,18 @@ section {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid #f0f0f0;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f3f4f6;
 }
 
 .template-specs li {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .template-specs li svg {
@@ -573,42 +556,46 @@ section {
   flex-shrink: 0;
 }
 
-/* Amazon Pricing Block */
+/* Bloque de Precios */
 .amazon-price-block {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  background: #f8fafc;
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e5e7eb;
 }
 
 .amazon-deal-badge {
-  background: #cc0c39;
+  background: var(--price-red);
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 800;
-  padding: 0.2rem 0.45rem;
-  border-radius: 2px;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
   display: inline-block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
 .price-row-amazon {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .price-main {
-  font-size: 1.65rem;
+  font-size: 1.75rem;
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1;
 }
 
 .price-symbol {
-  font-size: 0.95rem;
+  font-size: 1rem;
   vertical-align: super;
 }
 
 .price-old {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   text-decoration: line-through;
 }
@@ -617,57 +604,55 @@ section {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 }
 
 .prime-check {
-  color: var(--drbyte-blue);
+  color: var(--success-green);
   font-weight: 800;
 }
 
-/* Buy / Add to Cart Button (Amazon Warm Yellow) */
+/* Botón Sólido de Compra */
 .btn-amazon-buy {
   width: 100%;
   background: var(--amazon-yellow);
-  border: 1px solid #fcd200;
-  border-radius: var(--radius-full);
-  padding: 0.65rem 1rem;
-  color: #0f1111;
-  font-size: 0.88rem;
+  border: 1px solid var(--amazon-yellow-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  color: #111827;
+  font-size: 0.92rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
   cursor: pointer;
-  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .btn-amazon-buy:hover {
   background: var(--amazon-yellow-hover);
-  border-color: #f2c200;
 }
 
 /* ==========================================================================
-   5. SERVICES & METHODOLOGY (AMAZON DEPARTMENT CARDS)
+   5. SERVICIOS Y METODOLOGÍA (TARJETAS SÓLIDAS)
    ========================================================================== */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .service-card {
   background: #ffffff;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
-  padding: 1.75rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s ease;
+  box-shadow: var(--shadow-card);
 }
 
 .service-card:hover {
@@ -677,8 +662,8 @@ section {
 .service-icon-box {
   width: 48px;
   height: 48px;
-  border-radius: 8px;
-  background: var(--drbyte-light-blue);
+  border-radius: 6px;
+  background: var(--drbyte-badge-bg);
   color: var(--drbyte-blue);
   display: flex;
   align-items: center;
@@ -690,12 +675,13 @@ section {
   font-size: 1.2rem;
   color: var(--drbyte-navy);
   margin-bottom: 0.6rem;
+  font-weight: 700;
 }
 
 .service-card p {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.25rem;
   line-height: 1.5;
   flex-grow: 1;
 }
@@ -705,7 +691,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border-top: 1px solid #f0f2f2;
+  border-top: 1px solid #f3f4f6;
   padding-top: 1rem;
 }
 
@@ -722,19 +708,20 @@ section {
   flex-shrink: 0;
 }
 
-/* Methodology Amazon 4-Columns */
+/* Metodología */
 .methodology-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .method-step {
   background: #ffffff;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
-  padding: 1.5rem;
-  border-top: 4px solid var(--drbyte-blue);
+  padding: 1.75rem;
+  border-top: 4px solid var(--drbyte-navy);
+  box-shadow: var(--shadow-card);
 }
 
 .step-num {
@@ -745,23 +732,24 @@ section {
 }
 
 .method-step h4 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--drbyte-navy);
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .method-step p {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
   line-height: 1.5;
 }
 
 /* ==========================================================================
-   6. CALCULATOR & CONTACT (AMAZON CLEAN WHITE BOXES)
+   6. CALCULADORA Y CONTACTO SÓLIDOS
    ========================================================================== */
 .calc-container {
   background: #ffffff;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
   padding: 2.5rem;
   display: grid;
@@ -773,16 +761,16 @@ section {
 .calc-options h3 {
   font-size: 1.25rem;
   color: var(--drbyte-navy);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.25rem;
 }
 
 .calc-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
 }
 
 .calc-group label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.45rem;
@@ -790,24 +778,23 @@ section {
 
 .calc-select {
   width: 100%;
-  padding: 0.65rem 0.85rem;
-  background: #f0f2f2;
-  border: 1px solid #d5d9d9;
+  padding: 0.75rem 0.85rem;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-primary);
   outline: none;
 }
 
 .calc-select:focus {
   border-color: var(--amazon-orange);
-  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.25);
 }
 
 .calc-checkboxes {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.65rem;
 }
 
 .checkbox-item {
@@ -820,16 +807,16 @@ section {
 }
 
 .checkbox-item input {
-  accent-color: var(--amazon-orange);
-  width: 16px;
-  height: 16px;
+  accent-color: var(--drbyte-navy);
+  width: 17px;
+  height: 17px;
 }
 
 .calc-result-box {
   background: #f8fafc;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid #d1d5db;
   border-radius: var(--radius-sm);
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -837,7 +824,7 @@ section {
 }
 
 .calc-price {
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 800;
   color: var(--price-red);
   margin: 0.5rem 0;
@@ -849,26 +836,26 @@ section {
   margin-bottom: 1.5rem;
 }
 
-/* Contact Box */
+/* Contacto Sólido */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
   background: #ffffff;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
   padding: 2.5rem;
   box-shadow: var(--shadow-card);
 }
 
 .contact-info h3 {
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   color: var(--drbyte-navy);
   margin-bottom: 0.75rem;
 }
 
 .contact-info p {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
@@ -883,14 +870,15 @@ section {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem;
   background: #f8fafc;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
 }
 
 .channel-icon {
   color: var(--drbyte-blue);
+  flex-shrink: 0;
 }
 
 .channel-detail strong {
@@ -900,14 +888,14 @@ section {
 }
 
 .channel-detail span {
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 .form-group {
@@ -917,17 +905,17 @@ section {
 }
 
 .form-group label {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .form-input, .form-textarea {
   background: #ffffff;
-  border: 1px solid #888c8c;
+  border: 1px solid #cbd5e1;
   color: var(--text-primary);
-  border-radius: 4px;
-  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
   font-size: 0.92rem;
   font-family: inherit;
   outline: none;
@@ -935,34 +923,34 @@ section {
 
 .form-input:focus, .form-textarea:focus {
   border-color: var(--amazon-orange);
-  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.25);
 }
 
 /* ==========================================================================
-   7. AMAZON FOOTER
+   7. FOOTER SÓLIDO
    ========================================================================== */
 .footer {
   margin-top: auto;
-  background: var(--drbyte-header-sub);
+  background: var(--drbyte-navy);
   color: #ffffff;
+  border-top: 3px solid var(--drbyte-blue);
 }
 
 .footer-back-to-top {
-  background: #232f3e;
+  background: var(--drbyte-header-sub);
   text-align: center;
-  padding: 0.85rem;
-  font-size: 0.82rem;
-  font-weight: 600;
+  padding: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease;
+  color: #f1f5f9;
 }
 
 .footer-back-to-top:hover {
-  background: #37475a;
+  background: #2d3748;
 }
 
 .footer-content {
-  max-width: 1380px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 2.5rem 1.25rem;
   display: flex;
@@ -980,17 +968,17 @@ section {
 
 .footer p {
   color: #cbd5e1;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
 }
 
 /* ==========================================================================
-   8. MODAL CHECKOUT AMAZON STYLE
+   8. MODAL CHECKOUT SÓLIDO
    ========================================================================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 99999;
-  background: rgba(0, 0, 0, 0.65);
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.75); /* Fondo de oscurecimiento estándar de modal */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1002,10 +990,10 @@ section {
   border-radius: var(--radius-sm);
   max-width: 520px;
   width: 100%;
-  padding: 2rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-  position: relative;
+  padding: 2.25rem;
   border-top: 5px solid var(--amazon-orange);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  position: relative;
 }
 
 .modal-close-btn {
@@ -1014,7 +1002,7 @@ section {
   right: 14px;
   background: none;
   color: var(--text-muted);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   cursor: pointer;
   padding: 4px 8px;
 }
@@ -1023,87 +1011,7 @@ section {
   color: var(--text-primary);
 }
 
-/* Intro Splash Retained */
-.drbyte-splash {
-  position: fixed;
-  inset: 0;
-  z-index: 999999;
-  background: radial-gradient(circle at 50% 40%, #0d1b2a 0%, #060b18 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
-}
-
-.drbyte-splash.splash-hiding {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.drbyte-splash-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-}
-
-.drbyte-splash-logo {
-  width: 190px;
-  height: auto;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 132, 255, 0.4);
-  border: 3px solid var(--drbyte-cyan);
-  animation: popInBounce 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.drbyte-splash-tagline {
-  margin-top: 1.5rem;
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: #ffffff;
-}
-
-.drbyte-splash-sub {
-  color: #94a3b8;
-  font-size: 0.9rem;
-  margin-top: 0.4rem;
-}
-
-.drbyte-splash-loader {
-  margin-top: 1.5rem;
-  width: 160px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 99px;
-  overflow: hidden;
-  position: relative;
-}
-
-.drbyte-splash-loader-bar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0%;
-  background: linear-gradient(90deg, var(--drbyte-blue), var(--drbyte-cyan), var(--amazon-orange));
-  animation: loadProgress 2.2s ease-in-out forwards;
-}
-
-@keyframes popInBounce {
-  0% { transform: scale(0.5); opacity: 0; }
-  70% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes loadProgress {
-  0% { width: 0%; }
-  60% { width: 70%; }
-  100% { width: 100%; }
-}
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 992px) {
   .hero-banner-container {
     grid-template-columns: 1fr;
@@ -1117,7 +1025,7 @@ section {
   }
   .calc-container, .contact-grid {
     grid-template-columns: 1fr;
-    padding: 1.5rem;
+    padding: 1.75rem;
   }
 }
 
@@ -1134,4 +1042,3 @@ section {
     grid-template-columns: 1fr;
   }
 }
-

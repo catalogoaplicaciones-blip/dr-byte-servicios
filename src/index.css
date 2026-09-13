@@ -1,45 +1,46 @@
 :root {
-  /* Amazon-inspired, clean high-converting e-commerce palette with Dr. Byte branding */
-  --bg-primary: #eaeded; /* Amazon light gray background */
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --bg-card-hover: #ffffff;
+  /* Fondo general limpio y neutro (sin transparencias) */
+  --bg-primary: #f2f4f8;       /* Gris azulado muy suave y limpio */
+  --bg-white: #ffffff;         /* Blanco sólido */
   
-  /* Dr. Byte Brand Accents */
-  --drbyte-navy: #0d1b2a;     /* Amazon/Dr. Byte dark deep navy */
-  --drbyte-header-sub: #1b263b; /* Secondary nav bar */
-  --drbyte-blue: #0084ff;     /* Dr. Byte electric blue */
-  --drbyte-cyan: #00d2ff;     /* Dr. Byte bright neon cyan */
-  --drbyte-light-blue: #e0f2fe;
+  /* Identidad DR. BYTE sólida */
+  --drbyte-navy: #0d1b2a;       /* Azul marino sólido principal */
+  --drbyte-header-sub: #1b263b; /* Barra secundaria sólida */
+  --drbyte-blue: #0066cc;       /* Azul corporativo legible */
+  --drbyte-cyan: #00b4d8;       /* Cian para detalles nítidos */
+  --drbyte-badge-bg: #e6f0fa;   /* Azul muy clarito sólido para etiquetas */
   
-  /* Amazon Commerce Accents adapted */
-  --amazon-orange: #ff9900;   /* Amazon action amber/orange */
-  --amazon-orange-hover: #e88b00;
-  --amazon-yellow: #ffd814;   /* Buy button yellow */
+  /* Botones y acentos tipo Amazon sólidos */
+  --amazon-yellow: #ffd814;     /* Botón de compra */
   --amazon-yellow-hover: #f7ca00;
-  --amazon-star: #ffa41c;     /* Rating star gold */
-  --price-red: #b12704;       /* Amazon deal red */
-  --success-green: #067d62;   /* Prime/Stock green */
-  
-  /* Texts & Borders */
-  --text-primary: #0f1111;    /* Amazon dark body text */
-  --text-secondary: #565959;  /* Amazon subtle gray */
-  --text-muted: #767676;
+  --amazon-yellow-border: #fcd200;
+  --amazon-orange: #ff9900;     /* Acento naranja */
+  --amazon-star: #e67a00;       /* Estrellas doradas */
+  --price-red: #b12704;         /* Rojo de precio / oferta */
+  --success-green: #067d62;     /* Verde éxito sólido */
+  --success-bg: #e6f4ea;        /* Fondo verde claro sólido */
+
+  /* Textos nítidos con alto contraste */
+  --text-primary: #111827;      /* Casi negro legible */
+  --text-secondary: #4b5563;    /* Gris oscuro legible */
+  --text-muted: #6b7280;
   --text-white: #ffffff;
   
-  --border-subtle: #d5d9d9;
-  --border-focus: #0084ff;
+  /* Bordes sólidos definidos */
+  --border-subtle: #d1d5db;
+  --border-card: #e5e7eb;
   
   --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
-  --radius-sm: 6px;
+  --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-full: 9999px;
   
-  --shadow-card: 0 2px 5px rgba(213, 217, 217, 0.5), 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 6px 18px rgba(0, 132, 255, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+  /* Sombras limpias y sólidas (sin efectos difusos extraños) */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 * {
@@ -91,12 +92,12 @@ button {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #eaeded;
+  background: #f2f4f8;
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0084ff;
+  background: #94a3b8;
 }
