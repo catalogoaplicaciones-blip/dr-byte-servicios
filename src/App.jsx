@@ -52,6 +52,69 @@ function App() {
     formacionEquipo: false
   });
 
+  // Tienda Online de Plantillas Excel
+  const [storeCategory, setStoreCategory] = useState('todas');
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [checkoutStep, setCheckoutStep] = useState('form'); // 'form' | 'success'
+  const [buyerEmail, setBuyerEmail] = useState('');
+
+  const excelTemplates = [
+    {
+      id: 'dash-ventas',
+      title: 'Dashboard Ejecutivo de Ventas & Clientes',
+      category: 'ventas',
+      categoryName: 'Gestión Comercial',
+      desc: 'Plantilla automatizada con macros VBA para registro de ventas, cartera de clientes, segmentación interactiva y filtros por botones.',
+      price: 29.90,
+      oldPrice: 49.00,
+      badge: 'VBA Automático',
+      preview: '/assets/preview_dashboard_ventas.jpg',
+      fileDownload: '/templates/Gestion_Clientes_Ventas_Totales.xlsm',
+      specs: [
+        'Formularios VBA con validación de datos',
+        'Filtros por canal de cobro y categorías',
+        'KPIs automáticos: Facturación, Base e IVA',
+        'Exportación y sincronización en tiempo real'
+      ]
+    },
+    {
+      id: 'dash-redes',
+      title: 'Planificador de Direccionamiento IP & VLSM',
+      category: 'it',
+      categoryName: 'Ingeniería IT',
+      desc: 'Herramienta de cálculo y asignación de subredes corporativas, mapeo de VLANs y documentación de switches y routers.',
+      price: 19.50,
+      oldPrice: 35.00,
+      badge: 'Fórmulas Pro',
+      preview: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80',
+      fileDownload: '#',
+      specs: [
+        'Cálculo automático de máscaras /24 a /30',
+        'Mapeo de interfaces de entrada/salida',
+        'Plantilla para inventario de puertos y racks',
+        'Listo para auditorías de red'
+      ]
+    },
+    {
+      id: 'dash-finanzas',
+      title: 'Control de Tesorería & Facturación Trimestral',
+      category: 'finanzas',
+      categoryName: 'Finanzas & Fiscal',
+      desc: 'Control exhaustivo de ingresos, gastos deducibles, previsión del modelo 303 de IVA e IRPF trimestral para autónomos y PYMES.',
+      price: 24.90,
+      oldPrice: 39.00,
+      badge: 'Multi-cuenta',
+      preview: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80',
+      fileDownload: '#',
+      specs: [
+        'Cálculo automático de cuotas trimestrales',
+        'Gráficos de flujo de caja (Cashflow)',
+        'Alertas de vencimiento de cobro',
+        'Plantilla homologada de facturas'
+      ]
+    }
+  ];
+
   // Estado del formulario de contacto
   const [formSent, setFormSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -131,6 +194,7 @@ function App() {
           <ul className="nav-links">
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#tienda">Tienda Excel</a></li>
             <li><a href="#metodologia">Metodología</a></li>
             <li><a href="#presupuesto">Calculadora</a></li>
             <li><a href="#contacto">Contacto</a></li>
@@ -336,6 +400,180 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* ========================================================================= */}
+      {/* 3.5 TIENDA ONLINE DE PLANTILLAS EXCEL & DASHBOARDS */}
+      {/* ========================================================================= */}
+      <section id="tienda">
+        <div className="section-header">
+          <span className="section-tag">Tienda Digital DR. BYTE</span>
+          <h2 className="section-title">Plantillas Excel Profesionales & Dashboards</h2>
+          <p className="section-subtitle">
+            Herramientas ejecutivas listas para usar, con automatizaciones VBA, fórmulas avanzadas y diseño corporativo para potenciar tu productividad.
+          </p>
+        </div>
+
+        {/* Barra de Filtros */}
+        <div className="store-filter-bar">
+          <button 
+            className={`store-filter-btn ${storeCategory === 'todas' ? 'active' : ''}`}
+            onClick={() => setStoreCategory('todas')}
+          >
+            Todas las Plantillas
+          </button>
+          <button 
+            className={`store-filter-btn ${storeCategory === 'ventas' ? 'active' : ''}`}
+            onClick={() => setStoreCategory('ventas')}
+          >
+            Gestión Comercial & Ventas
+          </button>
+          <button 
+            className={`store-filter-btn ${storeCategory === 'it' ? 'active' : ''}`}
+            onClick={() => setStoreCategory('it')}
+          >
+            Ingeniería IT & Redes
+          </button>
+          <button 
+            className={`store-filter-btn ${storeCategory === 'finanzas' ? 'active' : ''}`}
+            onClick={() => setStoreCategory('finanzas')}
+          >
+            Finanzas & Control
+          </button>
+        </div>
+
+        {/* Grid de Plantillas */}
+        <div className="templates-grid">
+          {excelTemplates
+            .filter(t => storeCategory === 'todas' || t.category === storeCategory)
+            .map(t => (
+              <div key={t.id} className="template-card">
+                <div className="template-preview-wrapper">
+                  <img src={t.preview} alt={t.title} className="template-preview-img" />
+                  <span className="template-badge-vba">
+                    <FileSpreadsheet size={14} />
+                    {t.badge}
+                  </span>
+                  <span className="template-badge-cat">{t.categoryName}</span>
+                </div>
+
+                <div className="template-body">
+                  <h3 className="template-title">{t.title}</h3>
+                  <p className="template-desc">{t.desc}</p>
+
+                  <ul className="template-specs">
+                    {t.specs.map((spec, i) => (
+                      <li key={i}>
+                        <CheckCircle2 size={15} color="#10b981" />
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="template-footer">
+                    <div className="template-pricing">
+                      <span className="template-price-old">{t.oldPrice.toFixed(2)} €</span>
+                      <span className="template-price-current">{t.price.toFixed(2)} €</span>
+                    </div>
+
+                    <button 
+                      className="btn-buy-template"
+                      onClick={() => {
+                        setSelectedTemplate(t);
+                        setCheckoutStep('form');
+                      }}
+                    >
+                      <span>Comprar / Probar</span>
+                      <ArrowRight size={15} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+      </section>
+
+      {/* MODAL DE COMPRA / DESCARGA INMEDIATA */}
+      {selectedTemplate && (
+        <div className="modal-overlay" onClick={() => setSelectedTemplate(null)}>
+          <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setSelectedTemplate(null)}>✕</button>
+
+            {checkoutStep === 'form' ? (
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.2rem' }}>
+                  <div style={{ background: 'rgba(14,165,233,0.15)', padding: '0.5rem', borderRadius: '8px', color: 'var(--accent-cyan)' }}>
+                    <FileSpreadsheet size={28} />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', fontWeight: 700, textTransform: 'uppercase' }}>
+                      Adquisición de Plantilla
+                    </span>
+                    <h3 style={{ fontSize: '1.25rem', color: '#ffffff' }}>{selectedTemplate.title}</h3>
+                  </div>
+                </div>
+
+                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                    <span style={{ color: 'var(--text-secondary)' }}>Precio Oficial:</span>
+                    <span style={{ color: '#ffffff', fontWeight: 700 }}>{selectedTemplate.price.toFixed(2)} €</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
+                    <span style={{ color: 'var(--text-muted)' }}>Entrega:</span>
+                    <span style={{ color: '#10b981', fontWeight: 600 }}>Descarga Instantánea (.xlsm) + Soporte</span>
+                  </div>
+                </div>
+
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  setCheckoutStep('success');
+                }}>
+                  <div className="form-group" style={{ marginBottom: '1.2rem' }}>
+                    <label>Tu Correo Electrónico (para remitir factura y licencia):</label>
+                    <input 
+                      type="email" 
+                      required 
+                      placeholder="ejemplo@correo.com"
+                      className="form-input"
+                      value={buyerEmail}
+                      onChange={(e) => setBuyerEmail(e.target.value)}
+                    />
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
+                    <button type="submit" className="btn-buy-template" style={{ flex: 1, justifyContent: 'center', padding: '0.8rem' }}>
+                      <span>Continuar y Descargar</span>
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+                <div style={{ display: 'inline-flex', background: 'rgba(16,185,129,0.15)', padding: '1rem', borderRadius: '50%', color: '#10b981', marginBottom: '1rem' }}>
+                  <CheckCircle2 size={44} />
+                </div>
+                <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem' }}>¡Licencia Habilitada!</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.8rem', lineHeight: '1.6' }}>
+                  Hemos registrado la descarga para <strong>{buyerEmail || 'tu cuenta'}</strong>. Ya puedes descargar la plantilla oficial con todas sus macros desbloqueadas.
+                </p>
+
+                <a 
+                  href={selectedTemplate.fileDownload} 
+                  download 
+                  className="btn-cta"
+                  style={{ width: '100%', justifyContent: 'center', padding: '0.85rem' }}
+                  onClick={() => {
+                    setTimeout(() => setSelectedTemplate(null), 1500);
+                  }}
+                >
+                  <FileSpreadsheet size={18} />
+                  <span>Descargar Archivo Excel (.xlsm)</span>
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* 4. METODOLOGÍA */}
       <section id="metodologia">
