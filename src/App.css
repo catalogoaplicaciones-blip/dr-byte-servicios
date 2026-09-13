@@ -1,7 +1,7 @@
-/* App.css - Diseño Limpio, Sólido y Sencillo (Sin Transparencias) */
+/* App.css - Diseño Limpio, Sólido y Sencillo con Pestañas (Landing / Tienda) */
 
 /* ==========================================================================
-   1. NAVBAR SÓLIDO TIPO AMAZON CON LOGO DR. BYTE
+   1. NAVBAR SÓLIDO TIPO AMAZON CON SELECTOR DE PESTAÑAS PRINCIPALES
    ========================================================================== */
 .navbar {
   position: sticky;
@@ -29,6 +29,7 @@
   border-radius: var(--radius-sm);
   background: transparent;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .drbyte-navbar-logo {
@@ -128,6 +129,7 @@
   color: #ffffff;
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
+  cursor: pointer;
 }
 
 .nav-item-link:hover {
@@ -154,6 +156,7 @@
   font-weight: 700;
   padding: 0.35rem 0.65rem;
   border-radius: var(--radius-sm);
+  cursor: pointer;
 }
 
 .nav-cart-btn:hover {
@@ -169,10 +172,10 @@
   font-size: 0.95rem;
 }
 
-/* Sub-barra de categorías sólida */
+/* Sub-barra con Pestañas Principales Grandes (Landing Page vs Tienda de Plantillas) */
 .nav-sub-bar {
   background: var(--drbyte-header-sub);
-  padding: 0.5rem 1.25rem;
+  padding: 0 1.25rem;
   border-top: 1px solid #2d3748;
 }
 
@@ -181,33 +184,70 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   overflow-x: auto;
 }
 
-.sub-bar-container a {
-  color: #f1f5f9;
-  font-size: 0.85rem;
-  font-weight: 600;
-  white-space: nowrap;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
+/* Selector Principal de Pestaña */
+.tab-button-main {
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.75rem 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
-.sub-bar-container a:hover {
-  background: #2d3748;
+.tab-button-main:hover {
+  color: #ffffff;
+  background: #24344d;
+}
+
+.tab-button-main.active {
+  color: #ffffff;
+  background: #24344d;
+  border-bottom-color: var(--amazon-orange);
+}
+
+.tab-badge-counter {
+  background: var(--amazon-orange);
+  color: #111827;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 99px;
+}
+
+.sub-bar-links-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.sub-bar-links-right a {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sub-bar-links-right a:hover {
   color: #ffffff;
 }
 
 /* ==========================================================================
-   2. HERO BANNER SÓLIDO (FONDO MARINO LIMPIO, SIN DEGRADADOS DIFUSOS)
+   2. HERO LANDING PAGE (SÓLIDO, LIMPIO, PROFESIONAL)
    ========================================================================== */
 .hero-banner-wrapper {
   background: var(--drbyte-navy);
-  padding: 3rem 1.25rem;
+  padding: 3.5rem 1.25rem;
   border-bottom: 3px solid var(--drbyte-blue);
   color: #ffffff;
 }
@@ -237,7 +277,7 @@
 }
 
 .hero-banner-title {
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   line-height: 1.2;
   margin-bottom: 1.2rem;
   font-weight: 800;
@@ -249,7 +289,7 @@
 }
 
 .hero-banner-desc {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: #e2e8f0;
   margin-bottom: 2rem;
   line-height: 1.6;
@@ -265,7 +305,7 @@
   background: var(--amazon-yellow);
   color: #111827;
   border: 1px solid var(--amazon-yellow-border);
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.6rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 0.95rem;
@@ -284,7 +324,7 @@
   background: #ffffff;
   color: var(--drbyte-navy);
   border: 1px solid #d1d5db;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.6rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 0.95rem;
@@ -303,7 +343,7 @@
   background: #ffffff;
   color: var(--text-primary);
   border-radius: var(--radius-md);
-  padding: 2rem;
+  padding: 2.2rem;
   border: 1px solid var(--border-card);
   box-shadow: var(--shadow-card);
   display: flex;
@@ -361,6 +401,35 @@
   font-size: 1.1rem;
 }
 
+/* Banner Destacado para invitar a la Tienda desde la Landing */
+.landing-store-callout {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-left: 6px solid var(--amazon-orange);
+  border-radius: var(--radius-sm);
+  padding: 1.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.landing-store-callout-text h3 {
+  font-size: 1.3rem;
+  color: var(--drbyte-navy);
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.landing-store-callout-text p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
 /* ==========================================================================
    3. SECCIONES GENERALES (FONDOS SÓLIDOS Y CLAROS)
    ========================================================================== */
@@ -392,8 +461,26 @@ section {
 }
 
 /* ==========================================================================
-   4. TIENDA DE PLANTILLAS EXCEL (TARJETAS SÓLIDAS BLANCAS)
+   4. PESTAÑA TIENDA DE PLANTILLAS EXCEL (TARJETAS SÓLIDAS)
    ========================================================================== */
+.store-view-header {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.store-view-header h1 {
+  font-size: 2rem;
+  color: var(--drbyte-navy);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .store-filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -637,7 +724,7 @@ section {
 }
 
 /* ==========================================================================
-   5. SERVICIOS Y METODOLOGÍA (TARJETAS SÓLIDAS)
+   5. SERVICIOS Y METODOLOGÍA (LANDING PAGE)
    ========================================================================== */
 .services-grid {
   display: grid;
@@ -978,7 +1065,7 @@ section {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(15, 23, 42, 0.75); /* Fondo de oscurecimiento estándar de modal */
+  background: rgba(15, 23, 42, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1020,12 +1107,19 @@ section {
   .hero-quick-actions {
     justify-content: center;
   }
+  .landing-store-callout {
+    flex-direction: column;
+    text-align: center;
+  }
   .methodology-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .calc-container, .contact-grid {
     grid-template-columns: 1fr;
     padding: 1.75rem;
+  }
+  .sub-bar-links-right {
+    display: none;
   }
 }
 
