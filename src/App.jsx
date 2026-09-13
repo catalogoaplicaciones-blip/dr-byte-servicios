@@ -1,47 +1,46 @@
 import React, { useState } from 'react';
 import { 
-  ShieldCheck, 
-  Network, 
-  Server, 
-  GraduationCap, 
-  Code2, 
+  Bot, 
+  Wrench, 
+  DownloadCloud, 
+  FileSpreadsheet, 
   CheckCircle2, 
   ArrowRight, 
   Send, 
   Mail, 
   Phone, 
-  MapPin, 
-  Calendar,
-  Award,
-  Layers,
-  FileSpreadsheet,
-  Wrench,
-  Search,
-  ShoppingCart,
-  Download,
-  Zap,
-  Home,
+  Search, 
+  ShoppingCart, 
+  Download, 
+  Zap, 
+  Home, 
   Store,
-  ArrowUpRight
+  Calendar,
+  Sparkles,
+  Cpu,
+  MonitorCheck,
+  Code
 } from 'lucide-react';
 import './App.css';
 
 function App() {
-  // Pestaña Activa: 'landing' (Servicios & Diagnóstico) | 'tienda' (Catálogo Excel)
+  // Pestaña Activa: 'landing' (Landing sin scroll) | 'tienda' (Tienda de plantillas Excel)
   const [activeTab, setActiveTab] = useState('landing');
+
+  // Modal rápido de contacto
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [contactSubject, setContactSubject] = useState('Consulta General');
+  const [formSent, setFormSent] = useState(false);
+  const [formData, setFormData] = useState({
+    nombre: '',
+    email: '',
+    telefono: '',
+    mensaje: ''
+  });
 
   // Buscador estilo Amazon
   const [searchQuery, setSearchQuery] = useState('');
   const [searchDepartment, setSearchDepartment] = useState('todas');
-
-  // Calculadora interactiva de presupuestos
-  const [serviceType, setServiceType] = useState('seguridad');
-  const [scope, setScope] = useState('empresa');
-  const [extras, setExtras] = useState({
-    urgencia: false,
-    soporteMensual: false,
-    formacionEquipo: false
-  });
 
   // Tienda Online de Plantillas Excel
   const [storeCategory, setStoreCategory] = useState('todas');
@@ -118,53 +117,23 @@ function App() {
     }
   ];
 
-  // Formulario de contacto
-  const [formSent, setFormSent] = useState(false);
-  const [formData, setFormData] = useState({
-    nombre: '',
-    email: '',
-    telefono: '',
-    servicio: 'Consultoría en Ciberseguridad & Redes',
-    mensaje: ''
-  });
-
-  const calculateEstimate = () => {
-    let base = 0;
-    if (serviceType === 'seguridad') base = 750;
-    if (serviceType === 'redes') base = 650;
-    if (serviceType === 'formacion') base = 500;
-    if (serviceType === 'desarrollo') base = 900;
-    if (serviceType === 'sistemas') base = 600;
-
-    let multiplier = 1;
-    if (scope === 'profesional') multiplier = 1;
-    if (scope === 'pyme') multiplier = 1.6;
-    if (scope === 'empresa') multiplier = 2.4;
-
-    let total = base * multiplier;
-    if (extras.urgencia) total += 250;
-    if (extras.soporteMensual) total += 350;
-    if (extras.formacionEquipo) total += 300;
-
-    return Math.round(total);
-  };
-
-  const handleExtraChange = (key) => {
-    setExtras(prev => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormSent(true);
-  };
-
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setActiveTab('tienda');
     if (searchDepartment !== 'todas') {
       setStoreCategory(searchDepartment);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenContact = (subject) => {
+    setContactSubject(subject);
+    setShowContactModal(true);
+    setFormSent(false);
+  };
+
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    setFormSent(true);
   };
 
   const filteredTemplates = excelTemplates.filter(t => {
@@ -177,17 +146,14 @@ function App() {
   });
 
   return (
-    <div className="portfolio-app">
-      {/* 1. NAVBAR SUPERIOR CON SELECTOR DE PESTAÑA */}
+    <div className="portfolio-app" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* 1. NAVBAR SUPERIOR ESTILO AMAZON CON SELECTOR DE PESTAÑAS */}
       <header className="navbar">
         <div className="nav-main-bar">
           <div 
             className="brand" 
             title="DR. BYTE - Inicio"
-            onClick={() => {
-              setActiveTab('landing');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={() => setActiveTab('landing')}
           >
             <img 
               src="/assets/dr_byte_logo.jpg" 
@@ -200,7 +166,7 @@ function App() {
             </div>
           </div>
 
-          {/* Barra de Búsqueda Sólida */}
+          {/* Buscador Rápido Sólido */}
           <form className="nav-search-bar" onSubmit={handleSearchSubmit}>
             <select 
               className="search-category-select"
@@ -208,7 +174,7 @@ function App() {
               onChange={(e) => setSearchDepartment(e.target.value)}
               aria-label="Seleccionar departamento"
             >
-              <option value="todas">Departamentos</option>
+              <option value="todas">Todos los servicios</option>
               <option value="ventas">Ventas & CRM</option>
               <option value="it">Ingeniería IT & Redes</option>
               <option value="finanzas">Finanzas & Fiscal</option>
@@ -216,644 +182,334 @@ function App() {
             <input 
               type="text" 
               className="search-input" 
-              placeholder="Buscar servicios, diagnósticos, plantillas Excel..."
+              placeholder="Buscar proyectos IA, mantenimiento, software o plantillas..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button type="submit" className="search-btn" aria-label="Buscar">
-              <Search size={19} />
+              <Search size={17} />
             </button>
           </form>
 
-          {/* Acciones Rápidas a la derecha */}
+          {/* Acciones Rápidas */}
           <div className="nav-actions-right">
             <div 
               className="nav-item-link"
-              onClick={() => {
-                setActiveTab('landing');
-                setTimeout(() => {
-                  const el = document.getElementById('presupuesto');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 50);
-              }}
+              onClick={() => handleOpenContact('Solicitud de Asistencia')}
             >
-              <span className="nav-item-small">Calculadora</span>
-              <span className="nav-item-bold">Presupuesto</span>
-            </div>
-
-            <div 
-              className="nav-item-link"
-              onClick={() => {
-                setActiveTab('landing');
-                setTimeout(() => {
-                  const el = document.getElementById('contacto');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 50);
-              }}
-            >
-              <span className="nav-item-small">Atención</span>
-              <span className="nav-item-bold">Contacto</span>
+              <span className="nav-item-small">Atención Rápida</span>
+              <span className="nav-item-bold">Contacto Directo</span>
             </div>
 
             <div 
               className="nav-cart-btn" 
               title="Abrir Tienda de Plantillas"
-              onClick={() => {
-                setActiveTab('tienda');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onClick={() => setActiveTab('tienda')}
             >
               <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                <ShoppingCart size={26} />
+                <ShoppingCart size={22} />
                 <span className="cart-count-badge">{excelTemplates.length}</span>
               </div>
-              <span style={{ marginLeft: '4px', fontSize: '0.9rem' }}>Tienda</span>
+              <span style={{ fontSize: '0.85rem' }}>Tienda Excel</span>
             </div>
           </div>
         </div>
 
-        {/* Sub-barra con selector de Pestañas: [LANDING PAGE] vs [TIENDA DE PLANTILLAS] */}
+        {/* Sub-barra: PESTAÑA LANDING vs PESTAÑA TIENDA */}
         <div className="nav-sub-bar">
           <div className="sub-bar-container">
             <button 
               className={`tab-button-main ${activeTab === 'landing' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab('landing');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onClick={() => setActiveTab('landing')}
             >
-              <Home size={18} />
-              <span>Servicios & Diagnóstico (Landing)</span>
+              <Home size={17} />
+              <span>Servicios Técnicos (Landing)</span>
             </button>
 
             <button 
               className={`tab-button-main ${activeTab === 'tienda' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab('tienda');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onClick={() => setActiveTab('tienda')}
             >
-              <Store size={18} />
+              <Store size={17} />
               <span>Tienda de Plantillas Excel</span>
               <span className="tab-badge-counter">{excelTemplates.length}</span>
             </button>
 
-            {/* Enlaces de ancla contextuales según pestaña */}
-            <div className="sub-bar-links-right">
-              {activeTab === 'landing' ? (
-                <>
-                  <a href="#servicios">Servicios</a>
-                  <a href="#metodologia">Metodología</a>
-                  <a href="#presupuesto">Calculadora</a>
-                  <a href="#contacto" style={{ color: 'var(--amazon-yellow)' }}>Contacto Directo</a>
-                </>
-              ) : (
-                <>
-                  <span 
-                    style={{ color: '#cbd5e1', fontSize: '0.82rem', cursor: 'pointer' }}
-                    onClick={() => setStoreCategory('todas')}
-                  >
-                    Ver todas
-                  </span>
-                  <span 
-                    style={{ color: '#cbd5e1', fontSize: '0.82rem', cursor: 'pointer' }}
-                    onClick={() => setStoreCategory('ventas')}
-                  >
-                    Ventas & CRM
-                  </span>
-                  <span 
-                    style={{ color: '#cbd5e1', fontSize: '0.82rem', cursor: 'pointer' }}
-                    onClick={() => setStoreCategory('it')}
-                  >
-                    Ingeniería IT
-                  </span>
-                  <span 
-                    style={{ color: '#cbd5e1', fontSize: '0.82rem', cursor: 'pointer' }}
-                    onClick={() => setStoreCategory('finanzas')}
-                  >
-                    Finanzas & Fiscal
-                  </span>
-                </>
-              )}
+            <div className="sub-bar-tagline">
+              ⚡ Manuel Aragonés | Diagnóstico, Inteligencia Artificial & Sistemas
             </div>
           </div>
         </div>
       </header>
 
       {/* ========================================================================= */}
-      {/* VISTA 1: LANDING PAGE DE SERVICIOS & DIAGNÓSTICO PROFESIONAL */}
+      {/* VISTA 1: LANDING PAGE QUE CABE EN PANTALLA SIN NECESIDAD DE SCROLL */}
       {/* ========================================================================= */}
       {activeTab === 'landing' && (
-        <main>
-          {/* HERO BANNER LANDING PAGE */}
-          <section id="inicio" className="hero-banner-wrapper">
-            <div className="hero-banner-container">
-              <div className="hero-banner-info">
-                <div className="hero-banner-badge">
-                  <Zap size={14} />
-                  <span>DR. BYTE | Consultoría & Redes</span>
-                </div>
-                <h1 className="hero-banner-title">
-                  Diagnóstico Clínico de Sistemas, <span className="highlight-amazon">Ciberseguridad Zero Trust</span> y Redes
-                </h1>
-                <p className="hero-banner-desc">
-                  Bienvenido al portal profesional de <strong>DR. BYTE</strong>, dirigido por <strong>Manuel Aragonés</strong>. 
-                  Auditamos, blindamos y optimizamos la infraestructura tecnológica de empresas y profesionales 
-                  con estándares corporativos de alta disponibilidad.
-                </p>
-
-                <div className="hero-quick-actions">
-                  <a href="#contacto" className="btn-amazon-primary">
-                    <Calendar size={18} />
-                    <span>Solicitar Diagnóstico Técnico</span>
-                  </a>
-                  <button 
-                    className="btn-amazon-secondary"
-                    onClick={() => {
-                      setActiveTab('tienda');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                  >
-                    <FileSpreadsheet size={18} />
-                    <span>Ir a la Tienda de Plantillas</span>
-                  </button>
-                </div>
-
-                <div style={{ display: 'flex', gap: '1.5rem', marginTop: '2rem', flexWrap: 'wrap' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.88rem', color: '#f1f5f9' }}>
-                    <ShieldCheck size={18} color="var(--drbyte-cyan)" />
-                    <span>Filosofía Zero Trust</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.88rem', color: '#f1f5f9' }}>
-                    <Award size={18} color="var(--amazon-yellow)" />
-                    <span>Docencia Oficial IT</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.88rem', color: '#f1f5f9' }}>
-                    <CheckCircle2 size={18} color="#10b981" />
-                    <span>Soporte Presencial y Remoto</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tarjeta Sólida Profesional */}
-              <div className="doctor-hero-card">
-                <div className="drbyte-verified-badge">
-                  <CheckCircle2 size={14} />
-                  <span>Especialista Verificado</span>
-                </div>
+        <main style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+          <div className="landing-viewport">
+            {/* Banner Compacto de Cabecera */}
+            <div className="landing-compact-hero">
+              <div className="compact-hero-left">
                 <img 
                   src="/assets/dr_byte_logo.jpg" 
                   alt="DR. BYTE" 
-                  className="drbyte-hero-img-main"
+                  className="compact-hero-avatar"
                 />
-                <h3>DR. BYTE</h3>
-                <p>Dirección Técnica: <strong>Manuel Aragonés</strong></p>
-
-                <div className="doctor-rating-row">
-                  <span className="stars-rating">★★★★★</span>
-                  <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>4.9</span>
-                  <span style={{ color: 'var(--text-secondary)' }}>(340 valoraciones)</span>
-                </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
-                  <span style={{ background: '#f3f4f6', padding: '0.3rem 0.65rem', borderRadius: '4px', fontSize: '0.78rem', fontWeight: 600 }}>Ciberseguridad NGFW</span>
-                  <span style={{ background: '#f3f4f6', padding: '0.3rem 0.65rem', borderRadius: '4px', fontSize: '0.78rem', fontWeight: 600 }}>Cisco & Fortinet</span>
-                  <span style={{ background: '#f3f4f6', padding: '0.3rem 0.65rem', borderRadius: '4px', fontSize: '0.78rem', fontWeight: 600 }}>Sistemas Windows/Linux</span>
-                  <span style={{ background: '#f3f4f6', padding: '0.3rem 0.65rem', borderRadius: '4px', fontSize: '0.78rem', fontWeight: 600 }}>Auditoría Zero Trust</span>
+                <div className="compact-hero-text">
+                  <h1>DR. BYTE | Soluciones Informáticas Especializadas</h1>
+                  <p>
+                    Dirección Técnica: <strong>Manuel Aragonés</strong> — Servicios de ingeniería, soporte y transformación digital para empresas y profesionales.
+                  </p>
+                  <div className="compact-hero-badges">
+                    <span className="hero-pill">✓ Respuesta Rápida</span>
+                    <span className="hero-pill">✓ Estándares Corporativos</span>
+                    <span className="hero-pill">✓ Asistencia Presencial & Remota</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
 
-          <section>
-            {/* DESTACADO PARA VISITAR LA TIENDA DE PLANTILLAS */}
-            <div className="landing-store-callout">
-              <div className="landing-store-callout-text">
-                <h3>
-                  <FileSpreadsheet size={24} color="var(--amazon-orange)" />
-                  ¿Buscas Plantillas Excel y Cuadros de Mando con Macros?
-                </h3>
-                <p>
-                  Disponemos de una tienda especializada con plantillas automatizadas en VBA para ventas, facturación trimestral y direccionamiento IP VLSM.
+              <div className="compact-hero-actions">
+                <button 
+                  className="btn-cta-compact"
+                  onClick={() => handleOpenContact('Solicitud de Diagnóstico Inmediato')}
+                >
+                  <Calendar size={16} />
+                  <span>Pedir Diagnóstico</span>
+                </button>
+                <button 
+                  className="btn-cta-secondary"
+                  onClick={() => setActiveTab('tienda')}
+                >
+                  <Store size={16} />
+                  <span>Ver Tienda Excel</span>
+                </button>
+              </div>
+            </div>
+
+            {/* LAS 4 COLUMNAS PRINCIPALES SOLICITADAS:
+                1. Proyectos de IA
+                2. Mantenimiento Informático
+                3. Instalación de Programas
+                4. Ofimática Avanzada
+            */}
+            <div className="pillars-grid-4">
+              {/* Columna 1: Proyectos de IA */}
+              <div className="pillar-card featured">
+                <div className="pillar-header">
+                  <div className="pillar-icon-box orange">
+                    <Bot size={24} />
+                  </div>
+                  <div className="pillar-title-wrap">
+                    <span className="pillar-tag">Vanguardia Tecnológica</span>
+                    <h3>Proyectos de IA</h3>
+                  </div>
+                </div>
+                <p className="pillar-desc">
+                  Integración de Inteligencia Artificial aplicada y automatizaciones para disparar la productividad de tu negocio.
                 </p>
+                <ul className="pillar-list">
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Automatización de flujos con modelos LLM y agentes</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Asistentes inteligentes para atención y soporte</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Procesamiento inteligente de documentos y datos</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Capacitación en herramientas de IA generativa</span>
+                  </li>
+                </ul>
+                <button 
+                  className="pillar-btn highlight"
+                  onClick={() => handleOpenContact('Proyectos de IA')}
+                >
+                  <span>Consultar Proyecto IA</span>
+                  <ArrowRight size={14} />
+                </button>
               </div>
-              <button 
-                className="btn-amazon-primary"
-                onClick={() => {
-                  setActiveTab('tienda');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              >
-                <span>Entrar a la Tienda de Plantillas</span>
-                <ArrowRight size={16} />
-              </button>
-            </div>
 
-            {/* SERVICIOS PROFESIONALES */}
-            <div id="servicios">
-              <div className="section-header">
-                <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase' }}>
-                  Áreas de Especialización
-                </span>
-                <h2>
-                  <Wrench size={26} color="var(--drbyte-blue)" />
-                  Servicios Técnicos Profesionales
-                </h2>
-                <p>
-                  Soluciones de consultoría, arquitectura de redes corporativas y transferencia de conocimiento.
+              {/* Columna 2: Mantenimiento Informático */}
+              <div className="pillar-card">
+                <div className="pillar-header">
+                  <div className="pillar-icon-box">
+                    <Wrench size={24} />
+                  </div>
+                  <div className="pillar-title-wrap">
+                    <span className="pillar-tag">Soporte Continuo</span>
+                    <h3>Mantenimiento IT</h3>
+                  </div>
+                </div>
+                <p className="pillar-desc">
+                  Diagnóstico preventivo, saneamiento de equipos, servidores y seguridad para evitar caídas y pérdida de información.
                 </p>
+                <ul className="pillar-list">
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Limpieza, optimización y puesta a punto de hardware</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Auditoría de ciberseguridad y cortafuegos Zero Trust</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Copias de seguridad 3-2-1 y recuperación de desastres</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Planes de soporte técnico preventivo mensual</span>
+                  </li>
+                </ul>
+                <button 
+                  className="pillar-btn"
+                  onClick={() => handleOpenContact('Mantenimiento Informático')}
+                >
+                  <span>Solicitar Mantenimiento</span>
+                  <ArrowRight size={14} />
+                </button>
               </div>
 
-              <div className="services-grid">
-                <div className="service-card">
-                  <div className="service-icon-box">
-                    <ShieldCheck size={28} />
+              {/* Columna 3: Instalación de Programas */}
+              <div className="pillar-card">
+                <div className="pillar-header">
+                  <div className="pillar-icon-box">
+                    <DownloadCloud size={24} />
                   </div>
-                  <h3>Ciberseguridad & Firewalls NGFW</h3>
-                  <p>
-                    Auditoría, diseño e implementación de políticas de cortafuegos perimetrales bajo filosofía Zero Trust y Default Deny.
-                  </p>
-                  <ul className="service-features">
-                    <li><CheckCircle2 size={16} /> Segmentación de Zonas (DMZ, Corp, Invitados)</li>
-                    <li><CheckCircle2 size={16} /> Reglas Stateful Inspection y Filtrado Bogon</li>
-                    <li><CheckCircle2 size={16} /> Implementación de VPNs IPsec y SSL seguras</li>
-                    <li><CheckCircle2 size={16} /> Fortinet FortiGate, Palo Alto y Cisco</li>
-                  </ul>
-                </div>
-
-                <div className="service-card">
-                  <div className="service-icon-box">
-                    <Network size={28} />
+                  <div className="pillar-title-wrap">
+                    <span className="pillar-tag">Software & Despliegue</span>
+                    <h3>Instalación Software</h3>
                   </div>
-                  <h3>Diseño & Optimización de Redes LAN/WAN</h3>
-                  <p>
-                    Planificación topológica y configuración avanzada de conmutación y enrutamiento corporativo para máxima disponibilidad.
-                  </p>
-                  <ul className="service-features">
-                    <li><CheckCircle2 size={16} /> Direccionamiento IPv4/IPv6 y esquemas VLSM</li>
-                    <li><CheckCircle2 size={16} /> Troncales 802.1Q, VLANs y Spanning-Tree</li>
-                    <li><CheckCircle2 size={16} /> Enrutamiento dinámico (OSPF / BGP)</li>
-                    <li><CheckCircle2 size={16} /> Simulación y validación previa en laboratorio</li>
-                  </ul>
                 </div>
-
-                <div className="service-card">
-                  <div className="service-icon-box">
-                    <GraduationCap size={28} />
-                  </div>
-                  <h3>Formación Técnica & Docencia IT</h3>
-                  <p>
-                    Capacitación in-company y programas docentes prácticos con laboratorios reales orientados a certificados de profesionalidad.
-                  </p>
-                  <ul className="service-features">
-                    <li><CheckCircle2 size={16} /> Montaje y Mantenimiento de Sistemas (UF1465/UD1)</li>
-                    <li><CheckCircle2 size={16} /> Identidad Digital y Certificados Telemáticos</li>
-                    <li><CheckCircle2 size={16} /> Talleres de Cableado Estructurado y Racks</li>
-                    <li><CheckCircle2 size={16} /> Metodología práctica orientada al empleo</li>
-                  </ul>
-                </div>
-
-                <div className="service-card">
-                  <div className="service-icon-box">
-                    <Server size={28} />
-                  </div>
-                  <h3>Administración de Sistemas & Servidores</h3>
-                  <p>
-                    Despliegue, securización y mantenimiento de servidores Windows Server y entornos Linux empresariales.
-                  </p>
-                  <ul className="service-features">
-                    <li><CheckCircle2 size={16} /> Directorio Activo (AD DS), DNS y directivas GPO</li>
-                    <li><CheckCircle2 size={16} /> Políticas de copias de seguridad 3-2-1</li>
-                    <li><CheckCircle2 size={16} /> Monitorización de recursos y eventos</li>
-                    <li><CheckCircle2 size={16} /> Continuidad de negocio y soporte</li>
-                  </ul>
-                </div>
-
-                <div className="service-card">
-                  <div className="service-icon-box">
-                    <FileSpreadsheet size={28} />
-                  </div>
-                  <h3>Dashboards & Automatización Comercial</h3>
-                  <p>
-                    Desarrollo de cuadros de mando a medida, modelos financieros y macros que multiplican la agilidad operativa.
-                  </p>
-                  <ul className="service-features">
-                    <li><CheckCircle2 size={16} /> Cuadros de mando ejecutivos en tiempo real</li>
-                    <li><CheckCircle2 size={16} /> Automatización de facturación y CRM</li>
-                    <li><CheckCircle2 size={16} /> Integración y exportación de informes PDF/HTML</li>
-                    <li><CheckCircle2 size={16} /> Reducción radical de tiempos manuales</li>
-                  </ul>
-                </div>
-
-                <div className="service-card">
-                  <div className="service-icon-box">
-                    <Code2 size={28} />
-                  </div>
-                  <h3>Desarrollo de Software & Portales Web</h3>
-                  <p>
-                    Desarrollo de aplicaciones modernas y portales web de alto rendimiento con React, Vite y arquitecturas escalables.
-                  </p>
-                  <ul className="service-features">
-                    <li><CheckCircle2 size={16} /> Aplicaciones web SPA y portales corporativos</li>
-                    <li><CheckCircle2 size={16} /> Integración de pasarelas y APIs REST</li>
-                    <li><CheckCircle2 size={16} /> Despliegue continuo en Vercel y GitHub</li>
-                    <li><CheckCircle2 size={16} /> Diseño responsive adaptado a móviles</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* METODOLOGÍA */}
-            <div id="metodologia" style={{ marginTop: '4.5rem' }}>
-              <div className="section-header">
-                <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase' }}>
-                  Protocolo
-                </span>
-                <h2>
-                  <Layers size={26} color="var(--drbyte-blue)" />
-                  Metodología Basada en Rigor Técnico
-                </h2>
-                <p>
-                  Protocolo exhaustivo para garantizar cero tiempos de caída y máxima estabilidad operativa.
+                <p className="pillar-desc">
+                  Instalación, licenciamiento y configuración segura de software corporativo y sistemas operativos a medida.
                 </p>
+                <ul className="pillar-list">
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Sistemas Windows Server, Windows 11 y Linux</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Certificados digitales e identidad electrónica FNMT</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Programas de gestión, ERPs, diseño y utilidades</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Eliminación de malware y configuración perimetral</span>
+                  </li>
+                </ul>
+                <button 
+                  className="pillar-btn"
+                  onClick={() => handleOpenContact('Instalación de Programas')}
+                >
+                  <span>Instalar Programas</span>
+                  <ArrowRight size={14} />
+                </button>
               </div>
 
-              <div className="methodology-grid">
-                <div className="method-step">
-                  <div className="step-num">01</div>
-                  <h4>Auditoría & Diagnóstico</h4>
-                  <p>Inspección de la infraestructura actual, vectores de riesgo y evaluación de necesidades del negocio.</p>
+              {/* Columna 4: Ofimática Avanzada */}
+              <div className="pillar-card">
+                <div className="pillar-header">
+                  <div className="pillar-icon-box">
+                    <FileSpreadsheet size={24} />
+                  </div>
+                  <div className="pillar-title-wrap">
+                    <span className="pillar-tag">Excel & Dashboards</span>
+                    <h3>Ofimática Avanzada</h3>
+                  </div>
                 </div>
-
-                <div className="method-step">
-                  <div className="step-num">02</div>
-                  <h4>Diseño de Solución</h4>
-                  <p>Modelado arquitectónico bajo principios de seguridad, planos de red y definición clara de objetivos.</p>
-                </div>
-
-                <div className="method-step">
-                  <div className="step-num">03</div>
-                  <h4>Implantación Segura</h4>
-                  <p>Despliegue ordenado con ventanas de mantenimiento controladas y validación previa en laboratorio.</p>
-                </div>
-
-                <div className="method-step">
-                  <div className="step-num">04</div>
-                  <h4>Documentación & Soporte</h4>
-                  <p>Entrega de manuales técnicos, capacitación del personal y asistencia técnica continua.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* CALCULADORA DE PRESUPUESTO */}
-            <div id="presupuesto" style={{ marginTop: '4.5rem' }}>
-              <div className="section-header">
-                <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase' }}>
-                  Tarifas
-                </span>
-                <h2>Estimador de Inversión Orientativo</h2>
-                <p>
-                  Configura los parámetros de tu proyecto para obtener una estimación inmediata adaptada a tu escala.
+                <p className="pillar-desc">
+                  Cuadros de mando ejecutivos en Excel, programación de macros VBA y automatización de reportes comerciales.
                 </p>
-              </div>
-
-              <div className="calc-container">
-                <div className="calc-options">
-                  <h3>Selecciona los parámetros de tu proyecto</h3>
-                  
-                  <div className="calc-group">
-                    <label>Tipo de Servicio Principal:</label>
-                    <select 
-                      className="calc-select" 
-                      value={serviceType} 
-                      onChange={(e) => setServiceType(e.target.value)}
-                    >
-                      <option value="seguridad">Auditoría & Ciberseguridad NGFW</option>
-                      <option value="redes">Diseño e Implantación de Redes LAN/WAN</option>
-                      <option value="formacion">Formación Técnica & Talleres Docentes</option>
-                      <option value="sistemas">Servidores & Infraestructura de Sistemas</option>
-                      <option value="desarrollo">Desarrollo Web & Cuadros de Mando Excel</option>
-                    </select>
-                  </div>
-
-                  <div className="calc-group">
-                    <label>Dimensión / Alcance de la Red:</label>
-                    <select 
-                      className="calc-select" 
-                      value={scope} 
-                      onChange={(e) => setScope(e.target.value)}
-                    >
-                      <option value="profesional">Profesional Independiente (1-5 puestos)</option>
-                      <option value="pyme">PYME / Empresa Mediana (6-30 puestos)</option>
-                      <option value="empresa">Corporación / Red Multi-sede (+30 puestos)</option>
-                    </select>
-                  </div>
-
-                  <div className="calc-group">
-                    <label>Servicios Adicionales:</label>
-                    <div className="calc-checkboxes">
-                      <label className="checkbox-item">
-                        <input 
-                          type="checkbox" 
-                          checked={extras.urgencia} 
-                          onChange={() => handleExtraChange('urgencia')} 
-                        />
-                        <span>Implantación urgente / Prioridad 24-48h (+250 €)</span>
-                      </label>
-                      <label className="checkbox-item">
-                        <input 
-                          type="checkbox" 
-                          checked={extras.soporteMensual} 
-                          onChange={() => handleExtraChange('soporteMensual')} 
-                        />
-                        <span>Mantenimiento & Guardias 3 meses (+350 €)</span>
-                      </label>
-                      <label className="checkbox-item">
-                        <input 
-                          type="checkbox" 
-                          checked={extras.formacionEquipo} 
-                          onChange={() => handleExtraChange('formacionEquipo')} 
-                        />
-                        <span>Jornada de Formación y Manual (+300 €)</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="calc-result-box">
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>
-                    Inversión Estimada
-                  </span>
-                  <div className="calc-price">{calculateEstimate()} €</div>
-                  <p className="calc-note">
-                    * Estimación sin IVA. Presupuesto detallado tras toma de requerimientos.
-                  </p>
-                  <a href="#contacto" className="btn-amazon-buy" style={{ textDecoration: 'none', padding: '0.85rem' }}>
-                    <span>Solicitar Propuesta Formal</span>
-                    <ArrowRight size={16} />
-                  </a>
-                </div>
+                <ul className="pillar-list">
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Dashboards de ventas, finanzas y control horario</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Programación de macros VBA para tareas repetitivas</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Plantillas comerciales con sincronización en vivo</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={15} />
+                    <span>Formación práctica personalizada para equipos</span>
+                  </li>
+                </ul>
+                <button 
+                  className="pillar-btn highlight"
+                  onClick={() => setActiveTab('tienda')}
+                >
+                  <span>Ver Tienda de Plantillas</span>
+                  <ArrowRight size={14} />
+                </button>
               </div>
             </div>
 
-            {/* CONTACTO */}
-            <div id="contacto" style={{ marginTop: '4.5rem' }}>
-              <div className="section-header">
-                <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase' }}>
-                  Contacto
-                </span>
-                <h2>Inicia tu Consulta con DR. BYTE</h2>
-                <p>
-                  Ponte en contacto para solicitar una propuesta a medida o concertar una reunión técnica.
-                </p>
+            {/* Barra Inferior de Acción y Canales Directos */}
+            <div className="landing-bottom-strip">
+              <div className="bottom-strip-contacts">
+                <div className="strip-item">
+                  <Mail size={18} />
+                  <span>Email: <strong>catalogoaplicaciones@gmail.com</strong></span>
+                </div>
+                <div className="strip-item">
+                  <Phone size={18} />
+                  <span>WhatsApp / Teléfono: <strong>+34 600 000 000</strong></span>
+                </div>
+                <div className="strip-item">
+                  <Zap size={18} />
+                  <span>Cobertura: <strong>España (Presencial / Asistencia Remota)</strong></span>
+                </div>
               </div>
 
-              <div className="contact-grid">
-                <div className="contact-info">
-                  <h3>Atención Directa</h3>
-                  <p>
-                    Atención personalizada para empresas, centros formativos y particulares que buscan rigor técnico.
-                  </p>
-
-                  <div className="direct-channels">
-                    <div className="channel-card">
-                      <Mail className="channel-icon" size={24} />
-                      <div className="channel-detail">
-                        <strong>Correo Electrónico</strong>
-                        <span>catalogoaplicaciones@gmail.com</span>
-                      </div>
-                    </div>
-
-                    <div className="channel-card">
-                      <Phone className="channel-icon" size={24} />
-                      <div className="channel-detail">
-                        <strong>Teléfono & WhatsApp</strong>
-                        <span>+34 600 000 000 (Atención Profesional)</span>
-                      </div>
-                    </div>
-
-                    <div className="channel-card">
-                      <MapPin className="channel-icon" size={24} />
-                      <div className="channel-detail">
-                        <strong>Ubicación & Cobertura</strong>
-                        <span>España / Modalidad Presencial y Remoto</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <form className="contact-form" onSubmit={handleSubmit}>
-                  {formSent ? (
-                    <div style={{
-                      background: '#e6f4ea',
-                      border: '1px solid #10b981',
-                      padding: '2.5rem 2rem',
-                      borderRadius: '4px',
-                      textAlign: 'center'
-                    }}>
-                      <CheckCircle2 size={48} color="#10b981" style={{ marginBottom: '1rem' }} />
-                      <h4 style={{ color: 'var(--drbyte-navy)', marginBottom: '0.5rem', fontSize: '1.25rem' }}>
-                        ¡Mensaje Enviado con Éxito!
-                      </h4>
-                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
-                        Gracias por contactar. Manuel Aragonés responderá a tu consulta a la mayor brevedad.
-                      </p>
-                      <button 
-                        type="button" 
-                        className="btn-amazon-primary" 
-                        style={{ marginTop: '1.5rem' }}
-                        onClick={() => setFormSent(false)}
-                      >
-                        Enviar otro mensaje
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="form-group">
-                        <label>Nombre Completo / Empresa:</label>
-                        <input 
-                          type="text" 
-                          required 
-                          placeholder="Ej. Juan Pérez - Innova Systems"
-                          className="form-input"
-                          value={formData.nombre}
-                          onChange={(e) => setFormData({...formData, nombre: e.target.value})}
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label>Email de Contacto:</label>
-                        <input 
-                          type="email" 
-                          required 
-                          placeholder="tuemail@empresa.com"
-                          className="form-input"
-                          value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label>Servicio de Interés:</label>
-                        <select 
-                          className="form-input"
-                          value={formData.servicio}
-                          onChange={(e) => setFormData({...formData, servicio: e.target.value})}
-                        >
-                          <option>Consultoría en Ciberseguridad & Redes</option>
-                          <option>Auditoría de Firewalls NGFW</option>
-                          <option>Formación Técnica In-Company</option>
-                          <option>Soporte de Servidores y Sistemas</option>
-                          <option>Dashboards y Plantillas Excel</option>
-                          <option>Desarrollo Web y Apps a Medida</option>
-                        </select>
-                      </div>
-
-                      <div className="form-group">
-                        <label>Mensaje:</label>
-                        <textarea 
-                          rows={4}
-                          required 
-                          placeholder="Describe brevemente tus requerimientos o qué plantilla necesitas..."
-                          className="form-textarea"
-                          value={formData.mensaje}
-                          onChange={(e) => setFormData({...formData, mensaje: e.target.value})}
-                        ></textarea>
-                      </div>
-
-                      <button type="submit" className="btn-amazon-buy" style={{ padding: '0.85rem' }}>
-                        <span>Enviar Mensaje</span>
-                        <Send size={18} />
-                      </button>
-                    </>
-                  )}
-                </form>
+              <div className="bottom-strip-cta">
+                <button 
+                  className="btn-cta-compact"
+                  onClick={() => handleOpenContact('Consulta General')}
+                >
+                  <Send size={15} />
+                  <span>Contactar Ahora</span>
+                </button>
               </div>
             </div>
-          </section>
+          </div>
         </main>
       )}
 
       {/* ========================================================================= */}
-      {/* VISTA 2: PESTAÑA TIENDA DE PLANTILLAS EXCEL & DASHBOARDS */}
+      {/* VISTA 2: PESTAÑA TIENDA DE PLANTILLAS EXCEL */}
       {/* ========================================================================= */}
       {activeTab === 'tienda' && (
-        <main>
-          <section style={{ paddingTop: '2rem' }}>
+        <main style={{ flex: 1 }}>
+          <div className="store-view-container">
             <div className="store-view-header">
               <span style={{ color: 'var(--amazon-orange)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase' }}>
                 Tienda Oficial DR. BYTE
               </span>
               <h1>
-                <FileSpreadsheet size={32} color="var(--drbyte-blue)" />
+                <FileSpreadsheet size={30} color="var(--drbyte-blue)" />
                 Catálogo de Plantillas Excel & Dashboards Ejecutivos
               </h1>
-              <p>
-                Herramientas profesionales de descarga directa para empresas, autónomos e ingenieros IT. Desarrolladas con macros VBA automáticas y fórmulas probadas en producción.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+                Herramientas profesionales listas para descargar con macros automáticas VBA y fórmulas avanzadas para multiplicar la productividad de tu empresa.
               </p>
             </div>
 
-            {/* Barra de Filtros de Departamentos */}
+            {/* Barra de Filtros */}
             <div className="store-filter-bar">
               <button 
                 className={`store-filter-btn ${storeCategory === 'todas' ? 'active' : ''}`}
@@ -877,11 +533,11 @@ function App() {
                 className={`store-filter-btn ${storeCategory === 'finanzas' ? 'active' : ''}`}
                 onClick={() => setStoreCategory('finanzas')}
               >
-                Finanzas & Control Fiscal
+                Finanzas & Fiscal
               </button>
             </div>
 
-            {/* Grid de Productos estilo Amazon */}
+            {/* Grid de Productos */}
             <div className="templates-grid">
               {filteredTemplates.map(t => (
                 <div key={t.id} className="template-card">
@@ -957,11 +613,111 @@ function App() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         </main>
       )}
 
-      {/* MODAL DE COMPRA / DESCARGA INMEDIATA */}
+      {/* FOOTER COMPACTO */}
+      <footer className="footer-compact">
+        <div className="footer-compact-container">
+          <div>© {new Date().getFullYear()} DR. BYTE - Dirección Técnica: Manuel Aragonés. Todos los derechos reservados.</div>
+          <div style={{ color: '#94a3b8' }}>Proyectos de IA · Mantenimiento Informático · Instalación de Software · Ofimática Avanzada</div>
+        </div>
+      </footer>
+
+      {/* MODAL DE CONTACTO RÁPIDO PARA CADA SERVICIO */}
+      {showContactModal && (
+        <div className="modal-overlay" onClick={() => setShowContactModal(false)}>
+          <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setShowContactModal(false)}>✕</button>
+
+            <div style={{ marginBottom: '1.25rem' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--amazon-orange)', fontWeight: 800, textTransform: 'uppercase' }}>
+                Contacto Profesional
+              </span>
+              <h3 style={{ fontSize: '1.25rem', color: 'var(--drbyte-navy)', marginTop: '0.2rem' }}>
+                {contactSubject}
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                Indícanos tus datos y Manuel Aragonés te atenderá personalmente.
+              </p>
+            </div>
+
+            {formSent ? (
+              <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
+                <CheckCircle2 size={44} color="#10b981" style={{ marginBottom: '0.75rem' }} />
+                <h4 style={{ color: 'var(--drbyte-navy)', fontSize: '1.15rem' }}>¡Consulta Recibida!</h4>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginTop: '0.4rem' }}>
+                  Nos pondremos en contacto contigo a la mayor brevedad posible.
+                </p>
+                <button 
+                  className="btn-cta-compact" 
+                  style={{ marginTop: '1.25rem' }}
+                  onClick={() => setShowContactModal(false)}
+                >
+                  Cerrar
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleContactSubmit}>
+                <div className="form-group">
+                  <label>Nombre Completo o Empresa:</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="Ej. Juan Pérez"
+                    className="form-input"
+                    value={formData.nombre}
+                    onChange={(e) => setFormData({...formData, nombre: e.target.value})}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Correo Electrónico:</label>
+                  <input 
+                    type="email" 
+                    required 
+                    placeholder="tuemail@empresa.com"
+                    className="form-input"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Teléfono (opcional para WhatsApp):</label>
+                  <input 
+                    type="tel" 
+                    placeholder="+34 600 000 000"
+                    className="form-input"
+                    value={formData.telefono}
+                    onChange={(e) => setFormData({...formData, telefono: e.target.value})}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Detalle de tu requerimiento:</label>
+                  <textarea 
+                    rows={3} 
+                    required 
+                    placeholder={`Cuéntame brevemente qué necesitas respecto a ${contactSubject}...`}
+                    className="form-textarea"
+                    value={formData.mensaje}
+                    onChange={(e) => setFormData({...formData, mensaje: e.target.value})}
+                  ></textarea>
+                </div>
+
+                <button type="submit" className="btn-amazon-buy" style={{ marginTop: '0.5rem', padding: '0.8rem' }}>
+                  <span>Enviar Consulta Directa</span>
+                  <Send size={16} />
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* MODAL DE COMPRA / DESCARGA INMEDIATA DE PLANTILLA */}
       {selectedTemplate && (
         <div className="modal-overlay" onClick={() => setSelectedTemplate(null)}>
           <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
@@ -983,7 +739,7 @@ function App() {
                   </div>
                 </div>
 
-                <div style={{ background: '#f9fafb', padding: '1rem', borderRadius: '4px', marginBottom: '1.5rem', border: '1px solid #e5e7eb' }}>
+                <div style={{ background: '#f9fafb', padding: '1rem', borderRadius: '4px', marginBottom: '1.25rem', border: '1px solid #e5e7eb' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>Precio Oficial:</span>
                     <span style={{ color: 'var(--price-red)', fontWeight: 800, fontSize: '1.1rem' }}>
@@ -992,7 +748,7 @@ function App() {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>Formato:</span>
-                    <span style={{ color: 'var(--success-green)', fontWeight: 700 }}>Excel con macros (.xlsm) + Licencia</span>
+                    <span style={{ color: 'var(--success-green)', fontWeight: 700 }}>Excel con macros (.xlsm)</span>
                   </div>
                 </div>
 
@@ -1047,37 +803,6 @@ function App() {
           </div>
         </div>
       )}
-
-      {/* FOOTER */}
-      <footer className="footer">
-        <div 
-          className="footer-back-to-top" 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >
-          Volver arriba ▲
-        </div>
-
-        <div className="footer-content">
-          <div className="footer-brand">
-            <img 
-              src="/assets/dr_byte_logo.jpg" 
-              alt="DR. BYTE" 
-              style={{ width: '40px', height: '40px', borderRadius: '4px', border: '1px solid var(--drbyte-cyan)' }} 
-            />
-            <div>
-              <strong style={{ fontSize: '1.1rem', color: '#ffffff', display: 'block' }}>DR. BYTE.es</strong>
-              <span style={{ fontSize: '0.78rem', color: '#93c5fd' }}>Diagnóstico & Consultoría Informática</span>
-            </div>
-          </div>
-
-          <div>
-            <p>© {new Date().getFullYear()} DR. BYTE - Manuel Aragonés. Todos los derechos reservados.</p>
-            <p style={{ marginTop: '0.25rem', color: '#94a3b8', fontSize: '0.8rem' }}>
-              Ciberseguridad Zero Trust | Redes LAN/WAN | Formación IT | Cuadros de Mando Excel VBA
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
