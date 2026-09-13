@@ -464,15 +464,15 @@ function App() {
               <div className="bottom-strip-contacts">
                 <div className="strip-item">
                   <Mail size={18} />
-                  <span>Email: <strong>catalogoaplicaciones@gmail.com</strong></span>
+                  <span>Email: <a href="mailto:jmaragones@gmail.com" style={{ textDecoration: 'underline', color: 'inherit' }}><strong>jmaragones@gmail.com</strong></a></span>
                 </div>
                 <div className="strip-item">
                   <Phone size={18} />
-                  <span>WhatsApp / Teléfono: <strong>+34 600 000 000</strong></span>
+                  <span>WhatsApp / Teléfono: <a href="tel:+34607353910" style={{ textDecoration: 'underline', color: 'inherit' }}><strong>+34 607 35 39 10</strong></a></span>
                 </div>
                 <div className="strip-item">
                   <Zap size={18} />
-                  <span>Cobertura: <strong>España (Presencial / Asistencia Remota)</strong></span>
+                  <span>Cobertura: <strong>Gran Canaria presencial y remota resto</strong></span>
                 </div>
               </div>
 
@@ -688,7 +688,7 @@ function App() {
                   <label>Teléfono (opcional para WhatsApp):</label>
                   <input 
                     type="tel" 
-                    placeholder="+34 600 000 000"
+                    placeholder="+34 607 35 39 10"
                     className="form-input"
                     value={formData.telefono}
                     onChange={(e) => setFormData({...formData, telefono: e.target.value})}
