@@ -114,6 +114,28 @@ function App() {
         'Alertas de vencimiento de facturas pendientes',
         'Plantilla homologada de presupuestos y facturación'
       ]
+    },
+    {
+      id: 'dash-limpieza',
+      title: 'Cuadrante de Turnos, Horas de Limpieza & Control de Operarios Pro',
+      category: 'servicios',
+      categoryName: 'Servicios & Cuadrantes',
+      desc: 'Plantilla completa con macros VBA y logotipo blindado de DR. BYTE para planificar turnos mensuales (M/T/N), fichaje de horas efectivas y auditoría por centros.',
+      price: 27.50,
+      oldPrice: 45.00,
+      discount: '-39%',
+      rating: 5.0,
+      reviewsCount: 68,
+      isChoice: true,
+      badge: 'VBA Turnos Pro',
+      preview: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80',
+      fileDownload: '/templates/Cuadrante_Horas_Limpieza_DrByte.xlsm',
+      specs: [
+        'Calendario mensual interactivo (días 1 al 31) con código de colores',
+        'Formulario de registro automático de turnos y descansos',
+        'Dashboard ejecutivo con horas efectivas en vivo y filtros',
+        'Base de datos de operarios, categorías y centros asignados'
+      ]
     }
   ];
 
@@ -534,6 +556,12 @@ function App() {
                 onClick={() => setStoreCategory('finanzas')}
               >
                 Finanzas & Fiscal
+              </button>
+              <button 
+                className={`store-filter-btn ${storeCategory === 'servicios' ? 'active' : ''}`}
+                onClick={() => setStoreCategory('servicios')}
+              >
+                Servicios & Cuadrantes
               </button>
             </div>
 
