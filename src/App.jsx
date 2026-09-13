@@ -434,7 +434,6 @@ function App() {
         {activeTab === 'tienda' && (
           <section className="section-wrapper" style={{ paddingTop: '3.5rem' }}>
             <div className="section-header-centered">
-              <span className="section-tag">Herramientas Profesionales</span>
               <h2 className="section-title">Tienda de Plantillas Excel Automatizadas</h2>
               <p className="section-subtitle">
                 Plantillas profesionales con macros VBA y fórmulas avanzadas para gestión real sin suscripciones.
