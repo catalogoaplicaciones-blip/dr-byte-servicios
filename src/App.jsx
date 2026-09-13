@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   Network, 
@@ -16,11 +16,33 @@ import {
   Sparkles,
   Award,
   Layers,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Wrench,
+  Activity
 } from 'lucide-react';
 import './App.css';
 
 function App() {
+  // Splash Screen Intro Animation
+  const [showSplash, setShowSplash] = useState(true);
+  const [splashHiding, setSplashHiding] = useState(false);
+
+  useEffect(() => {
+    // Tras 2.2s de carga animada de Dr. Byte, iniciar transición de salida suave
+    const timerFade = setTimeout(() => {
+      setSplashHiding(true);
+    }, 2400);
+
+    const timerRemove = setTimeout(() => {
+      setShowSplash(false);
+    }, 3200);
+
+    return () => {
+      clearTimeout(timerFade);
+      clearTimeout(timerRemove);
+    };
+  }, []);
+
   // Calculadora interactiva de presupuestos orientativos
   const [serviceType, setServiceType] = useState('seguridad');
   const [scope, setScope] = useState('empresa');
@@ -72,21 +94,37 @@ function App() {
 
   return (
     <div className="portfolio-app">
+      {/* 0. DR. BYTE INTRO SPLASH SCREEN ANIMADO */}
+      {showSplash && (
+        <div className={`drbyte-splash ${splashHiding ? 'splash-hiding' : ''}`}>
+          <div className="drbyte-splash-box">
+            <div className="drbyte-splash-glow"></div>
+            <img 
+              src="/assets/dr_byte_logo.jpg" 
+              alt="DR. BYTE" 
+              className="drbyte-splash-logo" 
+            />
+            <h2 className="drbyte-splash-tagline">DR. BYTE</h2>
+            <p className="drbyte-splash-sub">Diagnóstico, Redes & Soluciones Informáticas Especializadas</p>
+            <div className="drbyte-splash-loader">
+              <div className="drbyte-splash-loader-bar"></div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 1. NAVBAR */}
       <nav className="navbar">
         <div className="nav-container">
           <div className="brand">
             <img 
-              src="/assets/docente.jpg" 
-              alt="Manuel Aragonés" 
-              className="brand-avatar"
-              onError={(e) => {
-                e.target.src = "https://ui-avatars.com/api/?name=Manuel+Aragones&background=0284c7&color=fff";
-              }}
+              src="/assets/dr_byte_logo.jpg" 
+              alt="DR. BYTE" 
+              className="drbyte-navbar-logo"
             />
             <div className="brand-text">
-              <h2>Manuel Aragonés</h2>
-              <span>Consultor IT & Ciberseguridad</span>
+              <h2>DR. BYTE</h2>
+              <span>Soluciones IT & Ciberseguridad</span>
             </div>
           </div>
 
@@ -108,17 +146,22 @@ function App() {
       {/* 2. HERO SECTION */}
       <section id="inicio" className="hero-section">
         <div className="hero-content">
-          <span className="section-tag">Ingeniería & Soluciones Tecnológicas</span>
+          <div className="drbyte-hero-badge">
+            <img src="/assets/dr_byte_logo.jpg" alt="Dr. Byte" className="drbyte-mini-logo" />
+            <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+              DR. BYTE | Tu Especialista Tecnológico
+            </span>
+          </div>
           <h1>
-            Arquitectura de Redes, <span className="highlight-text">Ciberseguridad Zero Trust</span> y Formación Especializada
+            Diagnóstico Clínico de Sistemas, <span className="highlight-text">Ciberseguridad Zero Trust</span> y Redes
           </h1>
           <p className="hero-description">
-            Acompaño a empresas, instituciones y profesionales en la securización de sus infraestructuras críticas, implantación de firewalls corporativos de nueva generación (NGFW) y digitalización de alto rendimiento.
+            Bienvenido a <strong>DR. BYTE</strong>, el servicio profesional liderado por <strong>Manuel Aragonés</strong> para diagnosticar, sanear y blindar la infraestructura tecnológica de empresas y particulares, con soporte técnico avanzado y formación técnica de primer nivel.
           </p>
 
           <div className="hero-actions">
             <a href="#contacto" className="btn-cta">
-              <span>Agendar Reunión Inicial</span>
+              <span>Solicitar Diagnóstico Técnico</span>
               <Calendar size={18} />
             </a>
             <a href="#servicios" className="btn-secondary">
@@ -132,7 +175,14 @@ function App() {
               <ShieldCheck className="badge-icon" size={24} />
               <div className="badge-text">
                 <strong>Zero Trust</strong>
-                <span>Defensa perimetral estricta</span>
+                <span>Blindaje de redes perimetral</span>
+              </div>
+            </div>
+            <div className="badge-item">
+              <Activity className="badge-icon" size={24} />
+              <div className="badge-text">
+                <strong>Diagnóstico Express</strong>
+                <span>Resolución ágil de incidencias</span>
               </div>
             </div>
             <div className="badge-item">
@@ -142,39 +192,31 @@ function App() {
                 <span>Formación técnica oficial</span>
               </div>
             </div>
-            <div className="badge-item">
-              <Cpu className="badge-icon" size={24} />
-              <div className="badge-text">
-                <strong>Auditoría Real</strong>
-                <span>Estándares Palo Alto & Cisco</span>
-              </div>
-            </div>
           </div>
         </div>
 
         <div className="hero-visual">
           <div className="profile-card">
-            <img 
-              src="/assets/docente.jpg" 
-              alt="Manuel Aragonés" 
-              className="profile-img-large"
-              onError={(e) => {
-                e.target.src = "https://ui-avatars.com/api/?name=Manuel+Aragones&background=0284c7&color=fff";
-              }}
-            />
+            <div className="drbyte-hero-img-container">
+              <img 
+                src="/assets/dr_byte_logo.jpg" 
+                alt="DR. BYTE" 
+                className="drbyte-hero-img-main"
+              />
+            </div>
             <div className="profile-status">
               <span className="status-dot"></span>
-              <span>Disponible para Consultoría & Proyectos</span>
+              <span>DR. BYTE Consulta Abierta</span>
             </div>
-            <h3>Manuel Aragonés</h3>
+            <h3>DR. BYTE</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
-              Especialista en Sistemas, Comunicaciones y Capacitación Digital
+              Dirección Técnica: <strong>Manuel Aragonés</strong>
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Fortinet / NGFW</span>
-              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Sistemas Operativos</span>
+              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Soporte & Diagnóstico</span>
+              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Cortafuegos Fortinet</span>
               <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>VLANs & Routing</span>
-              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Certificados FNMT/DNIe</span>
+              <span style={{ background: 'rgba(255,255,255,0.05)', padding: '0.3rem 0.75rem', borderRadius: '6px', fontSize: '0.78rem', color: 'var(--accent-cyan)' }}>Mantenimiento 360°</span>
             </div>
           </div>
         </div>
