@@ -281,8 +281,7 @@ function App() {
               </h2>
 
               <p className="hero-description">
-                En <strong>DR. BYTE</strong> desarrollamos cuadros de mando ejecutivos sin suscripción, 
-                arquitecturas de red blindadas bajo principios <strong>Zero Trust</strong> y automatizaciones a medida para empresas, profesionales y despachos.
+                Cuadros de mando ejecutivos sin suscripción, arquitecturas de red Zero Trust y automatización de procesos con IA.
               </p>
 
               <div className="hero-cta-buttons">
@@ -335,7 +334,7 @@ function App() {
                 <span className="section-tag">Capacidades Técnicas</span>
                 <h3 className="section-title">Especialización de Extremo a Extremo</h3>
                 <p className="section-subtitle">
-                  Combinamos experiencia en infraestructura física, redes de datos corporativas y desarrollo de herramientas de productividad con macros y modelos de IA.
+                  Infraestructuras de red corporativas, ciberseguridad avanzada y herramientas de productividad con IA.
                 </p>
               </div>
 
@@ -438,7 +437,7 @@ function App() {
               <span className="section-tag">Herramientas Profesionales</span>
               <h2 className="section-title">Tienda de Plantillas Excel Automatizadas</h2>
               <p className="section-subtitle">
-                Plantillas corporativas diseñadas con macros VBA y fórmulas avanzadas para resolver problemas reales de facturación, turnos y redes sin suscripciones.
+                Plantillas profesionales con macros VBA y fórmulas avanzadas para gestión real sin suscripciones.
               </p>
             </div>
 
