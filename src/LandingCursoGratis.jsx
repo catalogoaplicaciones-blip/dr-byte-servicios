@@ -17,8 +17,7 @@ import {
 import './LandingCursoGratis.css';
 
 // URL de tu Web App de Google Sheets (Google Drive)
-// Cuando crees el script en Google Drive, pegaremos la URL aquí:
-const GOOGLE_SHEETS_WEBAPP_URL = '';
+const GOOGLE_SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby5bf_ounSEf1gZaOiKX3RPVknJr6qNuHFX-OK8x7_7Al1UxLQZSRRVscMmDIG1WHMc/exec';
 
 export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
   const [nombre, setNombre] = useState('');
