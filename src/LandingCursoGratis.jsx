@@ -7,15 +7,11 @@ import {
   FileSpreadsheet, 
   ShieldCheck, 
   ArrowRight, 
-  PlayCircle, 
-  BookOpen, 
   Check, 
   Mail, 
   User, 
   Lock, 
-  Clock,
   Award,
-  MessageCircle,
   ExternalLink
 } from 'lucide-react';
 import './LandingCursoGratis.css';
@@ -43,10 +39,6 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
       setSubmitted(true);
     }, 600);
   };
-
-  const whatsappMessage = encodeURIComponent(
-    `Hola Manuel, acabo de registrarme para el Curso Gratuito de Excel 365 (${email}). ¿Me pasas el material por WhatsApp?`
-  );
 
   return (
     <div className="lead-landing-page">
@@ -99,30 +91,24 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
 
               {/* Qué incluye el material gratuito */}
               <div className="lead-benefits-box">
-                <h3 className="lead-benefits-title">¿Qué recibirás inmediatamente al registrarte?</h3>
+                <h3 className="lead-benefits-title">¿Qué incluye este material gratuito?</h3>
                 <ul className="lead-benefits-list">
                   <li>
                     <CheckCircle2 size={20} className="check-icon-cyan" />
                     <div>
-                      <strong>Manual Oficial Completo (PDF 8 MB):</strong> Explicaciones visuales paso a paso, ejercicios resueltos y casos prácticos de empresa.
+                      <strong>Manual Oficial Completo en PDF (8 MB):</strong> Explicaciones visuales claras de todas las herramientas básicas e intermedias de Excel, referencias relativas/absolutas y fórmulas paso a paso.
                     </div>
                   </li>
                   <li>
                     <CheckCircle2 size={20} className="check-icon-cyan" />
                     <div>
-                      <strong>Pack de Prácticas y Plantillas (ZIP):</strong> Archivos `.xlsx` y presentaciones autoejecutables listas para practicar.
+                      <strong>Hoja de Prácticas `.xlsx` Oficial:</strong> Archivo de Excel listo para abrir en tu ordenador, con ejercicios guiados para poner en práctica lo aprendido desde el primer minuto.
                     </div>
                   </li>
                   <li>
                     <CheckCircle2 size={20} className="check-icon-cyan" />
                     <div>
-                      <strong>Vídeos Explicativos de Dr. Byte:</strong> Didáctica clara, ritmo pausado y sin ruidos molestos.
-                    </div>
-                  </li>
-                  <li>
-                    <CheckCircle2 size={20} className="check-icon-cyan" />
-                    <div>
-                      <strong>Soporte Directo por WhatsApp:</strong> Asistencia del profesor Manuel Aragonés (+34 607 35 39 10).
+                      <strong>Acceso Libre y Sin Compromiso:</strong> Formato descargable para que estudies y practiques a tu propio ritmo, sin registros complejos ni suscripciones.
                     </div>
                   </li>
                 </ul>
@@ -231,29 +217,18 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
                         className="lead-btn-download-direct"
                       >
                         <Download size={20} />
-                        <span>DESCARGAR MANUAL COMPLETO (PDF 8 MB)</span>
+                        <span>DESCARGAR MANUAL OFICIAL (PDF 8 MB)</span>
                       </a>
 
-                      {/* Descarga del Pack de Prácticas ZIP */}
+                      {/* Descarga de la Hoja de Prácticas XLSX */}
                       <a 
-                        href="/templates/Pack_Descargable_Curso_Excel_Clasico.zip" 
-                        download="Pack_Descargable_Curso_Excel_Clasico.zip"
+                        href="/templates/Plantilla_Ejercicios_Excel_Clasico.xlsx" 
+                        download="Plantilla_Ejercicios_Excel_Clasico.xlsx"
                         className="lead-btn-download-direct"
-                        style={{ background: 'linear-gradient(135deg, #e6a61a, #f59e0b)', color: '#0b2545' }}
+                        style={{ background: 'linear-gradient(135deg, #107C41, #0b5e2f)', color: '#ffffff', boxShadow: '0 4px 18px rgba(16, 124, 65, 0.35)' }}
                       >
-                        <Download size={20} />
-                        <span>DESCARGAR PACK DE PRÁCTICAS (.ZIP)</span>
-                      </a>
-
-                      {/* Confirmar por WhatsApp con Manuel */}
-                      <a 
-                        href={`https://wa.me/34607353910?text=${whatsappMessage}`}
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="lead-btn-whatsapp"
-                      >
-                        <MessageCircle size={20} />
-                        <span>Escribir a Manuel por WhatsApp para dudas</span>
+                        <FileSpreadsheet size={20} />
+                        <span>DESCARGAR HOJA DE PRÁCTICAS (.XLSX)</span>
                       </a>
                     </div>
 
