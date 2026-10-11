@@ -18,9 +18,10 @@ import {
   Calendar,
   Layers,
   Terminal,
-  Activity,
   Award
 } from 'lucide-react';
+import CookieBanner from './CookieBanner';
+import LegalModal from './LegalModal';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [formSent, setFormSent] = useState(false);
+  const [activeLegalDoc, setActiveLegalDoc] = useState(null); // 'avisoLegal' | 'privacidad' | 'cookies' | 'terminos' | null
 
   // Filtros Tienda
   const [storeCategory, setStoreCategory] = useState('todas');
@@ -937,7 +939,7 @@ function App() {
       )}
 
       {/* ========================================================================= */}
-      {/* 6. FOOTER CORPORATIVO TECH */}
+      {/* 6. FOOTER CORPORATIVO TECH CON ENLACES LEGALES */}
       {/* ========================================================================= */}
       <footer className="tech-footer">
         <div className="footer-container">
@@ -959,12 +961,47 @@ function App() {
             <button onClick={() => handleOpenContact('Contacto')}>Contacto</button>
           </div>
 
-          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'right' }}>
-            <span>© {new Date().getFullYear()} DR. BYTE. Todos los derechos reservados.</span> <br />
+          <div className="footer-legal-links">
+            <button onClick={() => setActiveLegalDoc('avisoLegal')}>Aviso Legal</button>
+            <span className="footer-legal-dot">•</span>
+            <button onClick={() => setActiveLegalDoc('privacidad')}>Privacidad</button>
+            <span className="footer-legal-dot">•</span>
+            <button onClick={() => setActiveLegalDoc('cookies')}>Cookies</button>
+            <span className="footer-legal-dot">•</span>
+            <button onClick={() => setActiveLegalDoc('terminos')}>Términos</button>
+            <span className="footer-legal-dot">•</span>
+            <button 
+              onClick={() => {
+                localStorage.removeItem('drbyte_cookie_consent');
+                window.location.reload();
+              }}
+              style={{ color: 'var(--drbyte-cyan)' }}
+              title="Abrir panel de preferencias de cookies"
+            >
+              Configurar Cookies
+            </button>
+          </div>
+
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'right', width: '100%', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1.25rem', marginTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <span>© {new Date().getFullYear()} DR. BYTE (Manuel Aragonés). Todos los derechos reservados.</span>
             <span style={{ color: 'var(--drbyte-cyan)' }}>Soporte Directo: +34 607 35 39 10 | hola.drbyte@gmail.com</span>
           </div>
         </div>
       </footer>
+
+      {/* ========================================================================= */}
+      {/* 7. BANNER DE COOKIES (RGPD / AEPD) */}
+      {/* ========================================================================= */}
+      <CookieBanner onOpenLegal={(docKey) => setActiveLegalDoc(docKey)} />
+
+      {/* ========================================================================= */}
+      {/* 8. MODAL DE DOCUMENTACIÓN LEGAL */}
+      {/* ========================================================================= */}
+      <LegalModal 
+        activeLegalDoc={activeLegalDoc} 
+        onClose={() => setActiveLegalDoc(null)} 
+        onSelectDoc={(docKey) => setActiveLegalDoc(docKey)}
+      />
     </div>
   );
 }
