@@ -13,13 +13,20 @@ import {
   Mail, 
   Search, 
   CheckCircle2, 
+  Check,
   X, 
-  ExternalLink,
-  Calendar,
-  Layers,
-  Award,
-  Activity,
-  Terminal
+  ExternalLink, 
+  Calendar, 
+  Layers, 
+  Award, 
+  Activity, 
+  Terminal,
+  Wrench,
+  GraduationCap,
+  HardDrive,
+  Laptop,
+  Network,
+  Lock
 } from 'lucide-react';
 import CookieBanner from './CookieBanner';
 import LegalModal from './LegalModal';
@@ -252,7 +259,7 @@ function App() {
             </div>
           </div>
 
-          {/* Selector de las 4 Pestañas */}
+          {/* Selector de Pestañas con Academia Separada */}
           <nav className="nav-tabs-group" aria-label="Navegación principal">
             <button 
               className={`tab-btn ${activeTab === 'inicio' ? 'active' : ''}`}
@@ -263,12 +270,28 @@ function App() {
             </button>
 
             <button 
+              className={`tab-btn ${activeTab === 'servicios' ? 'active' : ''}`}
+              onClick={() => setActiveTab('servicios')}
+            >
+              <Wrench size={18} />
+              <span>Servicios IT</span>
+            </button>
+
+            <button 
               className={`tab-btn ${activeTab === 'tienda' ? 'active' : ''}`}
               onClick={() => setActiveTab('tienda')}
             >
               <FileSpreadsheet size={18} />
               <span>Tienda Excel</span>
               <span className="tab-counter-badge">{templates.length}</span>
+            </button>
+
+            <button 
+              className={`tab-btn ${activeTab === 'academia' ? 'active' : ''}`}
+              onClick={() => setActiveTab('academia')}
+            >
+              <GraduationCap size={18} />
+              <span>Academia</span>
             </button>
 
             <button 
@@ -288,27 +311,14 @@ function App() {
             </button>
           </nav>
 
-          {/* Acción Rápida de Contacto y Enlace a Curso Gratis */}
+          {/* Acción Rápida de Contacto y Teléfono Directo */}
           <div className="header-actions">
-            <button 
-              className="btn-course-free-pill"
-              onClick={() => {
-                window.history.pushState({}, '', '/curso-gratis');
-                setActiveTab('curso-gratis');
-              }}
-              title="Acceder al Curso Gratuito de Excel"
-            >
-              <Sparkles size={15} />
-              <span>Curso Gratis</span>
-              <span className="pill-free-badge">NUEVO</span>
-            </button>
-
             <button 
               className="btn-contact-quick"
               onClick={() => handleOpenContact('Solicitud de Asistencia Inmediata')}
             >
               <Phone size={16} />
-              <span>Contacto Directo</span>
+              <span>Asistencia: +34 607 35 39 10</span>
             </button>
           </div>
         </div>
@@ -320,176 +330,419 @@ function App() {
       <main style={{ flex: 1 }}>
 
         {/* ----------------------------------------------------------------------- */}
-        {/* PESTAÑA 1: INICIO */}
+        {/* PESTAÑA 1: INICIO (SERVICIO TÉCNICO, REDES & CIBERSEGURIDAD EN CANARIAS) */}
         {/* ----------------------------------------------------------------------- */}
         {activeTab === 'inicio' && (
-          <div>
-            {/* Hero Principal con Banner Oficial */}
-            <section className="hero-tech-section">
-              <div className="hero-pill-badge">
-                <Sparkles size={15} />
-                <span>Ingeniería Informática, Ciberseguridad & Automatización Inteligente</span>
-              </div>
+          <div className="home-service-layout">
+            
+            {/* HERO PRINCIPAL: 2 COLUMNAS ESTILO LANDING PAGE (ALTA CONVERSIÓN) */}
+            <section className="home-hero-section">
+              <div className="lead-container">
+                <div className="home-hero-grid">
+                  
+                  {/* COLUMNA IZQUIERDA: PROPUESTA DE VALOR Y SOLUCIONES TÉCNICAS */}
+                  <div className="home-hero-info">
+                    <div className="lead-tagline">
+                      <Wrench size={16} />
+                      <span>SERVICIO TÉCNICO INFORMÁTICO & CIBERSEGURIDAD EN CANARIAS</span>
+                    </div>
 
-              {/* BANNER VISUAL OFICIAL DR. BYTE (DEL LOGO Y VÍDEOS) */}
-              <div className="hero-official-banner-wrap">
-                <img 
-                  src="/assets/drbyte_banner.png" 
-                  alt="DR. BYTE - Manuel Aragonés Informática - Tu academia online desde Canarias" 
-                  className="hero-official-banner-img"
-                />
-              </div>
+                    <h1 className="lead-main-title">
+                      Servicio Técnico <span className="highlight-cyan">Informático</span>, <br />
+                      Redes & <span className="highlight-gold">Ciberseguridad Corporativa</span>
+                    </h1>
 
-              <h2 className="hero-title-main">
-                Soluciones IT de Alto Nivel, <br />
-                <span className="gradient-text">Infraestructuras Robustas & Gestión con IA</span>
-              </h2>
+                    <p className="lead-lead-paragraph">
+                      Soporte profesional, diagnóstico exhaustivo y mantenimiento preventivo para empresas, profesionales y particulares. Trato directo con Manuel Aragonés, máxima confidencialidad y sin intermediarios.
+                    </p>
 
-              <p className="hero-description">
-                Cuadros de mando ejecutivos sin suscripción, arquitecturas de red Zero Trust y automatización de procesos con IA.
-              </p>
+                    {/* Caja de Compromisos y Capacidades Técnicas (Estilo Landing) */}
+                    <div className="lead-benefits-box">
+                      <h3 className="lead-benefits-title">¿Qué soluciones técnicas te ofrecemos?</h3>
+                      <ul className="lead-benefits-list">
+                        <li>
+                          <CheckCircle2 size={20} className="check-icon-cyan" />
+                          <div>
+                            <strong>Reparación & Puesta a Punto de Equipos:</strong> Diagnóstico de hardware, ampliación con discos NVMe, limpieza de virus/malware y optimización de rendimiento en talleres o a domicilio.
+                          </div>
+                        </li>
+                        <li>
+                          <CheckCircle2 size={20} className="check-icon-cyan" />
+                          <div>
+                            <strong>Redes Corporativas & Seguridad Zero Trust:</strong> Despliegue de cableado estructurado, Wi-Fi 6 profesional y cortafuegos Fortinet / Palo Alto bajo filosofía <em>Default Deny</em>.
+                          </div>
+                        </li>
+                        <li>
+                          <CheckCircle2 size={20} className="check-icon-cyan" />
+                          <div>
+                            <strong>Recuperación de Datos & Backups Blindados:</strong> Rescate de archivos en soportes dañados e implementación de copias de seguridad automáticas 3-2-1 inmutables.
+                          </div>
+                        </li>
+                        <li>
+                          <CheckCircle2 size={20} className="check-icon-cyan" />
+                          <div>
+                            <strong>Desarrollo de Cuadros de Mando en Excel/VBA:</strong> Automatización de turnos, facturación y almacenes con respuesta instantánea y sin cuotas mensuales.
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
 
-              <div className="hero-cta-buttons">
-                <button 
-                  className="btn-primary-glow"
-                  onClick={() => setActiveTab('tienda')}
-                >
-                  <FileSpreadsheet size={18} />
-                  <span>Explorar Tienda Excel</span>
-                  <ArrowRight size={18} />
-                </button>
+                    <div className="home-hero-buttons">
+                      <button 
+                        className="btn-primary-glow"
+                        onClick={() => handleOpenContact('Solicitud de Asistencia Técnica')}
+                      >
+                        <Wrench size={18} />
+                        <span>SOLICITAR ASISTENCIA TÉCNICA</span>
+                        <ArrowRight size={18} />
+                      </button>
 
-                <button 
-                  className="btn-secondary-glass"
-                  onClick={() => setActiveTab('quien-es')}
-                >
-                  <UserCheck size={18} />
-                  <span>Conocer a Dr. Byte</span>
-                </button>
+                      <a 
+                        href="tel:+34607353910"
+                        className="btn-secondary-glass"
+                      >
+                        <Phone size={18} />
+                        <span>+34 607 35 39 10</span>
+                      </a>
+                    </div>
+                  </div>
 
-                <button 
-                  className="btn-secondary-glass"
-                  onClick={() => handleOpenContact('Consultoría Técnica Personalizada')}
-                >
-                  <Phone size={18} />
-                  <span>+34 607 35 39 10</span>
-                </button>
-              </div>
+                  {/* COLUMNA DERECHA: TARJETA DE ASISTENCIA RÁPIDA (ESTILO LEAD FORM CARD) */}
+                  <div className="home-hero-card-col">
+                    <div className="lead-form-card" style={{ borderColor: 'var(--drbyte-cyan)' }}>
+                      <div className="lead-form-header">
+                        <div className="lead-icon-circle">
+                          <ShieldCheck size={30} />
+                        </div>
+                        <h2 className="lead-card-title">¿Tienes una Avería o Proyecto IT?</h2>
+                        <p className="lead-card-subtitle">
+                          Solución rápida, honesta y con garantía técnica en Gran Canaria (presencial) y todas las Islas (remoto).
+                        </p>
+                      </div>
 
-              {/* Barra de Métricas */}
-              <div className="hero-metrics-bar">
-                <div className="metric-item">
-                  <span className="metric-val">100%</span>
-                  <span className="metric-desc">Sin Suscripciones (Pago Único)</span>
-                </div>
-                <div className="metric-item">
-                  <span className="metric-val">Zero Trust</span>
-                  <span className="metric-desc">Estándares Palo Alto & Cisco</span>
-                </div>
-                <div className="metric-item">
-                  <span className="metric-val">+15 Años</span>
-                  <span className="metric-desc">Experiencia en Sistemas & Docencia</span>
+                      <div className="service-quick-contact-box">
+                        <div className="service-contact-row">
+                          <Phone size={20} className="contact-row-icon" />
+                          <div>
+                            <strong>Atención Telefónica Directa:</strong>
+                            <a href="tel:+34607353910" className="contact-row-val">+34 607 35 39 10</a>
+                          </div>
+                        </div>
+
+                        <div className="service-contact-row">
+                          <Mail size={20} className="contact-row-icon" />
+                          <div>
+                            <strong>Correo Electrónico Oficial:</strong>
+                            <a href="mailto:hola.drbyte@gmail.com" className="contact-row-val">hola.drbyte@gmail.com</a>
+                          </div>
+                        </div>
+
+                        <div className="service-contact-row">
+                          <Award size={20} className="contact-row-icon" />
+                          <div>
+                            <strong>Ubicación & Cobertura:</strong>
+                            <span>Las Palmas de Gran Canaria • Asistencia en todo el archipiélago</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <button 
+                        type="button" 
+                        onClick={() => handleOpenContact('Petición de Diagnóstico / Presupuesto')}
+                        className="lead-btn-submit"
+                        style={{ marginTop: '1.5rem' }}
+                      >
+                        <Wrench size={18} />
+                        <span>PEDIR DIAGNÓSTICO O PRESUPUESTO</span>
+                        <ArrowRight size={18} />
+                      </button>
+
+                      <div className="lead-security-guarantee">
+                        <Lock size={14} />
+                        <span>Trato técnico directo. Cero intermediarios y confidencialidad bajo RGPD.</span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </section>
 
-            {/* Pilares Técnicos */}
-            <section className="section-wrapper">
+            {/* 2. BARRA DE MÉTRICAS & CONFIANZA */}
+            <section className="home-metrics-section">
+              <div className="lead-container">
+                <div className="home-metrics-grid">
+                  <div className="home-metric-card">
+                    <span className="metric-number">100%</span>
+                    <span className="metric-label">Trato Técnico Personal</span>
+                    <span className="metric-detail">Hablas directamente con el especialista</span>
+                  </div>
+                  <div className="home-metric-card">
+                    <span className="metric-number">Zero Trust</span>
+                    <span className="metric-label">Ciberseguridad Corporativa</span>
+                    <span className="metric-detail">Estándares Cisco, Fortinet y Palo Alto</span>
+                  </div>
+                  <div className="home-metric-card">
+                    <span className="metric-number">+15 Años</span>
+                    <span className="metric-label">Experiencia en Sistemas</span>
+                    <span className="metric-detail">Ingeniería, redes y entornos productivos</span>
+                  </div>
+                  <div className="home-metric-card">
+                    <span className="metric-number">Canarias</span>
+                    <span className="metric-label">Cobertura Local y Remota</span>
+                    <span className="metric-detail">Respuesta ágil ante averías e incidencias</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 3. CATÁLOGO DE 4 SERVICIOS TÉCNICOS DETALLADOS (ESTILO LANDING CARDS) */}
+            <section className="home-services-detailed-section">
+              <div className="lead-container">
+                <div className="section-header-centered">
+                  <div className="lead-tagline">
+                    <ShieldCheck size={16} />
+                    <span>ÁREAS DE ESPECIALIZACIÓN TÉCNICA</span>
+                  </div>
+                  <h2 className="lead-main-title" style={{ fontSize: '2.2rem', textAlign: 'center' }}>
+                    Soluciones IT para <span className="highlight-cyan">Empresas</span> y <span className="highlight-gold">Profesionales</span>
+                  </h2>
+                  <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto 2.5rem' }}>
+                    Desde el diagnóstico de un equipo averiado hasta la implantación de perímetros blindados en redes de empresa.
+                  </p>
+                </div>
+
+                <div className="services-grid-cards">
+                  <div className="service-detail-card">
+                    <div className="lead-icon-circle">
+                      <Laptop size={26} />
+                    </div>
+                    <h3>Mantenimiento & Reparación de Equipos</h3>
+                    <p>
+                      Diagnóstico de averías en placas base, sustitución de componentes, cambio de discos mecánicos a memorias NVMe de alta velocidad, limpieza interna, cambio de pasta térmica y optimización del sistema.
+                    </p>
+                    <ul className="service-bullet-list">
+                      <li><Check size={16} className="check-cyan" /> Eliminación de virus, malware y troyanos</li>
+                      <li><Check size={16} className="check-cyan" /> Reinstalación limpia de Windows y drivers oficiales</li>
+                      <li><Check size={16} className="check-cyan" /> Recuperación de documentos y copias de seguridad</li>
+                    </ul>
+                  </div>
+
+                  <div className="service-detail-card">
+                    <div className="lead-icon-circle">
+                      <Network size={26} />
+                    </div>
+                    <h3>Redes Corporativas & Conectividad</h3>
+                    <p>
+                      Despliegue y saneamiento de redes locales para empresas, despachos y almacenes. Conmutación gestionada, segmentación de tráfico y soluciones inalámbricas estables para decenas de dispositivos concurrentes.
+                    </p>
+                    <ul className="service-bullet-list">
+                      <li><Check size={16} className="check-cyan" /> Planificación de subredes con VLSM y VLANs</li>
+                      <li><Check size={16} className="check-cyan" /> Configuración de routers y switches Cisco</li>
+                      <li><Check size={16} className="check-cyan" /> Wi-Fi 6 profesional de alta cobertura sin microcortes</li>
+                    </ul>
+                  </div>
+
+                  <div className="service-detail-card">
+                    <div className="lead-icon-circle">
+                      <ShieldCheck size={26} />
+                    </div>
+                    <h3>Ciberseguridad Perimetral & VPNs</h3>
+                    <p>
+                      Protección perimetral de infraestructuras empresariales bajo la filosofía <em>Default Deny</em> (menor privilegio). Configuración experta de cortafuegos Fortinet y Palo Alto Networks con inspección de estado.
+                    </p>
+                    <ul className="service-bullet-list">
+                      <li><Check size={16} className="check-cyan" /> VPNs seguras IPsec y SSL para teletrabajo cifrado</li>
+                      <li><Check size={16} className="check-cyan" /> Filtrado de tráfico dañino y bloqueo de ataques</li>
+                      <li><Check size={16} className="check-cyan" /> Políticas de zonas seguras y copias blindadas 3-2-1</li>
+                    </ul>
+                  </div>
+
+                  <div className="service-detail-card">
+                    <div className="lead-icon-circle">
+                      <Cpu size={26} />
+                    </div>
+                    <h3>Automatización & Macros VBA a Medida</h3>
+                    <p>
+                      Desarrollo de software y cuadros de mando interactivos sobre Excel. Controla turnos de personal, inventarios, clientes y finanzas con formularios rápidos, sin cuotas mensuales y con plena autonomía offline.
+                    </p>
+                    <ul className="service-bullet-list">
+                      <li><Check size={16} className="check-cyan" /> Dashboards interactivos con KPIs en tiempo real</li>
+                      <li><Check size={16} className="check-cyan" /> Formularios protegidos con validación automática</li>
+                      <li><Check size={16} className="check-cyan" /> Cero suscripciones: la herramienta es tuya para siempre</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Banner Destacado de Plantilla de Gestión */}
+                <div className="spotlight-banner">
+                  <div className="spotlight-text">
+                    <h4>Solución Destacada de Gestión</h4>
+                    <h3>Dashboard Ejecutivo de Ventas & Clientes VBA Pro</h3>
+                    <p>
+                      Una demostración práctica de ingeniería de software aplicada a la productividad: formularios rápidos, KPIs comerciales automáticos y segmentación de clientes sin depender de suscripciones recurrentes.
+                    </p>
+                    <div className="spotlight-badges">
+                      <span className="badge-tag">✓ Macros VBA Optimizadas</span>
+                      <span className="badge-tag">✓ Sin Cuotas Mensuales</span>
+                      <span className="badge-tag">✓ Soporte Técnico Directo</span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                      <button 
+                        className="btn-primary-glow"
+                        onClick={() => setSelectedTemplate(templates[0])}
+                      >
+                        <Download size={18} />
+                        <span>Descargar / Adquirir</span>
+                      </button>
+                      <button 
+                        className="btn-secondary-glass"
+                        onClick={() => setActiveTab('tienda')}
+                      >
+                        <span>Ver Catálogo Completo</span>
+                        <ArrowRight size={18} />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="spotlight-preview">
+                    <img 
+                      src="/assets/preview_dashboard_ventas.jpg" 
+                      alt="Preview Dashboard Ventas VBA DR. BYTE" 
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {/* ----------------------------------------------------------------------- */}
+        {/* PESTAÑA: SERVICIOS IT DETALLADOS */}
+        {/* ----------------------------------------------------------------------- */}
+        {activeTab === 'servicios' && (
+          <div className="section-wrapper">
+            <div className="lead-container">
               <div className="section-header-centered">
-                <span className="section-tag">Capacidades Técnicas</span>
-                <h3 className="section-title">Especialización de Extremo a Extremo</h3>
-                <p className="section-subtitle">
-                  Infraestructuras de red corporativas, ciberseguridad avanzada y herramientas de productividad con IA.
+                <div className="lead-tagline">
+                  <Wrench size={16} />
+                  <span>CATÁLOGO COMPLETO DE SERVICIOS</span>
+                </div>
+                <h2 className="lead-main-title" style={{ fontSize: '2.4rem', textAlign: 'center' }}>
+                  Servicios Técnicos & <span className="highlight-cyan">Soporte Informático</span>
+                </h2>
+                <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto 2.5rem' }}>
+                  Soluciones directas, transparentes y respaldadas por más de 15 años de experiencia técnica en sistemas, redes y ciberseguridad.
                 </p>
               </div>
 
-              <div className="tech-grid-cards">
-                <div className="tech-card">
-                  <div className="card-icon-box">
-                    <ShieldCheck size={26} />
-                  </div>
-                  <h3>Ciberseguridad & Firewalls</h3>
-                  <p>
-                    Implementación de arquitecturas perimetrales bajo filosofía <em>Default Deny</em>, inspección de estado, políticas de zonas seguras y VPNs IPsec/SSL en equipos Palo Alto y Fortinet.
-                  </p>
+              <div className="services-grid-cards">
+                <div className="service-detail-card">
+                  <div className="lead-icon-circle"><Laptop size={26} /></div>
+                  <h3>Reparación y Mantenimiento de Hardware</h3>
+                  <p>Mantenimiento preventivo y correctivo para ordenadores portátiles, torres de sobremesa y estaciones de trabajo. Diagnóstico de componentes dañados, sustitución de fuentes, limpieza interna y pasta térmica.</p>
+                  <button className="btn-secondary-glass" style={{ width: '100%', marginTop: '1rem', justifyContent: 'center' }} onClick={() => handleOpenContact('Consulta: Reparación de Hardware')}>Solicitar Reparación</button>
                 </div>
 
-                <div className="tech-card">
-                  <div className="card-icon-box">
-                    <Cpu size={26} />
-                  </div>
-                  <h3>Automatización con IA</h3>
-                  <p>
-                    Diseño e integración de agentes y asistentes locales que procesan información técnica, analizan datos complejos y optimizan procesos empresariales repetitivos.
-                  </p>
+                <div className="service-detail-card">
+                  <div className="lead-icon-circle"><Network size={26} /></div>
+                  <h3>Instalación y Auditoría de Redes</h3>
+                  <p>Cableado estructurado de categoría Cat6/Cat6A, armarios rack, conmutadores gestionados Cisco, routers empresariales y cobertura Wi-Fi profesional de alta densidad.</p>
+                  <button className="btn-secondary-glass" style={{ width: '100%', marginTop: '1rem', justifyContent: 'center' }} onClick={() => handleOpenContact('Consulta: Auditoría de Red')}>Pedir Auditoría de Red</button>
                 </div>
 
-                <div className="tech-card">
-                  <div className="card-icon-box">
-                    <Layers size={26} />
-                  </div>
-                  <h3>Dashboards & Macros VBA</h3>
-                  <p>
-                    Cuadros de mando interactivos que sincronizan datos en tiempo real, con formularios protegidos, gráficos dinámicos y total independencia de licencias cloud.
-                  </p>
+                <div className="service-detail-card">
+                  <div className="lead-icon-circle"><ShieldCheck size={26} /></div>
+                  <h3>Ciberseguridad y Firewalls Perimetrales</h3>
+                  <p>Implantación de políticas Zero Trust (Default Deny) en cortafuegos Fortinet y Palo Alto. Protección contra intrusiones, filtrado de tráfico malicioso y VPNs corporativas para teletrabajo seguro.</p>
+                  <button className="btn-secondary-glass" style={{ width: '100%', marginTop: '1rem', justifyContent: 'center' }} onClick={() => handleOpenContact('Consulta: Ciberseguridad')}>Proteger mi Empresa</button>
                 </div>
 
-                <div className="tech-card">
-                  <div className="card-icon-box">
-                    <Activity size={26} />
-                  </div>
-                  <h3>Redes Cisco & VLSM</h3>
-                  <p>
-                    Planificación de direccionamiento IP con máscaras de longitud variable, segmentación por VLANs, conmutación L2/L3 y documentación técnica para auditorías.
-                  </p>
+                <div className="service-detail-card">
+                  <div className="lead-icon-circle"><Cpu size={26} /></div>
+                  <h3>Automatización y Software de Gestión</h3>
+                  <p>Creación de herramientas a medida en Microsoft Excel mediante macros VBA deterministas y algoritmos sin dependencias de la nube ni cuotas mensuales recurrentes.</p>
+                  <button className="btn-secondary-glass" style={{ width: '100%', marginTop: '1rem', justifyContent: 'center' }} onClick={() => handleOpenContact('Consulta: Automatización')}>Solicitar Desarrollo</button>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
 
-              {/* Banner Destacado de Plantilla Estrella */}
-              <div className="spotlight-banner">
-                <div className="spotlight-text">
-                  <h4>Plantilla Recomendada</h4>
-                  <h3>Dashboard Ejecutivo de Ventas & Clientes VBA Pro</h3>
+        {/* ----------------------------------------------------------------------- */}
+        {/* PESTAÑA: ACADEMIA & FORMACIÓN TÉCNICA (SEPARADA DE LA PORTADA) */}
+        {/* ----------------------------------------------------------------------- */}
+        {activeTab === 'academia' && (
+          <div className="section-wrapper">
+            <div className="lead-container">
+              <div className="section-header-centered">
+                <div className="lead-tagline">
+                  <GraduationCap size={16} />
+                  <span>ACADEMIA DR. BYTE • FORMACIÓN TÉCNICA</span>
+                </div>
+                <h2 className="lead-main-title" style={{ fontSize: '2.4rem', textAlign: 'center' }}>
+                  Capacitación Práctica en <span className="highlight-cyan">Excel</span> & <span className="highlight-gold">Redes Corporativas</span>
+                </h2>
+                <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto 2.5rem' }}>
+                  Metodología directa basada en ejercicios y problemas reales del mercado laboral, sin teoría superflua ni simplificaciones.
+                </p>
+              </div>
+
+              <div className="services-grid-cards">
+                {/* CURSO GRATUITO LEAD MAGNET */}
+                <div className="service-detail-card" style={{ borderColor: 'var(--drbyte-cyan)', boxShadow: '0 8px 30px rgba(14, 165, 233, 0.12)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <div className="lead-icon-circle"><FileSpreadsheet size={26} /></div>
+                    <span className="lead-badge-free">100% GRATUITO</span>
+                  </div>
+                  <h3>Curso Completo de Excel Clásico</h3>
                   <p>
-                    La herramienta definitiva para empresas y autónomos. Formularios integrados con macros para altas instantáneas, 
-                    tarjetas KPI automáticas, segmentación Grandes Cuentas vs PYMES y filtros interactivos con botón «MOSTRAR TODOS».
+                    Aprende desde cero los fundamentos indispensables: referencias relativas y absolutas, fórmulas esenciales, formato condicional y gestión de datos.
                   </p>
-
-                  <div className="spotlight-badges">
-                    <span className="badge-tag">✓ Macros VBA Automatizadas</span>
-                    <span className="badge-tag">✓ Logotipo Blindado DR. BYTE</span>
-                    <span className="badge-tag">✓ Sin Cuotas Mensuales</span>
-                    <span className="badge-tag">✓ Soporte Directo Incluido</span>
-                  </div>
-
-                  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                    <button 
-                      className="btn-primary-glow"
-                      onClick={() => {
-                        setSelectedTemplate(templates[0]);
-                      }}
-                    >
-                      <Download size={18} />
-                      <span>Descargar / Adquirir</span>
-                    </button>
-                    <button 
-                      className="btn-secondary-glass"
-                      onClick={() => setActiveTab('tienda')}
-                    >
-                      <span>Ver en la Tienda</span>
-                      <ArrowRight size={18} />
-                    </button>
-                  </div>
+                  <ul className="service-bullet-list">
+                    <li><Check size={16} className="check-cyan" /> <strong>Manual Oficial en PDF (8 MB):</strong> Teoría y capturas paso a paso.</li>
+                    <li><Check size={16} className="check-cyan" /> <strong>Hoja de Prácticas (.xlsx):</strong> Ejercicios guiados para tu ordenador.</li>
+                    <li><Check size={16} className="check-cyan" /> Descarga libre e inmediata sin cuotas.</li>
+                  </ul>
+                  <button 
+                    className="lead-btn-submit"
+                    style={{ marginTop: '1.5rem', width: '100%', justifyContent: 'center' }}
+                    onClick={() => {
+                      window.history.pushState({}, '', '/curso-gratis');
+                      setActiveTab('curso-gratis');
+                    }}
+                  >
+                    <Download size={18} />
+                    <span>ACCEDER AL CURSO GRATIS</span>
+                    <ArrowRight size={18} />
+                  </button>
                 </div>
 
-                <div className="spotlight-preview">
-                  <img 
-                    src="/assets/preview_dashboard_ventas.jpg" 
-                    alt="Preview Dashboard Ventas VBA DR. BYTE" 
-                  />
+                {/* PRÓXIMOS NIVELES EXCEL 365 */}
+                <div className="service-detail-card">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <div className="lead-icon-circle"><Cpu size={26} /></div>
+                    <span style={{ background: '#f1f5f9', color: '#475569', fontSize: '0.75rem', fontWeight: '800', padding: '0.3rem 0.75rem', borderRadius: '9999px', border: '1px solid #cbd5e1' }}>PRÓXIMAMENTE</span>
+                  </div>
+                  <h3>Excel 365: Intermedio & Avanzado Pro</h3>
+                  <p>
+                    El salto al nivel corporativo: matrices dinámicas con funciones nativas de Microsoft 365 (FILTRAR, UNICOS, BUSCARX, ORDENAR) y cuadros de mando de alto impacto.
+                  </p>
+                  <ul className="service-bullet-list">
+                    <li><Check size={16} className="check-cyan" /> Dashboards interactivos ejecutivos con segmentadores</li>
+                    <li><Check size={16} className="check-cyan" /> Automatización y lógica determinista avanzada</li>
+                    <li><Check size={16} className="check-cyan" /> Cuaderno de ejercicios reales y evaluación práctica</li>
+                  </ul>
+                  <button 
+                    className="btn-secondary-glass"
+                    style={{ marginTop: '1.5rem', width: '100%', justifyContent: 'center' }}
+                    onClick={() => handleOpenContact('Interés en Cursos Excel 365 Intermedio/Avanzado')}
+                  >
+                    <span>Solicitar Información / Reserva</span>
+                    <ArrowRight size={18} />
+                  </button>
                 </div>
               </div>
-            </section>
+            </div>
           </div>
         )}
 
