@@ -17,16 +17,25 @@ import {
   ExternalLink,
   Calendar,
   Layers,
-  Terminal,
   Award
 } from 'lucide-react';
 import CookieBanner from './CookieBanner';
 import LegalModal from './LegalModal';
+import LandingCursoGratis from './LandingCursoGratis';
 import './App.css';
 
 function App() {
-  // Las 4 Pestañas Solicitadas: 'inicio' | 'tienda' | 'noticias' | 'quien-es'
-  const [activeTab, setActiveTab] = useState('inicio');
+  // Detección automática de la ruta /curso-gratis o #curso-gratis
+  const isDirectLeadUrl = () => {
+    if (typeof window === 'undefined') return false;
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    const search = window.location.search.toLowerCase();
+    return path.includes('curso-gratis') || hash.includes('curso-gratis') || search.includes('curso-gratis');
+  };
+
+  // 'inicio' | 'tienda' | 'noticias' | 'quien-es' | 'curso-gratis'
+  const [activeTab, setActiveTab] = useState(() => isDirectLeadUrl() ? 'curso-gratis' : 'inicio');
 
   // Modales
   const [showContactModal, setShowContactModal] = useState(false);
@@ -188,6 +197,27 @@ function App() {
       t.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCat && matchesQ;
   });
+
+  // SI LA PESTAÑA O RUTA ES 'curso-gratis', RENDERIZAR LA LANDING DE CAPTACIÓN EN AISLAMIENTO TOTAL
+  if (activeTab === 'curso-gratis') {
+    return (
+      <>
+        <LandingCursoGratis 
+          onOpenLegal={(docKey) => setActiveLegalDoc(docKey)}
+          onGoToMainWeb={() => {
+            window.history.pushState({}, '', '/');
+            setActiveTab('inicio');
+          }}
+        />
+        <CookieBanner onOpenLegal={(docKey) => setActiveLegalDoc(docKey)} />
+        <LegalModal 
+          activeLegalDoc={activeLegalDoc} 
+          onClose={() => setActiveLegalDoc(null)} 
+          onSelectDoc={(docKey) => setActiveLegalDoc(docKey)}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="portfolio-app">

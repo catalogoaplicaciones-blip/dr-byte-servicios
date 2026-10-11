@@ -8,27 +8,38 @@
   --bg-card-solid: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.9);
   
-  /* Acentos Tecnológicos Vibrantes */
-  --drbyte-cyan: #0284c7;
-  --drbyte-cyan-glow: rgba(2, 132, 199, 0.15);
-  --drbyte-blue: #2563eb;
-  --drbyte-indigo: #4f46e5;
-  --drbyte-indigo-glow: rgba(79, 70, 229, 0.12);
-  --drbyte-emerald: #059669;
-  --drbyte-amber: #d97706;
-  --drbyte-purple: #7c3aed;
+  /* Paleta Oficial DR. BYTE (Extraída del Banner Oficial) */
+  --drbyte-navy: #0B2545;            /* Azul marino oscuro del logo y fondos */
+  --drbyte-navy-dark: #07172C;       /* Azul noche ultra profundo */
+  --drbyte-navy-light: #133966;      /* Azul marino medio para tarjetas/bordes */
+  
+  --drbyte-cyan: #0EA5E9;            /* Cian eléctrico del degradado BYTE */
+  --drbyte-cyan-bright: #38BDF8;     /* Cian brillante de realce */
+  --drbyte-cyan-glow: rgba(14, 165, 233, 0.2);
+  
+  --drbyte-blue: #0070F3;            /* Azul corporativo saturado */
+  --drbyte-blue-dark: #0050B3;       /* Azul intenso de soporte */
+  
+  --drbyte-gold: #E6A61A;            /* Dorado / Ocre de «desde canarias» */
+  --drbyte-gold-light: #F59E0B;      /* Ámbar enérgico para insignias y acentos */
+  --drbyte-gold-glow: rgba(230, 166, 26, 0.2);
+
+  --drbyte-indigo: #2563EB;
+  --drbyte-emerald: #107C41;         /* Verde oficial Excel */
+  --drbyte-amber: #E6A61A;
+  --drbyte-purple: #7C3AED;
 
   /* Textos Nítidos con Máximo Contraste */
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --text-highlight: #0284c7;
+  --text-primary: #0B2545;           /* Azul marino corporativo para máxima legibilidad */
+  --text-secondary: #334E68;
+  --text-muted: #627D98;
+  --text-highlight: #0EA5E9;
   
   /* Bordes Limpios y Definidos */
-  --border-subtle: #f1f5f9;
-  --border-card: #e2e8f0;
-  --border-hover: #0284c7;
-  --border-glow: 0 0 20px rgba(2, 132, 199, 0.12);
+  --border-subtle: #F0F4F8;
+  --border-card: #D9E2EC;
+  --border-hover: #0EA5E9;
+  --border-glow: 0 0 20px rgba(14, 165, 233, 0.18);
 
   /* Sombras Suaves Nivel SaaS */
   --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.06);
