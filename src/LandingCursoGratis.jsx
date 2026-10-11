@@ -80,12 +80,12 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
               </div>
 
               <h1 className="lead-main-title">
-                Domina <span className="highlight-cyan">Excel 365</span> sin rodeos: <br />
-                <span className="highlight-gold">Guía Maestra & Prácticas Reales</span>
+                Curso Completo de <span className="highlight-cyan">Excel Clásico</span>: <br />
+                <span className="highlight-gold">Manual Oficial & Cuaderno de Prácticas</span>
               </h1>
 
               <p className="lead-lead-paragraph">
-                Aprende las fórmulas modernas que sustituyen al 90% de los métodos antiguos. Despídete de <code className="lead-code-old">BUSCARV</code> y descubre cómo automatizar reportes con una sola función.
+                Aprende desde cero y domina las bases de Excel que toda empresa exige: referencias relativas y absolutas, fórmulas esenciales, formato condicional y gestión de datos sin errores.
               </p>
 
               {/* Banner visual Dr. Byte */}
@@ -99,30 +99,30 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
 
               {/* Qué incluye el material gratuito */}
               <div className="lead-benefits-box">
-                <h3 className="lead-benefits-title">¿Qué recibirás inmediatamente en tu correo?</h3>
+                <h3 className="lead-benefits-title">¿Qué recibirás inmediatamente al registrarte?</h3>
                 <ul className="lead-benefits-list">
                   <li>
                     <CheckCircle2 size={20} className="check-icon-cyan" />
                     <div>
-                      <strong>Manual Técnico Oficial en PDF:</strong> Sintaxis, comparativa español/inglés y trucos de atajos para teclado.
+                      <strong>Manual Oficial Completo (PDF 8 MB):</strong> Explicaciones visuales paso a paso, ejercicios resueltos y casos prácticos de empresa.
                     </div>
                   </li>
                   <li>
                     <CheckCircle2 size={20} className="check-icon-cyan" />
                     <div>
-                      <strong>Plantilla de Prácticas `.xlsx`:</strong> Archivo descargable con los ejercicios paso a paso y soluciones explicadas.
+                      <strong>Pack de Prácticas y Plantillas (ZIP):</strong> Archivos `.xlsx` y presentaciones autoejecutables listas para practicar.
                     </div>
                   </li>
                   <li>
                     <CheckCircle2 size={20} className="check-icon-cyan" />
                     <div>
-                      <strong>Vídeo Masterclass en Alta Definición:</strong> Explicación pausada, con puntero claro y sin ruidos de clicks.
+                      <strong>Vídeos Explicativos de Dr. Byte:</strong> Didáctica clara, ritmo pausado y sin ruidos molestos.
                     </div>
                   </li>
                   <li>
                     <CheckCircle2 size={20} className="check-icon-cyan" />
                     <div>
-                      <strong>Resolución de Dudas Directa:</strong> Canal directo con el profesor Manuel Aragonés vía WhatsApp.
+                      <strong>Soporte Directo por WhatsApp:</strong> Asistencia del profesor Manuel Aragonés (+34 607 35 39 10).
                     </div>
                   </li>
                 </ul>
@@ -224,14 +224,25 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
                     </p>
 
                     <div className="lead-success-actions">
-                      {/* Descarga Directa Inmediata */}
+                      {/* Descarga Directa del Manual PDF */}
                       <a 
-                        href="/templates/Guia_Didactica_Excel_365_DrByte.pdf" 
-                        download="Guia_Didactica_Excel_365_DrByte.pdf"
+                        href="/templates/Curso_Excel_Clasico_Completo.pdf" 
+                        download="Curso_Excel_Clasico_Completo.pdf"
                         className="lead-btn-download-direct"
                       >
                         <Download size={20} />
-                        <span>DESCARGAR GUÍA EN PDF AHORA</span>
+                        <span>DESCARGAR MANUAL COMPLETO (PDF 8 MB)</span>
+                      </a>
+
+                      {/* Descarga del Pack de Prácticas ZIP */}
+                      <a 
+                        href="/templates/Pack_Descargable_Curso_Excel_Clasico.zip" 
+                        download="Pack_Descargable_Curso_Excel_Clasico.zip"
+                        className="lead-btn-download-direct"
+                        style={{ background: 'linear-gradient(135deg, #e6a61a, #f59e0b)', color: '#0b2545' }}
+                      >
+                        <Download size={20} />
+                        <span>DESCARGAR PACK DE PRÁCTICAS (.ZIP)</span>
                       </a>
 
                       {/* Confirmar por WhatsApp con Manuel */}
@@ -242,7 +253,7 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
                         className="lead-btn-whatsapp"
                       >
                         <MessageCircle size={20} />
-                        <span>Pedir ejercicios también por WhatsApp</span>
+                        <span>Escribir a Manuel por WhatsApp para dudas</span>
                       </a>
                     </div>
 
