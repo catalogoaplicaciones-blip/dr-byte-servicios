@@ -16,6 +16,10 @@ import {
 } from 'lucide-react';
 import './LandingCursoGratis.css';
 
+// URL de tu Web App de Google Sheets (Google Drive)
+// Cuando crees el script en Google Drive, pegaremos la URL aquí:
+const GOOGLE_SHEETS_WEBAPP_URL = '';
+
 export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
@@ -29,7 +33,25 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
 
     setLoading(true);
 
-    // Guardar lead de forma inmediata
+    // 1. Enviar automáticamente a tu hoja de cálculo en Google Drive si está configurada
+    if (GOOGLE_SHEETS_WEBAPP_URL) {
+      try {
+        fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fecha: new Date().toLocaleString('es-ES'),
+            nombre: nombre.trim() || 'No especificado',
+            email: email.trim()
+          })
+        }).catch(err => console.warn('Aviso Sheets:', err));
+      } catch (err) {
+        console.warn('Aviso al conectar con Google Sheets:', err);
+      }
+    }
+
+    // 2. Guardar también como respaldo local
     try {
       const leads = JSON.parse(localStorage.getItem('drbyte_leads') || '[]');
       leads.push({ 
