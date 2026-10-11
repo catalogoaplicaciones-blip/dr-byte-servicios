@@ -255,17 +255,17 @@ function App() {
             </div>
             <div className="brand-titles">
               <h1>DR. BYTE<span className="dot-tech">.es</span></h1>
-              <span className="brand-sub">Manuel Aragonés • <span className="brand-sub-gold">Desde Canarias</span></span>
+              <span className="brand-sub">Servicio Técnico • <span className="brand-sub-gold">Canarias</span></span>
             </div>
           </div>
 
-          {/* Selector de Pestañas con Academia Separada */}
+          {/* Selector de Pestañas en 1 Sola Línea */}
           <nav className="nav-tabs-group" aria-label="Navegación principal">
             <button 
               className={`tab-btn ${activeTab === 'inicio' ? 'active' : ''}`}
               onClick={() => setActiveTab('inicio')}
             >
-              <Home size={18} />
+              <Home size={15} />
               <span>Inicio</span>
             </button>
 
@@ -273,16 +273,16 @@ function App() {
               className={`tab-btn ${activeTab === 'servicios' ? 'active' : ''}`}
               onClick={() => setActiveTab('servicios')}
             >
-              <Wrench size={18} />
-              <span>Servicios IT</span>
+              <Wrench size={15} />
+              <span>Servicios</span>
             </button>
 
             <button 
               className={`tab-btn ${activeTab === 'tienda' ? 'active' : ''}`}
               onClick={() => setActiveTab('tienda')}
             >
-              <FileSpreadsheet size={18} />
-              <span>Tienda Excel</span>
+              <FileSpreadsheet size={15} />
+              <span>Tienda</span>
               <span className="tab-counter-badge">{templates.length}</span>
             </button>
 
@@ -290,7 +290,7 @@ function App() {
               className={`tab-btn ${activeTab === 'academia' ? 'active' : ''}`}
               onClick={() => setActiveTab('academia')}
             >
-              <GraduationCap size={18} />
+              <GraduationCap size={15} />
               <span>Academia</span>
             </button>
 
@@ -298,7 +298,7 @@ function App() {
               className={`tab-btn ${activeTab === 'noticias' ? 'active' : ''}`}
               onClick={() => setActiveTab('noticias')}
             >
-              <Newspaper size={18} />
+              <Newspaper size={15} />
               <span>Noticias</span>
             </button>
 
@@ -306,8 +306,8 @@ function App() {
               className={`tab-btn ${activeTab === 'quien-es' ? 'active' : ''}`}
               onClick={() => setActiveTab('quien-es')}
             >
-              <UserCheck size={18} />
-              <span>Quién es Dr. Byte</span>
+              <UserCheck size={15} />
+              <span>Dr. Byte</span>
             </button>
           </nav>
 
@@ -316,9 +316,10 @@ function App() {
             <button 
               className="btn-contact-quick"
               onClick={() => handleOpenContact('Solicitud de Asistencia Inmediata')}
+              title="Llamar o solicitar asistencia técnica directa"
             >
-              <Phone size={16} />
-              <span>Asistencia: +34 607 35 39 10</span>
+              <Phone size={14} />
+              <span className="btn-contact-text">+34 607 35 39 10</span>
             </button>
           </div>
         </div>
@@ -944,7 +945,7 @@ function App() {
                   </a>
                   <div className="contact-row-item">
                     <Terminal size={17} color="var(--drbyte-cyan)" />
-                    <span>Madrid & Cobertura Remota</span>
+                    <span>Canarias (Presencial) & Soporte Remoto</span>
                   </div>
                 </div>
 
