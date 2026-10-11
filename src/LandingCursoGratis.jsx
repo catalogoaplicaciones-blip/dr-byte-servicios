@@ -28,16 +28,24 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
     if (!email) return;
 
     setLoading(true);
-    // Simular registro seguro inmediato y almacenamiento local
-    setTimeout(() => {
-      // Guardar lead localmente
-      const leads = JSON.parse(localStorage.getItem('drbyte_leads') || '[]');
-      leads.push({ nombre, email, fecha: new Date().toISOString() });
-      localStorage.setItem('drbyte_leads', JSON.stringify(leads));
 
+    // Guardar lead de forma inmediata
+    try {
+      const leads = JSON.parse(localStorage.getItem('drbyte_leads') || '[]');
+      leads.push({ 
+        nombre: nombre.trim() || 'No especificado', 
+        email: email.trim(), 
+        fecha: new Date().toISOString() 
+      });
+      localStorage.setItem('drbyte_leads', JSON.stringify(leads));
+    } catch (err) {
+      console.warn("Storage no disponible:", err);
+    }
+
+    setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-    }, 600);
+    }, 400);
   };
 
   return (
