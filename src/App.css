@@ -51,7 +51,7 @@
 .brand-titles h1 {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--drbyte-navy);
   display: flex;
   align-items: center;
   gap: 0.2rem;
@@ -66,8 +66,14 @@
   font-size: 0.68rem;
   font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.brand-sub-gold {
+  color: var(--drbyte-gold);
+  font-weight: 800;
+  text-shadow: 0 0 12px var(--drbyte-gold-glow);
 }
 
 /* 4 PESTAÑAS PRINCIPALES */
@@ -75,7 +81,7 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  background: #f1f5f9;
+  background: #F0F4F8;
   padding: 0.35rem;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-card);
@@ -87,7 +93,7 @@
   gap: 0.5rem;
   padding: 0.55rem 1.15rem;
   border-radius: var(--radius-full);
-  color: #475569;
+  color: var(--text-secondary);
   font-size: 0.88rem;
   font-weight: 600;
   transition: var(--transition-fast);
@@ -95,14 +101,15 @@
 }
 
 .tab-btn:hover {
-  color: #0f172a;
-  background: rgba(255, 255, 255, 0.8);
+  color: var(--drbyte-navy);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .tab-btn.active {
   color: #ffffff;
-  background: #0f172a;
-  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.2);
+  background: var(--drbyte-navy);
+  box-shadow: 0 3px 12px rgba(11, 37, 69, 0.35);
+  border: 1px solid var(--drbyte-navy-light);
 }
 
 .tab-counter-badge {
@@ -117,7 +124,39 @@
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
+}
+
+/* Botón Píldora Curso Gratis con Dorado Oficial */
+.btn-course-free-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.05rem;
+  border-radius: var(--radius-full);
+  background: #FFFBEB;
+  border: 1.5px solid var(--drbyte-gold);
+  color: #92400E;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: 0 2px 8px var(--drbyte-gold-glow);
+}
+
+.btn-course-free-pill:hover {
+  background: #FEF3C7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(230, 166, 26, 0.35);
+}
+
+.pill-free-badge {
+  background: var(--drbyte-gold);
+  color: #07172C;
+  font-size: 0.64rem;
+  font-weight: 900;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-full);
 }
 
 .btn-contact-quick {
@@ -126,25 +165,26 @@
   gap: 0.5rem;
   padding: 0.55rem 1.25rem;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--drbyte-cyan), var(--drbyte-blue));
+  background: linear-gradient(135deg, var(--drbyte-navy) 0%, var(--drbyte-cyan) 100%);
   color: #ffffff;
   font-weight: 700;
   font-size: 0.88rem;
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28);
+  box-shadow: 0 4px 14px rgba(11, 37, 69, 0.25);
+  border: 1px solid rgba(14, 165, 233, 0.4);
   transition: var(--transition-fast);
 }
 
 .btn-contact-quick:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
-  filter: brightness(1.06);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.45);
+  filter: brightness(1.08);
 }
 
 /* ==========================================================================
-   2. HERO & SECCIÓN INICIO (LUMINOSO)
+   2. HERO & SECCIÓN INICIO (CON BANNER OFICIAL Y PALETA CORPORATIVA)
    ========================================================================== */
 .hero-tech-section {
-  padding: 5rem 1.5rem 3.5rem;
+  padding: 3.5rem 1.5rem 3.5rem;
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
@@ -155,27 +195,50 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.45rem 1.15rem;
+  padding: 0.45rem 1.25rem;
   border-radius: var(--radius-full);
-  background: #e0f2fe;
-  border: 1px solid #bae6fd;
-  color: #0369a1;
-  font-size: 0.84rem;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.28);
+  color: var(--drbyte-navy);
+  font-size: 0.85rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.1);
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.12);
+}
+
+/* BANNER OFICIAL DR. BYTE SHOWCASE */
+.hero-official-banner-wrap {
+  max-width: 860px;
+  margin: 0 auto 2.75rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid var(--drbyte-navy-light);
+  box-shadow: 0 16px 45px rgba(11, 37, 69, 0.2), 0 0 25px rgba(14, 165, 233, 0.25);
+  background: var(--drbyte-navy);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-official-banner-wrap:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(11, 37, 69, 0.28), 0 0 35px rgba(14, 165, 233, 0.4);
+}
+
+.hero-official-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .hero-title-main {
-  font-size: 3.35rem;
+  font-size: 3.2rem;
   line-height: 1.15;
   margin-bottom: 1.5rem;
-  color: #0f172a;
+  color: var(--drbyte-navy);
   font-weight: 800;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
+  background: linear-gradient(135deg, var(--drbyte-cyan) 0%, #0070F3 50%, var(--drbyte-navy) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -203,18 +266,18 @@
   gap: 0.6rem;
   padding: 0.85rem 1.85rem;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--drbyte-cyan), var(--drbyte-blue));
+  background: linear-gradient(135deg, var(--drbyte-cyan), #0070F3);
   color: #ffffff;
   font-weight: 700;
   font-size: 1rem;
-  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.35);
+  box-shadow: 0 4px 18px rgba(14, 165, 233, 0.38);
   transition: var(--transition-fast);
 }
 
 .btn-primary-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(2, 132, 199, 0.5);
-  filter: brightness(1.05);
+  box-shadow: 0 6px 24px rgba(14, 165, 233, 0.55);
+  filter: brightness(1.08);
 }
 
 .btn-secondary-glass {
@@ -357,22 +420,23 @@
   flex: 1;
 }
 
-/* BANNER DESTACADO DE PLANTILLA ESTRELLA */
+/* BANNER DESTACADO DE PLANTILLA ESTRELLA (PALETA OFICIAL DR. BYTE) */
 .spotlight-banner {
-  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 60%, #e0f2fe 100%);
-  border: 1px solid #bae6fd;
+  background: linear-gradient(135deg, var(--drbyte-navy) 0%, var(--drbyte-navy-dark) 100%);
+  border: 1.5px solid var(--drbyte-navy-light);
   border-radius: var(--radius-xl);
   padding: 2.75rem;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 2.5rem;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.08);
+  box-shadow: 0 16px 45px rgba(7, 23, 44, 0.35);
   margin-top: 2rem;
+  color: #ffffff;
 }
 
 .spotlight-text h4 {
-  color: var(--drbyte-cyan);
+  color: var(--drbyte-gold);
   font-size: 0.88rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -382,12 +446,12 @@
 
 .spotlight-text h3 {
   font-size: 1.95rem;
-  color: #0f172a;
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
 .spotlight-text p {
-  color: var(--text-secondary);
+  color: #D9E2EC;
   font-size: 1rem;
   line-height: 1.65;
   margin-bottom: 1.5rem;
@@ -401,14 +465,14 @@
 }
 
 .badge-tag {
-  background: #ffffff;
-  color: #0f172a;
-  padding: 0.3rem 0.85rem;
+  background: rgba(230, 166, 26, 0.15);
+  color: #FCD34D;
+  padding: 0.35rem 0.9rem;
   border-radius: var(--radius-full);
   font-size: 0.82rem;
-  font-weight: 600;
-  border: 1px solid #cbd5e1;
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
+  font-weight: 700;
+  border: 1px solid rgba(230, 166, 26, 0.35);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .spotlight-preview {
@@ -964,12 +1028,13 @@
   box-shadow: 0 0 10px rgba(2, 132, 199, 0.15);
 }
 
-/* FOOTER LUMINOSO Y PROFESIONAL */
+/* FOOTER CORPORATIVO OFICIAL DR. BYTE */
 .tech-footer {
   margin-top: auto;
-  background: #0f172a;
-  color: #94a3b8;
-  padding: 3rem 1.5rem 2.5rem;
+  background: var(--drbyte-navy-dark);
+  color: #9FB3C8;
+  padding: 3.5rem 1.5rem 2.5rem;
+  border-top: 2px solid var(--drbyte-navy-light);
 }
 
 .footer-container {

@@ -237,7 +237,7 @@ function App() {
       {/* ========================================================================= */}
       <header className="drbyte-header">
         <div className="header-container">
-          {/* Logo & Marca */}
+          {/* Logo & Marca Oficial */}
           <div 
             className="brand-wrapper" 
             onClick={() => setActiveTab('inicio')}
@@ -248,7 +248,7 @@ function App() {
             </div>
             <div className="brand-titles">
               <h1>DR. BYTE<span className="dot-tech">.es</span></h1>
-              <span className="brand-sub">Sistemas, Redes & IA</span>
+              <span className="brand-sub">Manuel Aragonés • <span className="brand-sub-gold">Desde Canarias</span></span>
             </div>
           </div>
 
@@ -288,8 +288,21 @@ function App() {
             </button>
           </nav>
 
-          {/* Acción Rápida de Contacto */}
+          {/* Acción Rápida de Contacto y Enlace a Curso Gratis */}
           <div className="header-actions">
+            <button 
+              className="btn-course-free-pill"
+              onClick={() => {
+                window.history.pushState({}, '', '/curso-gratis');
+                setActiveTab('curso-gratis');
+              }}
+              title="Acceder al Curso Gratuito de Excel"
+            >
+              <Sparkles size={15} />
+              <span>Curso Gratis</span>
+              <span className="pill-free-badge">NUEVO</span>
+            </button>
+
             <button 
               className="btn-contact-quick"
               onClick={() => handleOpenContact('Solicitud de Asistencia Inmediata')}
@@ -311,11 +324,20 @@ function App() {
         {/* ----------------------------------------------------------------------- */}
         {activeTab === 'inicio' && (
           <div>
-            {/* Hero Principal */}
+            {/* Hero Principal con Banner Oficial */}
             <section className="hero-tech-section">
               <div className="hero-pill-badge">
                 <Sparkles size={15} />
                 <span>Ingeniería Informática, Ciberseguridad & Automatización Inteligente</span>
+              </div>
+
+              {/* BANNER VISUAL OFICIAL DR. BYTE (DEL LOGO Y VÍDEOS) */}
+              <div className="hero-official-banner-wrap">
+                <img 
+                  src="/assets/drbyte_banner.png" 
+                  alt="DR. BYTE - Manuel Aragonés Informática - Tu academia online desde Canarias" 
+                  className="hero-official-banner-img"
+                />
               </div>
 
               <h2 className="hero-title-main">
