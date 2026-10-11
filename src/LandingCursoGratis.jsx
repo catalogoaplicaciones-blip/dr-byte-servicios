@@ -71,18 +71,45 @@ export default function LandingCursoGratis({ onOpenLegal, onGoToMainWeb }) {
 
   return (
     <div className="lead-landing-page">
-      {/* 1. BARRA SUPERIOR MINIMALISTA (SIN MENÚ DISTRACTOR) */}
+      {/* 1. BARRA SUPERIOR CON ACCESO DIRECTO A LA WEB PRINCIPAL */}
       <header className="lead-top-bar">
         <div className="lead-top-container">
-          <div className="lead-brand-pill">
+          <div 
+            className="lead-brand-pill" 
+            onClick={onGoToMainWeb} 
+            style={{ cursor: 'pointer' }}
+            title="Ir a la portada de DR. BYTE"
+          >
             <img src="/assets/dr_byte_logo.jpg" alt="DR. BYTE Logo" className="lead-logo-mini" />
             <div className="lead-brand-text">
               <span className="lead-brand-name">DR. BYTE</span>
               <span className="lead-brand-sub">Tu academia online desde Canarias</span>
             </div>
           </div>
-          <div className="lead-top-right">
+          <div className="lead-top-right" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <span className="lead-badge-free">100% GRATUITO</span>
+            <button 
+              type="button" 
+              onClick={onGoToMainWeb} 
+              style={{
+                background: 'var(--drbyte-navy)',
+                color: '#ffffff',
+                border: 'none',
+                padding: '0.45rem 0.9rem',
+                borderRadius: '8px',
+                fontSize: '0.82rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                transition: 'all 0.2s ease'
+              }}
+              title="Volver a la portada de DR. BYTE"
+            >
+              <span>Web Principal</span>
+              <ArrowRight size={14} />
+            </button>
           </div>
         </div>
       </header>

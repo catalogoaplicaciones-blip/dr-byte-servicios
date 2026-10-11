@@ -17,7 +17,9 @@ import {
   ExternalLink,
   Calendar,
   Layers,
-  Award
+  Award,
+  Activity,
+  Terminal
 } from 'lucide-react';
 import CookieBanner from './CookieBanner';
 import LegalModal from './LegalModal';
@@ -36,6 +38,15 @@ function App() {
 
   // 'inicio' | 'tienda' | 'noticias' | 'quien-es' | 'curso-gratis'
   const [activeTab, setActiveTab] = useState(() => isDirectLeadUrl() ? 'curso-gratis' : 'inicio');
+
+  // Sincronizar navegación del navegador (atrás/adelante)
+  React.useEffect(() => {
+    const handlePopState = () => {
+      setActiveTab(isDirectLeadUrl() ? 'curso-gratis' : 'inicio');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Modales
   const [showContactModal, setShowContactModal] = useState(false);
